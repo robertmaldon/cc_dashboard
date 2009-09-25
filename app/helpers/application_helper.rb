@@ -1,0 +1,39 @@
+# Methods added to this helper will be available to all templates in the application.
+module ApplicationHelper
+
+  # Output the difference between a give time and now in
+  # approximate seconds/minutes/hours/days
+  def time_ago(time)
+    time_diff = Time.now.to_i - time.to_i
+    if time_diff < 60
+      seconds = time_diff
+      "#{seconds} second#{pluralise(seconds)} ago"
+    elsif time_diff < 3600
+      minutes = (time_diff/60).round
+      "#{minutes} minute#{pluralise(minutes)} ago"
+    elsif time_diff < 86400
+      hours = (time_diff/3600).round
+      "#{hours} hour#{pluralise(hours)} ago"
+    else
+      days = (time_diff/86400).round
+      "#{days} day#{pluralise(days)} ago"
+    end
+  end
+
+  # Generate icon tags in both IE-specific and standards formats
+  def themed_icon_tag(source)
+    themed_source = "themes/#{DashboardConfig.theme}/favicon/#{source}"
+    "<link rel=\"SHORTCUT ICON\" href=\"#{compute_public_path(themed_source, 'images')}\"/>\n<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"#{compute_public_path(themed_source, 'images')}\"/>"
+  end
+
+  private
+
+  def pluralise(number)
+    if number > 1
+      's'
+    else
+      ''
+    end
+  end
+  
+end

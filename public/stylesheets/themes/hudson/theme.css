@@ -1,0 +1,25 @@
+/* 'hudson' theme styles */
+
+body { background: #fff url(/images/themes/hudson/background_repeat.gif); color: #000; }
+
+.Error { background: #882132; color: #fff; }
+
+.Exception.Building { background: #fff url(/images/themes/hudson/exception/building.gif) no-repeat center left; color: #000; }
+.Exception.CheckingModifications { background: #440000; color: #fff; }
+.Exception.Pending { background: #440000; color: #fff; }
+.Exception.Sleeping { background: #440000; color: #fff; }
+
+.Failure.Building { background: #fff url(/images/themes/hudson/failure/building.gif) no-repeat center left; color: #000; }
+.Failure.CheckingModifications { background: #882132; color: #fff; }
+.Failure.Pending { background: #882132; color: #fff; }
+.Failure.Sleeping { background: #882132; color: #fff; }
+
+.Success.Building { background: #fff url(/images/themes/hudson/success/building.gif) no-repeat center left; color: #000; }
+.Success.CheckingModifications { background: #2bca5b; color: #040302; }
+.Success.Pending { background: #2bca5b; color: #040302; }
+.Success.Sleeping { background: #2bca5b; color: #040302; }
+
+.Unknown.Building { background: #fff url(/images/themes/hudson/unknown/building.gif) no-repeat center left; color: #000; }
+.Unknown.CheckingModifications { background: #707070; color: #040302; }
+.Unknown.Pending { background: #707070; color: #040302; }
+.Unknown.Sleeping { background: #707070; color: #040302; }

@@ -1,0 +1,64 @@
+== cc_dashboard - Aggregates the build status of projects from multiple CruiseControl servers on to a single "dashboard" web page
+
+cc_dashboard will combine the build status of projects from multiple CruiseControl servers (actually, from any Continuous Integration server that exposes build status information using the "cctray xml format" - see below) on to a single "dashboard" web page.
+
+cc_dashboard is a Rails application. It has been tested against Rail 2.1, but because it is very, very simple it should run under earlier and later versions of Rails.
+
+== Why cc_dashboard?
+
+As the number of Rails projects I was using increased I was then forced to split them amongst multiple CruiseControl.rb servers to improve build times. However, I now had the problem of monitoring multiple CruiseControl.rb servers. So the answer was to aggregate all the build status using cc_dashboard!
+
+== Installation
+
+Assuming you have the base Rails gems installed (no database needed):
+
+- Unpack the cc_dashboard zip/tar
+- Create a <b>config/cc_dashboard_config.rb</b> file with a list of "cctray xml format" (see below) feed URLs. You can use <b>config/cc_dashboard_config.rb.example</b> as a template
+- Start the cc_dashboard Rails server by running the <b>script/server</b> script. If no arguments are supplied this will start the server on port 3332.
+- Point your web browser at the application root. e.g.
+
+  http://localhost:3332/
+
+== Themes
+
+cc_dashboard has support for changing the look, or "theme", of its dashboard page.
+
+Built-in themes are:
+
+* *smiley*
+* *hudson* - some images borrowed from the {Hudson continuous integration server}[https://hudson.dev.java.net/]
+
+You choose the theme by setting the <b>DashboardConfig.theme</b> value in the <b>config/cc_dashboard_config.rb</b> configuration file.
+
+== "cctray xml format"
+
+Originally developed for CruiseControl.NET, the "cctray xml format" is an RSS-like way of exposing the build status of projects. This format has caught on and is now supported by a number of continuous integration servers:
+
+* {CruiseControl.rb}[http://cruisecontrolrb.thoughtworks.com] - http://cc.rb.servername:3333/XmlStatusReport.aspx
+* {CruiseControl}[http://cruisecontrol.sourceforge.net/] - http://cc.java.servername:8080/cctray.xml
+* {CruiseControl.NET}[http://ccnet.thoughtworks.com/] - http://cc.net.servername/XmlStatusReport.aspx
+* {Hudson}[https://hudson.dev.java.net/] - http://hudson.servername:8080/cc.xml
+
+See {Multiple Project Summary Reporting Standard }[http://confluence.public.thoughtworks.org/display/CI/Multiple+Project+Summary+Reporting+Standard] for details of the cctray XML feed format. This doco is mostly correct, the only difference i've seen "in the wild" is an additional "Pending" activity.
+
+Oh, {cctray}[http://confluence.public.thoughtworks.org/display/CCNET/CCTray] is a .NET application that sits in your Windows system tray and can alert you via popups or sounds when a project build is successful or fails. It is available as part of a {CruiseControl.NET release}[http://sourceforge.net/projects/ccnet/files/CruiseControl.NET%20Releases/].
+
+{ccmenu}[http://ccmenu.sourceforge.net/] is a cctray equivalent for the Mac.
+
+== Supported Browsers
+
+cc_dashboard has been tested successfully against Firefox 3, Internet Explorer 7 and Internet Explorer 8.
+
+cc_dashboard does not render correctly using Internet Explorer 6 and I have no intention of supporting IE6 :)
+
+== License
+
+The 'smiley' theme favicons are derived from images from {Tango Project}[http://tango.freedesktop.org/Tango_Desktop_Project], which are covered by the {Creative Commons Attribution Share-Alike License}[http://creativecommons.org/licenses/by-sa/2.5/].
+
+The 'hudson' theme images are copied from the {Hudson continuous integration server}[https://hudson.dev.java.net/], which copied most of its art work from {Tango Project}[http://tango.freedesktop.org/Tango_Desktop_Project].
+
+The rest of cc_dashboard is licensed under the terms of the the Apache 2.0 license. See http://www.apache.org/licenses/LICENSE-2.0 for details.
+
+== Other CruiseControl Aggregators
+
+{bigvisiblewall}[http://code.google.com/p/bigvisiblewall/] is implemented in Scala and packaged as a Java web application.
