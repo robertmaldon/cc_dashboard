@@ -1,5 +1,7 @@
 == cc_dashboard - Aggregates the build status of projects from multiple CruiseControl servers on to a single "dashboard" web page
 
+http://github.com/robertmaldon/cc_dashboard
+
 cc_dashboard will combine the build status of projects from multiple CruiseControl servers (actually, from any Continuous Integration server that exposes build status information using the "cctray xml format" - see below) on to a single "dashboard" web page.
 
 cc_dashboard is a Rails application. It has been tested against Rail 2.1, but because it is very, very simple it should run under earlier and later versions of Rails.
@@ -7,6 +9,8 @@ cc_dashboard is a Rails application. It has been tested against Rail 2.1, but be
 == Why cc_dashboard?
 
 As the number of Rails projects I was using increased I was then forced to split them amongst multiple CruiseControl.rb servers to improve build times. However, I now had the problem of monitoring multiple CruiseControl.rb servers. So the answer was to aggregate all the build status using cc_dashboard!
+
+Why did I write it in Rails? Because I was working with a large number of Rails projects at the time and had the Rails infrastructure in place to host cc_dashboard!
 
 == Installation
 
@@ -39,11 +43,28 @@ Originally developed for CruiseControl.NET, the "cctray xml format" is an RSS-li
 * {CruiseControl.NET}[http://ccnet.thoughtworks.com/] - http://cc.net.servername/XmlStatusReport.aspx
 * {Hudson}[https://hudson.dev.java.net/] - http://hudson.servername:8080/cc.xml
 
-See {Multiple Project Summary Reporting Standard }[http://confluence.public.thoughtworks.org/display/CI/Multiple+Project+Summary+Reporting+Standard] for details of the cctray XML feed format. This doco is mostly correct, the only difference i've seen "in the wild" is an additional "Pending" activity.
+See {Multiple Project Summary Reporting Standard }[http://confluence.public.thoughtworks.org/display/CI/Multiple+Project+Summary+Reporting+Standard] for details of the cctray XML feed format. This doco is mostly correct, the only difference i've seen "in the wild" are:
+
+* An additional "Pending" activity
+* An additional "Unknown" status (CruiseControl.rb)
 
 Oh, {cctray}[http://confluence.public.thoughtworks.org/display/CCNET/CCTray] is a .NET application that sits in your Windows system tray and can alert you via popups or sounds when a project build is successful or fails. It is available as part of a {CruiseControl.NET release}[http://sourceforge.net/projects/ccnet/files/CruiseControl.NET%20Releases/].
 
 {ccmenu}[http://ccmenu.sourceforge.net/] is a cctray equivalent for the Mac.
+
+== CruiseControl.rb cctray times in the wrong timezone bug
+
+CruiseControl.rb versions 1.4.0 and 1.3.0 (and probably earlier versions) incorrectly report local server time as UTC in the cctray feeds. To fix change the following method in lib/time_formatter.rb
+
+  def round_trip_local(time)
+    time.strftime('%Y-%m-%dT%H:%M:%S.0000000-00:00') # yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK)
+  end
+
+to
+
+  def round_trip_local(time)
+    time.xmlschema
+  end
 
 == Supported Browsers
 
@@ -61,4 +82,10 @@ The rest of cc_dashboard is licensed under the terms of the the Apache 2.0 licen
 
 == Other CruiseControl Aggregators
 
+{big-visible-cruise-web}[http://code.google.com/p/big-visible-cuise-web/] is Java servlet/Javascript webapp which remembers which builds you chose to show/hide.
+
 {bigvisiblewall}[http://code.google.com/p/bigvisiblewall/] is implemented in Scala and packaged as a Java web application.
+
+{cc_board}[http://github.com/qxjit/cc_board] is a {Sinatra-based}[http://www.sinatrarb.com/] aggregator.
+
+{cc_monitor}[http://github.com/betarelease/cc_monitor] is a {Ramaze-based}[http://ramaze.net/] aggregator. This was the main inspiration for cc_dashboard, but was not very robust at the time.
