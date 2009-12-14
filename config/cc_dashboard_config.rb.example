@@ -17,5 +17,5 @@ DashboardConfig.cctray_feed_urls = {
 # The number of seconds between browser page reloads
 #DashboardConfig.refresh_interval = 60.seconds
 
-# The theme. Currently available themes are 'smiley' and 'hudson'
+# The theme. Currently available themes are 'doom', 'smiley' and 'hudson'
 DashboardConfig.theme = 'smiley'

@@ -29,6 +29,7 @@ cc_dashboard has support for changing the look, or "theme", of its dashboard pag
 
 Built-in themes are:
 
+* *doom* - yep, the original first-person shooter Doom
 * *smiley*
 * *hudson* - some images borrowed from the {Hudson continuous integration server}[https://hudson.dev.java.net/]
 
@@ -46,7 +47,7 @@ Originally developed for CruiseControl.NET, the "cctray xml format" is an RSS-li
 See {Multiple Project Summary Reporting Standard }[http://confluence.public.thoughtworks.org/display/CI/Multiple+Project+Summary+Reporting+Standard] for details of the cctray XML feed format. This doco is mostly correct, the only difference i've seen "in the wild" are:
 
 * An additional "Pending" activity
-* An additional "Unknown" status (CruiseControl.rb)
+* An additional "Unknown" status. I've seen Unknown reported by CruiseControl.rb when project builds are serialized ("Configuration.serialize_builds = true" set in .cruise/site_config.rb) and one build is waiting for another build to finish. I've seen Unknown reported by Hudson when a project is disabled.
 
 Oh, {cctray}[http://confluence.public.thoughtworks.org/display/CCNET/CCTray] is a .NET application that sits in your Windows system tray and can alert you via popups or sounds when a project build is successful or fails. It is available as part of a {CruiseControl.NET release}[http://sourceforge.net/projects/ccnet/files/CruiseControl.NET%20Releases/].
 
@@ -73,6 +74,8 @@ cc_dashboard has been tested successfully against Firefox 3, Internet Explorer 7
 cc_dashboard does not render correctly using Internet Explorer 6 and I have no intention of supporting IE6 :)
 
 == License
+
+The 'doom' theme images are copyright {id Software}[http://www.idsoftware.com/]. Special thanks to Phidias N. Bourlas for generating the {original animated GIFs}[http://www.cslab.ntua.gr/~phib/doom1.htm] that were used to create the theme.
 
 The 'smiley' theme favicons are derived from images from {Tango Project}[http://tango.freedesktop.org/Tango_Desktop_Project], which are covered by the {Creative Commons Attribution Share-Alike License}[http://creativecommons.org/licenses/by-sa/2.5/].
 

@@ -1,6 +1,9 @@
 /* 'hudson' theme styles */
 
-body { background: #fff url(/images/themes/hudson/background_repeat.gif); color: #000; }
+body { background: #fff; color: #000; }
+body.building { background: #ccc url(/images/themes/hudson/background/building.png); }
+body.healthy { background: url(/images/themes/hudson/background/healthy.png); }
+body.sick { background: #990000 url(/images/themes/hudson/background/sick.png); }
 
 .Error { background: #882132; color: #fff; }
 

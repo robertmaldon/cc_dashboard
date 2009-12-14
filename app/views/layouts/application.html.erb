@@ -11,7 +11,7 @@
     <meta http-equiv="refresh" content="<%= DashboardConfig.refresh_interval %>" />
 
     <%= stylesheet_link_tag 'site' %>
-    <%= stylesheet_link_tag "themes/#{DashboardConfig.theme}/theme.css" %>
+    <%= stylesheet_link_tag "themes/#{@theme}/theme.css" %>
 
     <%= themed_icon_tag(@icon) %>
 
@@ -25,7 +25,7 @@
     -%>
     <title><%= title %></title>
   </head>
-  <body>
+  <body class="<%= @status %>">
 
     <div id="main">
       <%= yield  %>

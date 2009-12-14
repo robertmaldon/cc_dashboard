@@ -22,7 +22,7 @@ module ApplicationHelper
 
   # Generate icon tags in both IE-specific and standards formats
   def themed_icon_tag(source)
-    themed_source = "themes/#{DashboardConfig.theme}/favicon/#{source}"
+    themed_source = "themes/#{@theme}/favicon/#{source}"
     "<link rel=\"SHORTCUT ICON\" href=\"#{compute_public_path(themed_source, 'images')}\"/>\n<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"#{compute_public_path(themed_source, 'images')}\"/>"
   end
 

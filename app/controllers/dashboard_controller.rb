@@ -6,6 +6,8 @@ require 'ostruct'
 class DashboardController < ApplicationController
 
   def index
+    @theme = params[:theme] || DashboardConfig.theme;
+    
     @activity_building = 0
     @status_failure    = 0
     @status_exception  = 0
@@ -39,12 +41,14 @@ class DashboardController < ApplicationController
     end
 
     if @activity_building > 0
-      @icon = 'building.ico'
+      @status = 'building'
     elsif @status_failure > 0 || @status_exception > 0
-      @icon = 'sick.ico'
+      @status = 'sick'
     else
-      @icon = 'healthy.ico'
+      @status = 'healthy'
     end
+
+    @icon = "#{@status}.ico"
   end
 
   private
