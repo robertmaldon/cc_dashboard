@@ -4,7 +4,7 @@ http://github.com/robertmaldon/cc_dashboard
 
 cc_dashboard will combine the build status of projects from multiple CruiseControl servers (actually, from any Continuous Integration server that exposes build status information using the "cctray xml format" - see below) on to a single "dashboard" web page.
 
-cc_dashboard is a Rails application. It has been tested against Rail 2.1, but because it is very, very simple it should run under earlier and later versions of Rails.
+cc_dashboard is a Rails application. It has been tested against Rails 2.1 and Rails 2.3.5, but because it is very, very simple it should run under earlier and later versions of Rails.
 
 == Why cc_dashboard?
 
