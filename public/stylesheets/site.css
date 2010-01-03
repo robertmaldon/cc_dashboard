@@ -11,14 +11,20 @@ h2 { margin: 0; padding: 0; font-size: 0.7em; }
 
 p { margin: 0; padding: 0; font-size: 0.5em; }
 
-div.project { color: #fff; text-align: center; width: 300px; float: left; height: 100px; margin: 0.2em; position: relative; border: 2px solid #c0c0c0; overflow: hidden; }
+div { color: #fff; text-align: center; width: 300px; float: left; height: 100px; margin: 0.2em; position: relative; border: 2px solid #c0c0c0; overflow: hidden; }
+
+div.chuck-norris-fact.healthy { background: #2bca5b url(/images/background/chuck-norris/healthy.png) no-repeat bottom center; height: 325px; color: #040302; }
+div.chuck-norris-fact.building { background: #ff9933 url(/images/background/chuck-norris/building.png) no-repeat bottom center; height: 325px; color: #000; }
+div.chuck-norris-fact.sick { background: #882132 url(/images/background/chuck-norris/sick.png) no-repeat bottom center; height: 325px; color: #fff; }
+
+div.xxxchuck-norris { background: #000 url(/images/background/chuck-norris/healthy.png) no-repeat bottom center; color: #ff6633; text-align: center; width: 300px; height: 325px; margin: 0.2em; float: left; border: 2px solid #c0c0c0; overflow: hidden; }
+div.xxxproject { color: #fff; text-align: center; width: 300px; float: left; height: 100px; margin: 0.2em; position: relative; border: 2px solid #c0c0c0; overflow: hidden; }
 
 #pageloaderror { margin: 100px 0 0 0; padding: 0; text-align: center; width: 100%; float: none; }
-#debug { display: none; }
 
 .Error { background: #882132; color: #fff; }
 
-.Exception.Building { background: #440000; color: #fff; }
+.Exception.Building { background: #ff9933; color: #fff; }
 .Exception.CheckingModifications { background: #440000; color: #fff; }
 .Exception.Pending { background: #440000; color: #fff; }
 .Exception.Sleeping { background: #440000; color: #fff; }

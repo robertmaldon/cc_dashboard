@@ -33,7 +33,7 @@ Built-in themes are:
 * *smiley*
 * *hudson* - some images borrowed from the {Hudson continuous integration server}[https://hudson.dev.java.net/]
 
-You choose the theme by setting the <b>DashboardConfig.theme</b> value in the <b>config/cc_dashboard_config.rb</b> configuration file.
+You choose the theme by setting the <b>DashboardConfig.theme</b> value in the <b>config/cc_dashboard_config.rb</b> configuration file. You can also choose the theme per-HTTP-request by adding a "?theme=THEME" to the end of the URL (e.g. "?theme=hudson").
 
 == "cctray xml format"
 
@@ -73,7 +73,7 @@ cc_dashboard has been tested successfully against Firefox 3, Internet Explorer 7
 
 cc_dashboard does not render correctly using Internet Explorer 6 and I have no intention of supporting IE6 :)
 
-== License
+== License and Acknowledgements
 
 The 'doom' theme images are copyright {id Software}[http://www.idsoftware.com/]. Special thanks to Phidias N. Bourlas for generating the {original animated GIFs}[http://www.cslab.ntua.gr/~phib/doom1.htm] that were used to create the theme.
 
@@ -82,6 +82,8 @@ The 'smiley' theme favicons are derived from images from {Tango Project}[http://
 The 'hudson' theme images are copied from the {Hudson continuous integration server}[https://hudson.dev.java.net/], which copied most of its art work from {Tango Project}[http://tango.freedesktop.org/Tango_Desktop_Project].
 
 The rest of cc_dashboard is licensed under the terms of the the Apache 2.0 license. See http://www.apache.org/licenses/LICENSE-2.0 for details.
+
+The 'Chuck Norris Facts' widget was inspired by the {Hudson Chuck Norris Plugin}[http://wiki.hudson-ci.org/display/HUDSON/ChuckNorris+Plugin], which in turn was inspired by {The Ultimate Top 25 Chuck Norris “The Programmer” Jokes}[http://www.codesqueeze.com/the-ultimate-top-25-chuck-norris-the-programmer-jokes/].
 
 == Other CruiseControl Aggregators
 

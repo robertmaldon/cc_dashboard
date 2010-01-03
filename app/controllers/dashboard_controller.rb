@@ -49,6 +49,8 @@ class DashboardController < ApplicationController
     end
 
     @icon = "#{@status}.ico"
+
+    @chuck_norris_fact = CHUCK_NORRIS_FACTS[rand(CHUCK_NORRIS_FACTS.length)]
   end
 
   private

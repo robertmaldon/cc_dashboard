@@ -12,7 +12,10 @@ class DashboardConfig
   cattr_accessor :refresh_interval, :instance_writer => false
   @@refresh_interval = 60.seconds
 
+  cattr_accessor :chuck_norris_kick_ass, :instance_writer => false
+  @@chuck_norris_kick_ass = true
+
   cattr_accessor :theme, :instance_writer => false
-  @@theme = 'smiley'
+  @@theme = 'doom'
 
 end
