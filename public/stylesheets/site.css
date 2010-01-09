@@ -17,9 +17,6 @@ div.chuck-norris-fact.healthy { background: #2bca5b url(/images/background/chuck
 div.chuck-norris-fact.building { background: #ff9933 url(/images/background/chuck-norris/building.png) no-repeat bottom center; height: 325px; color: #000; }
 div.chuck-norris-fact.sick { background: #882132 url(/images/background/chuck-norris/sick.png) no-repeat bottom center; height: 325px; color: #fff; }
 
-div.xxxchuck-norris { background: #000 url(/images/background/chuck-norris/healthy.png) no-repeat bottom center; color: #ff6633; text-align: center; width: 300px; height: 325px; margin: 0.2em; float: left; border: 2px solid #c0c0c0; overflow: hidden; }
-div.xxxproject { color: #fff; text-align: center; width: 300px; float: left; height: 100px; margin: 0.2em; position: relative; border: 2px solid #c0c0c0; overflow: hidden; }
-
 #pageloaderror { margin: 100px 0 0 0; padding: 0; text-align: center; width: 100%; float: none; }
 
 .Error { background: #882132; color: #fff; }
