@@ -1,4 +1,4 @@
-require "rexml/document"
+require 'rexml/document'
 require 'net/http'
 require 'uri'
 require 'ostruct'
@@ -6,7 +6,8 @@ require 'ostruct'
 class DashboardController < ApplicationController
 
   def index
-    @theme = params[:theme] || DashboardConfig.theme;
+    @skin = params[:skin] || DashboardConfig.skin;
+    @refresh = params[:refresh] || DashboardConfig.refresh_interval
     
     @activity_building = 0
     @status_failure    = 0

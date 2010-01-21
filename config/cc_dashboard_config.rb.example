@@ -18,7 +18,7 @@ DashboardConfig.cctray_feed_urls = {
 #DashboardConfig.refresh_interval = 60.seconds
 
 # Nobody stops Chuck Norris from kicking ass!
-#DashboardConfig.chuck_norris_kick_ass = false
+#DashboardConfig.show_chuck_norris_facts = false
 
-# The theme. Currently available themes are 'doom', 'smiley' and 'hudson'
-DashboardConfig.theme = 'smiley'
+# The skin. Currently available skins are 'doom', 'smiley' and 'hudson'
+#DashboardConfig.skin = 'doom'

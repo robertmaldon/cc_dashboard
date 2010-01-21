@@ -1,31 +1,31 @@
-/* 'hudson' theme styles */
+/* 'hudson' skin styles */
 
 body { background: #fff; color: #000; }
-body.building { background: #ccc url(/images/themes/hudson/background/building.png); }
-body.healthy { background: url(/images/themes/hudson/background/healthy.png); }
-body.sick { background: #990000 url(/images/themes/hudson/background/sick.png); }
+body.building { background: #ccc url(/images/skins/hudson/background/building.png); }
+body.healthy { background: url(/images/skins/hudson/background/healthy.png); }
+body.sick { background: #990000 url(/images/skins/hudson/background/sick.png); }
 
 .Error { background: #882132; color: #fff; }
 
-.Exception.Building { background: #fff url(/images/themes/hudson/exception/building.gif) no-repeat center left; color: #000; }
+.Exception.Building { background: #fff url(/images/skins/hudson/exception/building.gif) no-repeat center left; color: #000; }
 .Exception.CheckingModifications { background: #440000; color: #fff; }
 .Exception.Pending { background: #440000; color: #fff; }
 .Exception.Sleeping { background: #440000; color: #fff; }
 .Exception.Unknown { background: #440000; color: #fff; }
 
-.Failure.Building { background: #fff url(/images/themes/hudson/failure/building.gif) no-repeat center left; color: #000; }
+.Failure.Building { background: #fff url(/images/skins/hudson/failure/building.gif) no-repeat center left; color: #000; }
 .Failure.CheckingModifications { background: #882132; color: #fff; }
 .Failure.Pending { background: #882132; color: #fff; }
 .Failure.Sleeping { background: #882132; color: #fff; }
 .Failure.Unknown { background: #882132; color: #fff; }
 
-.Success.Building { background: #fff url(/images/themes/hudson/success/building.gif) no-repeat center left; color: #000; }
+.Success.Building { background: #fff url(/images/skins/hudson/success/building.gif) no-repeat center left; color: #000; }
 .Success.CheckingModifications { background: #2bca5b; color: #040302; }
 .Success.Pending { background: #2bca5b; color: #040302; }
 .Success.Sleeping { background: #2bca5b; color: #040302; }
 .Success.Unknown { background: #2bca5b; color: #040302; }
 
-.Unknown.Building { background: #fff url(/images/themes/hudson/unknown/building.gif) no-repeat center left; color: #000; }
+.Unknown.Building { background: #fff url(/images/skins/hudson/unknown/building.gif) no-repeat center left; color: #000; }
 .Unknown.CheckingModifications { background: #707070; color: #040302; }
 .Unknown.Pending { background: #707070; color: #040302; }
 .Unknown.Sleeping { background: #707070; color: #040302; }

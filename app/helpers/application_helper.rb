@@ -21,9 +21,9 @@ module ApplicationHelper
   end
 
   # Generate icon tags in both IE-specific and standards formats
-  def themed_icon_tag(source)
-    themed_source = "themes/#{@theme}/favicon/#{source}"
-    "<link rel=\"SHORTCUT ICON\" href=\"#{compute_public_path(themed_source, 'images')}\"/>\n<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"#{compute_public_path(themed_source, 'images')}\"/>"
+  def skinned_icon_tag(source)
+    skinned_source = "skins/#{@skin}/favicon/#{source}"
+    "<link rel=\"SHORTCUT ICON\" href=\"#{compute_public_path(skinned_source, 'images')}\"/>\n<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"#{compute_public_path(skinned_source, 'images')}\"/>"
   end
 
   private
