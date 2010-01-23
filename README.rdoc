@@ -32,6 +32,7 @@ Built-in skins are:
 * *doom* - yep, the original first-person shooter Doom
 * *smiley*
 * *hudson* - some images borrowed from the {Hudson continuous integration server}[https://hudson.dev.java.net/]
+* *kitten* - aaawww, how cute :)
 
 You choose the skin by setting the <b>DashboardConfig.skin</b> value in the <b>config/cc_dashboard_config.rb</b> configuration file. You can also choose the skin per-HTTP-request by adding a "?skin=SKIN" to the end of the URL (e.g. "?skin=hudson").
 
