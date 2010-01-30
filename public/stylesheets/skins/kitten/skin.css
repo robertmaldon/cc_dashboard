@@ -14,9 +14,9 @@ body.sick { background: url(/images/skins/kitten/background/sick.jpg); }
 .Exception.Unknown { background: #440000; color: #fff; }
 
 .Failure.Building { background: #ff9933 url(/images/skins/kitten/failure/building.gif) no-repeat center left; color: #000; }
-.Failure.CheckingModifications { background: #882132; color: #fff; }
+.Failure.CheckingModifications { background: #882132 url(/images/skins/kitten/failure/checking.gif) no-repeat center left; color: #fff; }
 .Failure.Pending { background: #882132; color: #fff; }
-.Failure.Sleeping { background: #882132; color: #fff; }
+.Failure.Sleeping { background: #882132 url(/images/skins/kitten/failure/sleeping.gif) no-repeat center left; color: #fff; }
 .Failure.Unknown { background: #882132; color: #fff; }
 
 .Success.Building { background: #dddddd url(/images/skins/kitten/success/building.gif) no-repeat center left; color: #040302; }
