@@ -10,7 +10,7 @@ CHUCK_NORRIS_FACTS = [
   'doesn’t need garbage collection because he doesn’t call .Dispose(), he calls .DropKick()',
   '’s first program was "kill -9"',
   'burst the dot com bubble',
-  'can write infinite recursion functions…and have them return',
+  'can write infinite recursion functions… and have them return',
   'can solve the Towers of Hanoi in one move',
   'finished World of Warcraft',
   'doesn’t use web standards as the web will conform to him',
@@ -50,7 +50,6 @@ CHUCK_NORRIS_FACTS = [
   'breaks RSA 128-bit encrypted codes in mill-seconds',
   'doesn’t needs try-catch. Exceptions are too afraid to raise.',
   'can get Visual SourceSafe to actually work',
-  'can get TAMI to actually work',
   'can read all encrypted data, because nothing can hide from Chuck Norris',
   '’s hosting is 101% uptime guaranteed',
   'can access the DB from the UI',
@@ -75,6 +74,8 @@ CHUCK_NORRIS_FACTS = [
   'is the only man who can pronounce GNU the way it is meant to be pronounced',
   'takes notes in binary',
   'gets paid 99 cents by Apple every time he listens to a song',
+  '’s iPod came with a real charger instead of just a USB cord',
+  'is the reason why Waldo is hiding',
   'can’t be found using Google. He finds you.',
   'doesn’t cheat death. He wins fair and square.',
   'destroyed the periodic table, because he only recognizes the element of surprise',
@@ -99,5 +100,9 @@ CHUCK_NORRIS_FACTS = [
   'does know what Willis is talking about!',
   'can watch an episode of 60 Minutes in 22 seconds',
   'makes onions cry',
-  'is not only a noun, but also a verb'
+  'is not only a noun, but also a verb',
+  'was once in a knife fight, and the knife lost',
+  '’s tears cure cancer. Too bad he has never cried.',
+  'has already been to Mars. That’s why there are no signs of life there.',
+  'frequently donates blood to the Red Cross. Just never his own.'
 ]
