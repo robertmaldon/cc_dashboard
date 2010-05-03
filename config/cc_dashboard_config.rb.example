@@ -20,6 +20,6 @@ DashboardConfig.cctray_feed_urls = {
 # Nobody stops Chuck Norris from kicking ass!
 #DashboardConfig.show_chuck_norris_facts = false
 
-# The skin. Currently available skins are 'doom', 'smiley', 'hudson'
-# and 'kitten'
+# The skin. Currently available skins are 'doom', 'hudson', 'kitten', 'smiley'
+# and 'spaceinvaders'.
 #DashboardConfig.skin = 'doom'

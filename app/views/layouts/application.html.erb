@@ -24,6 +24,11 @@
       title += 'cc_dashboard'
     -%>
     <title><%= title %></title>
+
+    <%- if File.exists?("#{RAILS_ROOT}/public/javascripts/skins/#{@skin}.js") -%> 
+      <%= javascript_include_tag 'jquery-1.4.2.min' %>
+      <%= javascript_include_tag "skins/#{@skin}.js" %>
+    <%- end -%>
   </head>
   <body class="<%= @status %>">
 

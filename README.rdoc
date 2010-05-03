@@ -30,9 +30,10 @@ cc_dashboard has support for changing the look, or "skin", of its dashboard page
 Built-in skins are:
 
 * *doom* - yep, the original first-person shooter Doom
-* *smiley*
 * *hudson* - some images borrowed from the {Hudson continuous integration server}[https://hudson.dev.java.net/]
 * *kitten* - aaawww, how cute :)
+* *smiley*
+* *spaceinvaders* - yep, the arcade classic
 
 You choose the skin by setting the <b>DashboardConfig.skin</b> value in the <b>config/cc_dashboard_config.rb</b> configuration file. You can also choose the skin per-HTTP-request by adding a "?skin=SKIN" to the end of the URL (e.g. "?skin=hudson").
 
@@ -78,9 +79,11 @@ cc_dashboard does not render correctly using Internet Explorer 6 and I have no i
 
 The 'doom' skin images are copyright {id Software}[http://www.idsoftware.com/]. Special thanks to Phidias N. Bourlas for generating the {original animated GIFs}[http://www.cslab.ntua.gr/~phib/doom1.htm] that were used to create the skin.
 
+The 'hudson' skin images are copied from the {Hudson continuous integration server}[https://hudson.dev.java.net/], which copied most of its art work from {Tango Project}[http://tango.freedesktop.org/Tango_Desktop_Project].
+
 The 'smiley' skin favicons are derived from images from {Tango Project}[http://tango.freedesktop.org/Tango_Desktop_Project], which are covered by the {Creative Commons Attribution Share-Alike License}[http://creativecommons.org/licenses/by-sa/2.5/].
 
-The 'hudson' skin images are copied from the {Hudson continuous integration server}[https://hudson.dev.java.net/], which copied most of its art work from {Tango Project}[http://tango.freedesktop.org/Tango_Desktop_Project].
+The 'spaceinvaders' images are derived from those on {The History Of Space Invaders}[http://www.brentradio.com/SpaceInvaders.htm]. Space Invaders copyright Taito Corp.
 
 The rest of cc_dashboard is licensed under the terms of the the Apache 2.0 license. See http://www.apache.org/licenses/LICENSE-2.0 for details.
 

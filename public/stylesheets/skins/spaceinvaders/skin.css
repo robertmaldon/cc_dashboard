@@ -1,0 +1,35 @@
+/* 'spaceinvaders' skin styles */
+
+body { background: #000e0e; }
+body.building { background: #fff261 url(/images/skins/spaceinvaders/background/building.gif); }
+body.healthy { background: url(/images/skins/spaceinvaders/background/healthy.gif); }
+body.sick { background: url(/images/skins/spaceinvaders/background/sick.gif); }
+
+.Error { background: #882132; color: #fff; }
+
+.Exception.Building { background: #440000 url(/images/skins/spaceinvaders/exception/building.gif) no-repeat left center; color: #fff; }
+.Exception.CheckingModifications { background: #440000; color: #fff; }
+.Exception.Pending { background: #440000; color: #fff; }
+.Exception.Sleeping { background: #440000; color: #fff; }
+.Exception.Unknown { background: #440000; color: #fff; }
+
+.Failure.Building { background: #ff9933 url(/images/skins/spaceinvaders/failure/building.gif) no-repeat left center; color: #fff; }
+.Failure.CheckingModifications { background: #882132; color: #fff; }
+.Failure.Pending { background: #882132; color: #fff; }
+.Failure.Sleeping { background: #882132; color: #fff; }
+.Failure.Unknown { background: #882132; color: #fff; }
+
+.Success.Building { background: #ff9933 url(/images/skins/spaceinvaders/success/building.gif) no-repeat left center; color: #040302; }
+.Success.CheckingModifications { background: #2bca5b; color: #040302; }
+.Success.Pending { background: #2bca5b; color: #040302; }
+.Success.Sleeping { background: #2bca5b; color: #040302; }
+.Success.Unknown { background: #2bca5b; color: #040302; }
+
+.Unknown.Building { background: #707070 url(/images/skins/spaceinvaders/unknown/building.gif) no-repeat left center; color: #040302; }
+.Unknown.CheckingModifications { background: #707070; color: #040302; }
+.Unknown.Pending { background: #707070; color: #040302; }
+.Unknown.Sleeping { background: #707070; color: #040302; }
+.Unknown.Unknown { background: #707070; color: #040302; }
+
+.saucer { position:absolute; top: 0px; left: 0px; z-index: 2000; }
+.alien { position:absolute; z-index: 2000; }
