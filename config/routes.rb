@@ -33,6 +33,10 @@ ActionController::Routing::Routes.draw do |map|
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   map.root :controller => 'dashboard'
 
+  # Serve up dynamic stylesheets
+  map.connect 'stylesheets/:id.:format', :controller => 'stylesheets', :action => 'show'  
+  map.connect 'stylesheets/skins/:id.:format', :controller => 'stylesheets', :action => 'skin'  
+
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.
