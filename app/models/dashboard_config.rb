@@ -12,8 +12,8 @@ class DashboardConfig
   cattr_accessor :refresh_interval, :instance_writer => false
   @@refresh_interval = 60.seconds
 
-  cattr_accessor :show_chuck_norris_facts, :instance_writer => false
-  @@show_chuck_norris_facts = true
+  cattr_accessor :bling, :instance_writer => false
+  @@bling = 'chucknorris'
 
   cattr_accessor :skin, :instance_writer => false
   @@skin = 'doom'

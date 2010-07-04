@@ -19,8 +19,9 @@ DashboardConfig.cctray_feed_urls = {
 
 # The bling. Currently available blings are 'cheezburger' and 'chucknorris'.
 # Nobody stops Chuck Norris from kicking ass!
+DashboardConfig.bling = 'cheezburger'
 #DashboardConfig.bling = 'chucknorris'
 
-# The skin. Currently available skins are 'doom', 'hudson', 'kitten', 'smiley'
-# and 'spaceinvaders'.
-#DashboardConfig.skin = 'doom'
+# The skin. Currently available skins are 'doom', 'smiley', 'hudson'
+# and 'kitten'
+DashboardConfig.skin = 'spaceinvaders'

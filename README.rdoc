@@ -37,11 +37,20 @@ Built-in skins are:
 
 You choose the skin by setting the <b>DashboardConfig.skin</b> value in the <b>config/cc_dashboard_config.rb</b> configuration file. You can also choose the skin per-HTTP-request by adding a "?skin=SKIN" to the end of the URL (e.g. "?skin=hudson").
 
+== Bling
+
+To make the dahsboard a little less boring you can add some "bling". Built-in blings are:
+
+* *cheezburger* - a random image from the {Cheezburger Network}[http://cheezburger.com/]
+* *chucknorris* - Chuck Norris is the ultimate programmer! 
+
+You choose the skin by setting the <b>DashboardConfig.bling</b> value in the <b>config/cc_dashboard_config.rb</b> configuration file. You can also choose the bling per-HTTP-request by adding a "?bling=BLING" to the end of the URL (e.g. "?bling=cheezburger").
+
 == "cctray xml format"
 
 Originally developed for CruiseControl.NET, the "cctray xml format" is an RSS-like way of exposing the build status of projects. This format has caught on and is now supported by a number of continuous integration servers:
 
-* {CruiseControl.rb}[http://cruisecontrolrb.thoughtworks.com] - http://cc.rb.servername:3333/XmlStatusReport.aspx
+* {CruiseControl.rb}[http://cruisecontrolrb.thoughtworks.com/] - http://cc.rb.servername:3333/XmlStatusReport.aspx
 * {CruiseControl}[http://cruisecontrol.sourceforge.net/] - http://cc.java.servername:8080/cctray.xml
 * {CruiseControl.NET}[http://ccnet.thoughtworks.com/] - http://cc.net.servername/XmlStatusReport.aspx
 * {Hudson}[https://hudson.dev.java.net/] - http://hudson.servername:8080/cc.xml
@@ -71,11 +80,17 @@ to
 
 == Supported Browsers
 
-cc_dashboard has been tested successfully against Firefox 3, Internet Explorer 7 and Internet Explorer 8.
+cc_dashboard has been tested successfully against Chrome 5.0, Firefox 3.5, Internet Explorer 7 and Internet Explorer 8.
 
 cc_dashboard does not render correctly using Internet Explorer 6 and I have no intention of supporting IE6 :)
 
 == License and Acknowledgements
+
+cc_dashboard is licensed under the terms of the the Apache 2.0 license. See http://www.apache.org/licenses/LICENSE-2.0 for details.
+
+Some of the images used for the skins have their own licenses - see below.
+
+=== Skins
 
 The 'doom' skin images are copyright {id Software}[http://www.idsoftware.com/]. Special thanks to Phidias N. Bourlas for generating the {original animated GIFs}[http://www.cslab.ntua.gr/~phib/doom1.htm] that were used to create the skin.
 
@@ -85,9 +100,11 @@ The 'smiley' skin favicons are derived from images from {Tango Project}[http://t
 
 The 'spaceinvaders' images are derived from those on {The History Of Space Invaders}[http://www.brentradio.com/SpaceInvaders.htm]. Space Invaders copyright Taito Corp.
 
-The rest of cc_dashboard is licensed under the terms of the the Apache 2.0 license. See http://www.apache.org/licenses/LICENSE-2.0 for details.
+=== Bling
 
-The 'Chuck Norris Facts' widget was inspired by the {Hudson Chuck Norris Plugin}[http://wiki.hudson-ci.org/display/HUDSON/ChuckNorris+Plugin], which in turn was inspired by {The Ultimate Top 25 Chuck Norris “The Programmer” Jokes}[http://www.codesqueeze.com/the-ultimate-top-25-chuck-norris-the-programmer-jokes/]. (Which I think was in turn inspired by {ChuckNorrisFacts.com}[http://chucknorrisfacts.com/].)
+The 'cheezburger' images are copyright Pet Holdings, Inc. The technique to get around browser security issues when AJAX loading the images was lifted from... inspired by Kevin Luck's blog post {Data Scraping with YQL and JQuery}[http://www.kelvinluck.com/2009/02/data-scraping-with-yql-and-jquery/]. Thanks also to Yahoo! for providing {YQL}[http://developer.yahoo.com/yql/], a nice tool that makes screen scraping dead easy.
+
+The 'chucknorris' bling was inspired by the {Hudson Chuck Norris Plugin}[http://wiki.hudson-ci.org/display/HUDSON/ChuckNorris+Plugin], which in turn was inspired by {The Ultimate Top 25 Chuck Norris “The Programmer” Jokes}[http://www.codesqueeze.com/the-ultimate-top-25-chuck-norris-the-programmer-jokes/]. (Which I think was in turn inspired by {ChuckNorrisFacts.com}[http://chucknorrisfacts.com/].)
 
 == Other CruiseControl Aggregators
 

@@ -1,11 +1,5 @@
 <div id="main">
-  <%- if DashboardConfig.show_chuck_norris_facts -%>
-  <a href="http://www.codesqueeze.com/the-ultimate-top-25-chuck-norris-the-programmer-jokes/" target="_blank">
-    <div class="chuck-norris-fact <%= @status %>">
-      <h2>Chuck Norris <%= @chuck_norris_fact %></h2>
-    </div>
-  </a>
-  <%- end -%>
+  <%= render :partial => 'bling' %>
 
   <%- @projects.each do |project| -%>
     <%- title = "[#{project.group_name}] #{project.name} - Status: #{project.lastBuildStatus} - Activity: #{project.activity} - Last Build: #{project.lastBuildTime}" -%>

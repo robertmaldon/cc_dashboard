@@ -6,8 +6,9 @@ require 'ostruct'
 class DashboardController < ApplicationController
 
   def index
-    @skin = params[:skin] || DashboardConfig.skin;
+    @skin = params[:skin] || DashboardConfig.skin
     @refresh = params[:refresh] || DashboardConfig.refresh_interval
+    @bling = params[:bling] || DashboardConfig.bling
     
     @activity_building = 0
     @status_failure    = 0
