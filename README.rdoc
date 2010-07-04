@@ -34,6 +34,7 @@ Built-in skins are:
 * *kitten* - aaawww, how cute :)
 * *smiley*
 * *spaceinvaders* - yep, the arcade classic
+* *worldcup* - a.k.a. soccer
 
 You choose the skin by setting the <b>DashboardConfig.skin</b> value in the <b>config/cc_dashboard_config.rb</b> configuration file. You can also choose the skin per-HTTP-request by adding a "?skin=SKIN" to the end of the URL (e.g. "?skin=hudson").
 
@@ -99,6 +100,8 @@ The 'hudson' skin images are copied from the {Hudson continuous integration serv
 The 'smiley' skin favicons are derived from images from {Tango Project}[http://tango.freedesktop.org/Tango_Desktop_Project], which are covered by the {Creative Commons Attribution Share-Alike License}[http://creativecommons.org/licenses/by-sa/2.5/].
 
 The 'spaceinvaders' images are derived from those on {The History Of Space Invaders}[http://www.brentradio.com/SpaceInvaders.htm]. Space Invaders copyright Taito Corp.
+
+The 'worldcup' skin was contributed by {lightningdb}[http://github.com/lightningdb]
 
 === Bling
 
