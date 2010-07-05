@@ -22,7 +22,7 @@ module ApplicationHelper
 
   # Generate icon tags in both IE-specific and standards formats
   def skinned_icon_tag(source)
-    skinned_source = "skins/#{@skin}/favicon/#{source}"
+    skinned_source = "skins/#{@skin}/favicon_#{source}"
     "<link rel=\"SHORTCUT ICON\" href=\"#{compute_public_path(skinned_source, 'images')}\"/>\n<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"#{compute_public_path(skinned_source, 'images')}\"/>"
   end
 
