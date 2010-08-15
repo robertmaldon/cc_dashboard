@@ -1,31 +1,31 @@
 /* 'doom' skin styles */
 
 body { background: #000e0e; }
-body.building { background: url(/images/skins/doom/background_building.jpg); }
-body.healthy { background: url(/images/skins/doom/background_healthy.jpg); }
-body.sick { background: url(/images/skins/doom/background_sick.jpg); }
+body.building { background: url(<%= skin_random_image_path('background_building', 'jpg') %>); }
+body.healthy { background: url(<%= skin_random_image_path('background_healthy', 'jpg') %>); }
+body.sick { background: url(<%= skin_random_image_path('background_sick', 'jpg') %>); }
 
 .Error { background: #882132; color: #fff; }
 
-.Exception.Building { background: #440000 url(/images/skins/doom/exception_building.gif) no-repeat 5px 5px; color: #fff; }
+.Exception.Building { background: #440000 url(<%= skin_random_image_path('exception_building', 'gif') %>) no-repeat 5px 5px; color: #fff; }
 .Exception.CheckingModifications { background: #440000; color: #fff; }
 .Exception.Pending { background: #440000; color: #fff; }
-.Exception.Sleeping { background: #440000 url(/images/skins/doom/exception_sleeping.gif) no-repeat 5px 0; color: #fff; }
+.Exception.Sleeping { background: #440000 url(<%= skin_random_image_path('exception_sleeping', 'gif') %>) no-repeat 5px 0; color: #fff; }
 .Exception.Unknown { background: #440000; color: #fff; }
 
-.Failure.Building { background: #ff9933 url(/images/skins/doom/failure_building.gif) no-repeat 5px 5px; color: #fff; }
-.Failure.CheckingModifications { background: #882132 url(/images/skins/doom/failure_checking.gif) no-repeat 5px 0; color: #fff; }
-.Failure.Pending { background: #882132 url(/images/skins/doom/failure_checking.gif) no-repeat 5px 0; color: #fff; }
-.Failure.Sleeping { background: #882132 url(/images/skins/doom/failure_sleeping.gif) no-repeat 5px 0; color: #fff; }
-.Failure.Unknown { background: #882132 url(/images/skins/doom/failure_sleeping.gif) no-repeat 5px 0; color: #fff; }
+.Failure.Building { background: #ff9933 url(<%= skin_random_image_path('failure_building', 'gif') %>) no-repeat 5px 5px; color: #fff; }
+.Failure.CheckingModifications { background: #882132 url(<%= skin_random_image_path('failure_checking', 'gif') %>) no-repeat 5px 0; color: #fff; }
+.Failure.Pending { background: #882132 url(<%= skin_random_image_path('failure_checking', 'gif') %>) no-repeat 5px 0; color: #fff; }
+.Failure.Sleeping { background: #882132 url(<%= skin_random_image_path('failure_sleeping', 'gif') %>) no-repeat 5px 0; color: #fff; }
+.Failure.Unknown { background: #882132 url(<%= skin_random_image_path('failure_sleeping', 'gif') %>) no-repeat 5px 0; color: #fff; }
 
-.Success.Building { background: #ff9933 url(/images/skins/doom/success_building.gif) no-repeat 5px 5px; color: #040302; }
+.Success.Building { background: #ff9933 url(<%= skin_random_image_path('success_building', 'gif') %>) no-repeat 5px 5px; color: #040302; }
 .Success.CheckingModifications { background: #2bca5b; color: #040302; }
 .Success.Pending { background: #2bca5b; color: #040302; }
 .Success.Sleeping { background: #2bca5b; color: #040302; }
 .Success.Unknown { background: #2bca5b; color: #040302; }
 
-.Unknown.Building { background: #707070 url(/images/skins/doom/unknown_building.gif) no-repeat 5px 5px; color: #040302; }
+.Unknown.Building { background: #707070 url(<%= skin_random_image_path('unknown_building', 'gif') %>) no-repeat 5px 5px; color: #040302; }
 .Unknown.CheckingModifications { background: #707070; color: #040302; }
 .Unknown.Pending { background: #707070; color: #040302; }
 .Unknown.Sleeping { background: #707070; color: #040302; }

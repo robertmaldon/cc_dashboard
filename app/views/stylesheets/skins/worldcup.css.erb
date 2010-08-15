@@ -1,31 +1,31 @@
 /* 'worldcup' skin styles */
 
 body { background: #fff; color: #000; }
-body.building { background: url(/images/skins/worldcup/background_building.jpg); }
-body.healthy { background: url(/images/skins/worldcup/background_healthy.jpg); }
-body.sick { background: url(/images/skins/worldcup/background_sick.jpg); }
+body.building { background: url(<%= skin_random_image_path('background_building', 'jpg') %>); }
+body.healthy { background: url(<%= skin_random_image_path('background_healthy', 'jpg') %>); }
+body.sick { background: url(<%= skin_random_image_path('background_sick', 'jpg') %>); }
 
 .Error { background: #882132; color: #fff; }
 
-.Exception.Building { background: #440000 url(/images/skins/worldcup/exception_building.gif) no-repeat center left; color: #fff; }
+.Exception.Building { background: #440000 url(<%= skin_random_image_path('exception_building', 'gif') %>) no-repeat center left; color: #fff; }
 .Exception.CheckingModifications { background: #440000; color: #fff; }
 .Exception.Pending { background: #440000; color: #fff; }
 .Exception.Sleeping { background: #440000; color: #fff; }
 .Exception.Unknown { background: #440000; color: #fff; }
 
-.Failure.Building { background: #ff9933 url(/images/skins/worldcup/failure_building.gif) no-repeat center left; color: #000; }
+.Failure.Building { background: #ffffff url(<%= skin_random_image_path('failure_building', 'gif') %>) no-repeat center left; color: #000; }
 .Failure.CheckingModifications { background: #882132; color: #fff; }
 .Failure.Pending { background: #882132; color: #fff; }
 .Failure.Sleeping { background: #882132; color: #fff; }
 .Failure.Unknown { background: #882132; color: #fff; }
 
-.Success.Building { background: #dddddd url(/images/skins/worldcup/success_building.gif) no-repeat center left; color: #040302; }
+.Success.Building { background: #dddddd url(<%= skin_random_image_path('success_building', 'gif') %>) no-repeat center left; color: #040302; }
 .Success.CheckingModifications { background: #2bca5b; color: #040302; }
 .Success.Pending { background: #2bca5b; color: #040302; }
 .Success.Sleeping { background: #2bca5b; color: #040302; }
 .Success.Unknown { background: #2bca5b; color: #040302; }
 
-.Unknown.Building { background: #707070 url(/images/skins/worldcup/unknown_building.gif) no-repeat center left; color: #040302; }
+.Unknown.Building { background: #707070 url(<%= skin_random_image_path('unknown_building', 'gif') %>) no-repeat center left; color: #040302; }
 .Unknown.CheckingModifications { background: #707070; color: #040302; }
 .Unknown.Pending { background: #707070; color: #040302; }
 .Unknown.Sleeping { background: #707070; color: #040302; }

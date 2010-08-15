@@ -1,6 +1,13 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
+  def skin_random_image_path(prefix, extension)
+    all_images = Dir.glob("public/images/skins/#{@skin}/#{prefix}*.#{extension}")
+    random_image = all_images[rand(all_images.size)]
+
+    image_path("skins/#{@skin}/#{File.basename(random_image)}")
+  end
+
   # Output the difference between a give time and now in
   # approximate seconds/minutes/hours/days
   def time_ago(time)
