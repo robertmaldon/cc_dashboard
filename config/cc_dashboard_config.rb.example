@@ -21,6 +21,6 @@ DashboardConfig.cctray_feed_urls = {
 # Nobody stops Chuck Norris from kicking ass!
 #DashboardConfig.bling = 'chucknorris'
 
-# The skin. Currently available skins are 'doom', 'hudson', 'kitten', 'smiley',
-# 'spaceinvaders' and 'worldcup'.
+# The skin. Currently available skins are 'doom', 'hudson', 'iskin', 'kitten',
+# 'smiley', 'spaceinvaders' and 'worldcup'.
 #DashboardConfig.skin = 'doom'

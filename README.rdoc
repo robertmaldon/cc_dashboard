@@ -31,6 +31,7 @@ Built-in skins are:
 
 * *doom* - yep, the original first-person shooter Doom
 * *hudson* - some images borrowed from the {Hudson continuous integration server}[https://hudson.dev.java.net/]
+* *iskin* - all things Apple and the cult of Steve Jobs
 * *kitten* - aaawww, how cute :)
 * *smiley*
 * *spaceinvaders* - yep, the arcade classic
