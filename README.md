@@ -1,0 +1,121 @@
+# cc_dashboard - Aggregates the build status of projects from multiple CruiseControl servers on to a single "dashboard" web page
+
+[http://github.com/robertmaldon/cc_dashboard](http://github.com/robertmaldon/cc_dashboard)
+
+cc_dashboard will combine the build status of projects from multiple CruiseControl servers (actually, from any Continuous Integration server that exposes build status information using the "cctray xml format" - see below) on to a single "dashboard" web page.
+
+cc_dashboard is a Rails application. It has been tested against Rails 2.1 and Rails 2.3.5, but because it is very, very simple it should run under earlier and later versions of Rails.
+
+# Why cc_dashboard?
+
+As the number of Rails projects I was using increased I was then forced to split them amongst multiple CruiseControl.rb servers to improve build times. However, I now had the problem of monitoring multiple CruiseControl.rb servers. So the answer was to aggregate all the build status using cc_dashboard!
+
+Why did I write it in Rails? Because I was working with a large number of Rails projects at the time and had the Rails infrastructure in place to host cc_dashboard!
+
+# Installation
+
+Assuming you have the base Rails gems installed (no database needed):
+
+- Unpack the cc_dashboard zip/tar
+- Create a **config/cc\_dashboard\_config.rb** file with a list of "cctray xml format" (see below) feed URLs. You can use **config/cc\_dashboard\_config.rb.example** as a template
+- Start the cc_dashboard Rails server by running the **script/server** script. If no arguments are supplied this will start the server on port 3332.
+- Point your web browser at the application root. e.g.
+
+  [http://localhost:3332/](http://localhost:3332/)
+
+# Skins
+
+cc_dashboard has support for changing the look, or "skin", of its dashboard page.
+
+Built-in skins are:
+
+* **doom** - yep, the original first-person shooter Doom
+* **hudson** - some images borrowed from the [Hudson continuous integration server](https://hudson.dev.java.net/)
+* **iskin** - all things Apple and the cult of Steve Jobs
+* **kitten** - aaawww, how cute :)
+* **smiley**
+* **spaceinvaders** - yep, the arcade classic
+* **worldcup** - a.k.a. soccer
+
+You choose the skin by setting the **DashboardConfig.skin** value in the **config/cc\_dashboard\_config.rb** configuration file. You can also choose the skin per-HTTP-request by adding a "?skin=SKIN" to the end of the URL (e.g. "?skin=hudson").
+
+# Bling
+
+To make the dahsboard a little less boring you can add some "bling". Built-in blings are:
+
+* **cheezburger** - a random image from the [Cheezburger Network](http://cheezburger.com/)
+* **chucknorris** - Chuck Norris is the ultimate programmer! 
+
+You choose the skin by setting the **DashboardConfig.bling** value in the **config/cc\_dashboard\_config.rb** configuration file. You can also choose the bling per-HTTP-request by adding a "?bling=BLING" to the end of the URL (e.g. "?bling=cheezburger").
+
+# "cctray xml format"
+
+Originally developed for CruiseControl.NET, the "cctray xml format" is an RSS-like way of exposing the build status of projects. This format has caught on and is now supported by a number of continuous integration servers:
+
+* [CruiseControl.rb](http://cruisecontrolrb.thoughtworks.com/) - http://cc.rb.servername:3333/XmlStatusReport.aspx
+* [CruiseControl](http://cruisecontrol.sourceforge.net/) - http://cc.java.servername:8080/cctray.xml
+* [CruiseControl.NET](http://ccnet.thoughtworks.com/) - http://cc.net.servername/XmlStatusReport.aspx
+* [Hudson](https://hudson.dev.java.net/) - http://hudson.servername:8080/cc.xml
+
+See [Multiple Project Summary Reporting Standard](http://confluence.public.thoughtworks.org/display/CI/Multiple+Project+Summary+Reporting+Standard) for details of the cctray XML feed format. This doco is mostly correct, the only difference i've seen "in the wild" are:
+
+* An additional "Pending" activity
+* An additional "Unknown" status. I've seen Unknown reported by CruiseControl.rb when project builds are serialized ("Configuration.serialize_builds = true" set in .cruise/site_config.rb) and one build is waiting for another build to finish. I've seen Unknown reported by Hudson when a project is disabled.
+
+Oh, [cctray](http://confluence.public.thoughtworks.org/display/CCNET/CCTray) is a .NET application that sits in your Windows system tray and can alert you via popups or sounds when a project build is successful or fails. It is available as part of a [CruiseControl.NET release](http://sourceforge.net/projects/ccnet/files/CruiseControl.NET%20Releases/).
+
+[ccmenu](http://ccmenu.sourceforge.net/) is a cctray equivalent for the Mac.
+
+# CruiseControl.rb cctray times in the wrong timezone bug
+
+CruiseControl.rb versions 1.4.0 and 1.3.0 (and probably earlier versions) incorrectly report local server time as UTC in the cctray feeds. To fix change the following method in lib/time_formatter.rb
+
+    def round_trip_local(time)
+      time.strftime('%Y-%m-%dT%H:%M:%S.0000000-00:00') # yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK)
+    end
+
+to
+
+    def round_trip_local(time)
+      time.xmlschema
+    end
+
+# Supported Browsers
+
+cc_dashboard has been tested successfully against Chrome 5.0, Firefox 3.5, Internet Explorer 7 and Internet Explorer 8.
+
+cc_dashboard does not render correctly using Internet Explorer 6 and I have no intention of supporting IE6 :)
+
+# License and Acknowledgements
+
+cc_dashboard is licensed under the terms of the the Apache 2.0 license. See [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0) for details.
+
+Some of the images used for the skins have their own licenses - see below.
+
+## Skins
+
+The 'doom' skin images are copyright [id Software](http://www.idsoftware.com/). Special thanks to Phidias N. Bourlas for generating the [original animated GIFs](http://www.cslab.ntua.gr/~phib/doom1.htm) that were used to create the skin.
+
+The 'hudson' skin images are copied from the [Hudson continuous integration server](https://hudson.dev.java.net/), which copied most of its art work from [Tango Project](http://tango.freedesktop.org/Tango_Desktop_Project).
+
+The 'smiley' skin favicons are derived from images from [Tango Project](http://tango.freedesktop.org/Tango_Desktop_Project), which are covered by the [Creative Commons Attribution Share-Alike License](http://creativecommons.org/licenses/by-sa/2.5/).
+
+The 'spaceinvaders' images are derived from those on [The History Of Space Invaders](http://www.brentradio.com/SpaceInvaders.htm). Space Invaders copyright Taito Corp.
+
+The 'worldcup' skin was contributed by [lightningdb](http://github.com/lightningdb)
+
+## Bling
+
+The 'cheezburger' images are copyright Pet Holdings, Inc. The technique to get around browser security issues when AJAX loading the images was lifted from... inspired by Kevin Luck's blog post [Data Scraping with YQL and JQuery](http://www.kelvinluck.com/2009/02/data-scraping-with-yql-and-jquery/). Thanks also to Yahoo! for providing [YQL](http://developer.yahoo.com/yql/), a nice tool that makes screen scraping dead easy.
+
+The 'chucknorris' bling was inspired by the [Hudson Chuck Norris Plugin](http://wiki.hudson-ci.org/display/HUDSON/ChuckNorris+Plugin), which in turn was inspired by [The Ultimate Top 25 Chuck Norris 'The Programmer' Jokes](http://www.codesqueeze.com/the-ultimate-top-25-chuck-norris-the-programmer-jokes/). (Which I think was in turn inspired by [ChuckNorrisFacts.com](http://chucknorrisfacts.com/).)
+
+# Other CruiseControl Aggregators
+
+[big-visible-cruise-web](http://code.google.com/p/big-visible-cuise-web/) is Java servlet/Javascript webapp which remembers which builds you chose to show/hide.
+
+[bigvisiblewall](http://code.google.com/p/bigvisiblewall/) is implemented in Scala and packaged as a Java web application.
+
+[cc_board](http://github.com/qxjit/cc_board) is a [Sinatra-based](http://www.sinatrarb.com/) aggregator.
+
+[cc_monitor](http://github.com/betarelease/cc_monitor) is a [Ramaze-based](http://ramaze.net/) aggregator. This was the main inspiration for cc_dashboard, but was not very robust at the time.
