@@ -2,7 +2,7 @@
 module ApplicationHelper
 
   def skin_random_image_path(prefix, extension)
-    all_images = Dir.glob("public/images/skins/#{@skin}/#{prefix}*.#{extension}")
+    all_images = Dir.glob("app/assets/images/skins/#{@skin}/#{prefix}*.#{extension}")
     random_image = all_images[rand(all_images.size)]
 
     image_path("skins/#{@skin}/#{File.basename(random_image)}")
@@ -30,7 +30,8 @@ module ApplicationHelper
   # Generate icon tags in both IE-specific and standards formats
   def skinned_icon_tag(source)
     skinned_source = "skins/#{@skin}/favicon_#{source}"
-    "<link rel=\"SHORTCUT ICON\" href=\"#{compute_public_path(skinned_source, 'images')}\"/>\n<link rel=\"icon\" type=\"image/vnd.microsoft.icon\" href=\"#{compute_public_path(skinned_source, 'images')}\"/>"
+    tag(:link, {:rel => 'SHORTCUT_ICON', :href => image_path(skinned_source)}) +
+    tag(:link, {:rel => 'icon', :type => 'image/vnd.microsoft.icon', :href => image_path(skinned_source)})
   end
 
   private

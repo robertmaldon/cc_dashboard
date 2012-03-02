@@ -4,7 +4,7 @@
 
 cc_dashboard will combine the build status of projects from multiple CruiseControl servers (actually, from any Continuous Integration server that exposes build status information using the "cctray xml format" - see below) on to a single "dashboard" web page.
 
-cc_dashboard is a Rails application. It has been tested against Rails 2.1 and Rails 2.3.5, but because it is very, very simple it should run under earlier and later versions of Rails.
+cc_dashboard is a Rails 3.2 application. It has been tested against Ruby 1.9.3, but because it is very, very simple it should run under earlier versions of 1.9. (Rails 3.1 dropped support for Ruby 1.8.7.)
 
 # Why cc_dashboard?
 
@@ -12,16 +12,24 @@ As the number of Rails projects I was using increased I was then forced to split
 
 Why did I write it in Rails? Because I was working with a large number of Rails projects at the time and had the Rails infrastructure in place to host cc_dashboard!
 
+(Another approach to this problem could have been to use continuous integration servers that support master/multiple slaves configurations like Jenkins, but it wasn't an options at the time.)
+
 # Installation
 
 Assuming you have the base Rails gems installed (no database needed):
 
+- Install ruby 1.9.2 or later and bundler
 - Unpack the cc_dashboard zip/tar
 - Create a **config/cc\_dashboard\_config.rb** file with a list of "cctray xml format" (see below) feed URLs. You can use **config/cc\_dashboard\_config.rb.example** as a template
-- Start the cc_dashboard Rails server by running the **script/server** script. If no arguments are supplied this will start the server on port 3332.
+- Install the dependent gems by doing a **bundle install**
+- Start the cc_dashboard Rails server by running the **start.sh** script
 - Point your web browser at the application root. e.g.
 
   [http://localhost:3332/](http://localhost:3332/)
+
+To stop the cc_dashboard Rails server run the **stop.sh** script.
+
+Note to Rails gurus: The start.sh and stop.sh scripts use Unicorn, but if you like you can use Webrick (e.g. "rails server -p 3332 -e production"), or Thin, or you can deploy behind Passenger, or use whatever server you like. You can also bind to whatever TCP port you like.
 
 # Skins
 
@@ -57,7 +65,8 @@ Originally developed for CruiseControl.NET, the "cctray xml format" is an RSS-li
 * [CruiseControl.NET](http://ccnet.thoughtworks.com/) - http://cc.net.servername/XmlStatusReport.aspx
 * [Hudson](https://hudson.dev.java.net/) - http://hudson.servername:8080/cc.xml
 
-See [Multiple Project Summary Reporting Standard](http://confluence.public.thoughtworks.org/display/CI/Multiple+Project+Summary+Reporting+Standard) for details of the cctray XML feed format. This doco is mostly correct, the only difference i've seen "in the wild" are:
+See [Multiple Project Summary Reporting Standard](http://confluence.public.thoughtworks.org/display/CI/Multiple+Project+Summary+Reporting+Standard) for details of the cctray XML feed format. This doco is mostly correct, the
+only difference i've seen "in the wild" are:
 
 * An additional "Pending" activity
 * An additional "Unknown" status. I've seen Unknown reported by CruiseControl.rb when project builds are serialized ("Configuration.serialize_builds = true" set in .cruise/site_config.rb) and one build is waiting for another build to finish. I've seen Unknown reported by Hudson when a project is disabled.
@@ -94,13 +103,16 @@ Some of the images used for the skins have their own licenses - see below.
 
 ## Skins
 
-The 'doom' skin images are copyright [id Software](http://www.idsoftware.com/). Special thanks to Phidias N. Bourlas for generating the [original animated GIFs](http://www.cslab.ntua.gr/~phib/doom1.htm) that were used to create the skin.
+The 'doom' skin images are copyright [id Software](http://www.idsoftware.com/). Special thanks to Phidias N. Bourlas for generating the
+[original animated GIFs](http://www.cslab.ntua.gr/~phib/doom1.htm) that were used to create the skin.
 
 The 'hudson' skin images are copied from the [Hudson continuous integration server](https://hudson.dev.java.net/), which copied most of its art work from [Tango Project](http://tango.freedesktop.org/Tango_Desktop_Project).
 
-The 'smiley' skin favicons are derived from images from [Tango Project](http://tango.freedesktop.org/Tango_Desktop_Project), which are covered by the [Creative Commons Attribution Share-Alike License](http://creativecommons.org/licenses/by-sa/2.5/).
+The 'smiley' skin favicons are derived from images from [Tango Project](http://tango.freedesktop.org/Tango_Desktop_Project), which are
+covered by the [Creative Commons Attribution Share-Alike License](http://creativecommons.org/licenses/by-sa/2.5/).
 
-The 'spaceinvaders' images are derived from those on [The History Of Space Invaders](http://www.brentradio.com/SpaceInvaders.htm). Space Invaders copyright Taito Corp.
+The 'spaceinvaders' images are derived from those on [The History Of Space Invaders](http://www.brentradio.com/SpaceInvaders.htm).
+Space Invaders copyright Taito Corp.
 
 The 'worldcup' skin was contributed by [lightningdb](http://github.com/lightningdb)
 
@@ -108,7 +120,8 @@ The 'worldcup' skin was contributed by [lightningdb](http://github.com/lightning
 
 The 'cheezburger' images are copyright Pet Holdings, Inc. The technique to get around browser security issues when AJAX loading the images was lifted from... inspired by Kevin Luck's blog post [Data Scraping with YQL and JQuery](http://www.kelvinluck.com/2009/02/data-scraping-with-yql-and-jquery/). Thanks also to Yahoo! for providing [YQL](http://developer.yahoo.com/yql/), a nice tool that makes screen scraping dead easy.
 
-The 'chucknorris' bling was inspired by the [Hudson Chuck Norris Plugin](http://wiki.hudson-ci.org/display/HUDSON/ChuckNorris+Plugin), which in turn was inspired by [The Ultimate Top 25 Chuck Norris 'The Programmer' Jokes](http://www.codesqueeze.com/the-ultimate-top-25-chuck-norris-the-programmer-jokes/). (Which I think was in turn inspired by [ChuckNorrisFacts.com](http://chucknorrisfacts.com/).)
+The 'chucknorris' bling was inspired by the [Hudson Chuck Norris Plugin](http://wiki.hudson-ci.org/display/HUDSON/ChuckNorris+Plugin),
+which in turn was inspired by [The Ultimate Top 25 Chuck Norris 'The Programmer' Jokes](http://www.codesqueeze.com/the-ultimate-top-25-chuck-norris-the-programmer-jokes/). (Which I think was in turn inspired by [ChuckNorrisFacts.com](http://chucknorrisfacts.com/).)
 
 # Other CruiseControl Aggregators
 
@@ -118,4 +131,5 @@ The 'chucknorris' bling was inspired by the [Hudson Chuck Norris Plugin](http://
 
 [cc_board](http://github.com/qxjit/cc_board) is a [Sinatra-based](http://www.sinatrarb.com/) aggregator.
 
-[cc_monitor](http://github.com/betarelease/cc_monitor) is a [Ramaze-based](http://ramaze.net/) aggregator. This was the main inspiration for cc_dashboard, but was not very robust at the time.
+[cc_monitor](http://github.com/betarelease/cc_monitor) is a [Ramaze-based](http://ramaze.net/) aggregator. This was the main inspiration
+for cc_dashboard, but was not very robust at the time.

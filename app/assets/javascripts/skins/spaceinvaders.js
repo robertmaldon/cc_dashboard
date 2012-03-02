@@ -8,7 +8,7 @@
 
         /* Only sometimes show a saucer */
         if (randomIntBetween(1, 10) > 7) {
-            var saucer = $('<img/>').attr('id', 'saucer').attr('class', 'saucer').attr('src', '../../images/skins/spaceinvaders/saucer.gif');
+            var saucer = $('<img/>').attr('id', 'saucer').attr('class', 'saucer').attr('src', '/assets/skins/spaceinvaders/saucer.gif');
             $('#main').append(saucer);
             $('#saucer').animate({
                              left: '+='.concat($(window).width() - 50)
@@ -26,7 +26,7 @@
             var alienLeftEnd   = $(window).width() / 3;
 
             for (i = randomIntBetween(1, 5); i > 0; i--) {
-                var alien = $('<img/>').attr('id', 'alien' + (index + i)).attr('class', 'alien').attr('src', '../../images/skins/spaceinvaders/' + src);
+                var alien = $('<img/>').attr('id', 'alien' + (index + i)).attr('class', 'alien').attr('src', '/assets/skins/spaceinvaders/' + src);
                 $('#main').append(alien);
                 var alienId = '#alien' + (index + i);
                 $(alienId).css('top', top + 'px').css('left', alienLeftStart + (i * 70) + 'px');

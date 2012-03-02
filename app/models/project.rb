@@ -11,7 +11,7 @@ class Project
     @lastBuildStatus = element.attributes['lastBuildStatus']
     @category = element.attributes['category']
     @lastBuildLabel = element.attributes['lastBuildLabel']
-    @lastBuildTime = Time.parse(element.attributes['lastBuildTime'])
+    @lastBuildTime = Time.parse(element.attributes['lastBuildTime']) rescue element.attributes['lastBuildTime']
   end
 
 end

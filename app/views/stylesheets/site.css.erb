@@ -13,9 +13,9 @@ p { margin: 0; padding: 0; font-size: 0.5em; }
 
 div { color: #fff; text-align: center; width: 300px; float: left; height: 100px; margin: 5px; position: relative; border: 2px solid #c0c0c0; overflow: hidden; }
 
-div.chuck-norris-fact.healthy { background: #2bca5b url(../images/background/chuck-norris/healthy.png) no-repeat bottom center; height: 316px; color: #040302; }
-div.chuck-norris-fact.building { background: #ff9933 url(../images/background/chuck-norris/building.png) no-repeat bottom center; height: 316px; color: #000; }
-div.chuck-norris-fact.sick { background: #882132 url(../images/background/chuck-norris/sick.png) no-repeat bottom center; height: 316px; color: #fff; }
+div.chuck-norris-fact.healthy { background: #2bca5b url(<%= image_path("background/chuck-norris/healthy.png") %>) no-repeat bottom center; height: 316px; color: #040302; }
+div.chuck-norris-fact.building { background: #ff9933 url(<%= image_path("background/chuck-norris/building.png") %>) no-repeat bottom center; height: 316px; color: #000; }
+div.chuck-norris-fact.sick { background: #882132 url(<%= image_path("background/chuck-norris/sick.png") %>) no-repeat bottom center; height: 316px; color: #fff; }
 
 div.cheezburger { position: relative; width: 615px; height: 430px; border: none; }
   div.cheezburger img { position: absolute; top: 190px; left: 280px; border: none; }

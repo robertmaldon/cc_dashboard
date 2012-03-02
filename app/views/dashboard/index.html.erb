@@ -7,7 +7,7 @@
       <div class="project <%= project.lastBuildStatus %> <%= project.activity %>">
           <h2><%= project.name %></h2>
           <p>Last label: <%= project.lastBuildLabel %></p>
-          <p>Last build: <%= time_ago(project.lastBuildTime) %></p>
+          <p>Last build: <%= time_ago(project.lastBuildTime) rescue project.lastBuildTime %></p>
       </div>
     </a>
 

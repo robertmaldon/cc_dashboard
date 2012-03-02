@@ -10,8 +10,8 @@
     <meta http-equiv="expires" content="0" />
     <meta http-equiv="refresh" content="<%= @refresh %>" />
 
-    <%= stylesheet_link_tag 'site' %>
-    <%= stylesheet_link_tag "skins/#{@skin}.css" %>
+    <%= stylesheet_link_tag "stylesheets/site.css" %>
+    <%= stylesheet_link_tag "stylesheets/skins/#{@skin}.css" %>
 
     <%= skinned_icon_tag(@icon) %>
 
@@ -25,8 +25,8 @@
     -%>
     <title><%= title %></title>
 
-      <%= javascript_include_tag 'jquery-1.4.2.min' %>
-    <%- if File.exists?("#{RAILS_ROOT}/public/javascripts/skins/#{@skin}.js") -%> 
+    <%= javascript_include_tag "jquery" %>
+    <%- if File.exists?("#{Rails.root}/app/assets/javascripts/skins/#{@skin}.js") -%> 
       <%= javascript_include_tag "skins/#{@skin}.js" %>
     <%- end -%>
   </head>
