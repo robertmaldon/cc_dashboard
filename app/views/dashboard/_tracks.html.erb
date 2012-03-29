@@ -1,0 +1,56 @@
+<%- if !@track.blank? -%>
+<script type="text/javascript">
+if ((typeof(Audio) !== "undefined") && (typeof(Storage) !== "undefined") {
+	var play_success = false
+	var play_failure = false
+
+	var item;
+
+	var lastBuildStatus;
+	var currentBuildStatus;
+	var lastActivity;
+	var currentActivity;
+
+	<%- @projects.each do | project | -%>
+	item = sessionStorage.getItem('<%= project.webUrl %>')||';';
+
+	lastBuildStatus    = item.split(";")[0];
+	currentBuildStatus = '<%= project.lastBuildStatus %>';
+	lastActivity       = item.split(";")[1];
+	currentActivity    = '<%= project.activity %>';
+	if (('Success' == lastBuildStatus) && ('Success' != currentBuildStatus)) {
+		// The simplest case. The last status was 'Success' and the current status is not 'Success'
+		play_failure = true;
+	} else if ('Failure' == lastBuildStatus) {
+		if ('Success' == currentBuildStatus) {
+			// The last status was 'Failure' and the current status is 'Success'
+			play_success = true;
+		} else if (('Sleeping' != lastActivity) && ('Sleeping' == currentActivity)) {
+			// The last status was 'Failure' and a new build - just finished - failed again
+			play_failure = true;
+		}
+	}
+	<%- end -%>
+
+	// Remove last results
+	sessionStorage.clear();
+
+	// Store the status of each build for comparison on the next update
+	<%- @projects.each do | project | -%>
+		sessionStorage.setItem('<%= project.webUrl %>', '<%= project.lastBuildStatus %>;<%= project.activity %>');
+	<%- end -%>
+
+	// Play sounds
+	if (play_success) {
+		var audioElement = document.createElement('audio');
+		audioElement.setAttribute('src', '<%= track_random_sound_path("success") %>');
+		audioElement.play();
+	}
+	if (play_failure) {
+		var audioElement = document.createElement('audio');
+		audioElement.setAttribute('src', '<%= track_random_sound_path("failure") %>');
+		audioElement.play();
+	}
+}
+</script>
+<%- end -%>

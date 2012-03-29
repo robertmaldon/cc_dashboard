@@ -35,7 +35,7 @@ Note to Rails gurus: The start.sh and stop.sh scripts use Unicorn, but if you li
 
 cc_dashboard has support for changing the look, or "skin", of its dashboard page.
 
-Built-in skins are:
+Available skins are:
 
 * **doom** - yep, the original first-person shooter Doom
 * **hudson** - some images borrowed from the [Hudson continuous integration server](https://hudson.dev.java.net/)
@@ -54,7 +54,24 @@ To make the dahsboard a little less boring you can add some "bling". Built-in bl
 * **cheezburger** - a random image from the [Cheezburger Network](http://cheezburger.com/)
 * **chucknorris** - Chuck Norris is the ultimate programmer! 
 
-You choose the skin by setting the **DashboardConfig.bling** value in the **config/cc\_dashboard\_config.rb** configuration file. You can also choose the bling per-HTTP-request by adding a "?bling=BLING" to the end of the URL (e.g. "?bling=cheezburger").
+You choose the bling by setting the **DashboardConfig.bling** value in the **config/cc\_dashboard\_config.rb** configuration file. You can also choose the bling per-HTTP-request by adding a "?bling=BLING" to the end of the URL (e.g. "?bling=cheezburger").
+
+# (Sound) Tracks
+
+cc_dashboard can play sounds to alert you when:
+
+1. a build breaks
+2. a build is still broken
+3. a build was broken but is now fixed
+
+Available skins are:
+
+* **aliens** - sound bites from the classic "Aliens" movie. Game over!
+* **simpsons** - sound bites from the animated "satirical parody of a middle class American lifestyle" sitcom. Doh!
+
+You choose the track by setting the **DashboardConfig.track** value in the **config/cc\_dashboard\_config.rb** configuration file, or leave the configuration commented out to disable sounds. You can also choose the track per-HTTP-request by adding a "?track=TRACK" to the end of the URL (e.g. "?track=aliens").
+
+NOTE: Tracks will only work on browsers that support the HTML5 audio and storage APIs. WAVs seem to be the most widely supported cross-browser audio format.
 
 # "cctray xml format"
 
@@ -65,13 +82,12 @@ Originally developed for CruiseControl.NET, the "cctray xml format" is an RSS-li
 * [CruiseControl.NET](http://ccnet.thoughtworks.com/) - http://cc.net.servername/XmlStatusReport.aspx
 * [Hudson](https://hudson.dev.java.net/) - http://hudson.servername:8080/cc.xml
 
-See [Multiple Project Summary Reporting Standard](http://confluence.public.thoughtworks.org/display/CI/Multiple+Project+Summary+Reporting+Standard) for details of the cctray XML feed format. This doco is mostly correct, the
-only difference i've seen "in the wild" are:
+See [Multiple Project Summary Reporting Standard](http://confluence.public.thoughtworks.org/display/CI/Multiple+Project+Summary+Reporting+Standard) for details of the cctray XML feed format. This doco is mostly correct, the only difference i've seen "in the wild" are:
 
 * An additional "Pending" activity
 * An additional "Unknown" status. I've seen Unknown reported by CruiseControl.rb when project builds are serialized ("Configuration.serialize_builds = true" set in .cruise/site_config.rb) and one build is waiting for another build to finish. I've seen Unknown reported by Hudson when a project is disabled.
 
-Oh, [cctray](http://confluence.public.thoughtworks.org/display/CCNET/CCTray) is a .NET application that sits in your Windows system tray and can alert you via popups or sounds when a project build is successful or fails. It is available as part of a [CruiseControl.NET release](http://sourceforge.net/projects/ccnet/files/CruiseControl.NET%20Releases/).
+btw, [cctray](http://confluence.public.thoughtworks.org/display/CCNET/CCTray) is a .NET application that sits in your Windows system tray and can alert you via popups or sounds when a project build is successful or fails. It is available as part of a [CruiseControl.NET release](http://sourceforge.net/projects/ccnet/files/CruiseControl.NET%20Releases/).
 
 [ccmenu](http://ccmenu.sourceforge.net/) is a cctray equivalent for the Mac.
 
@@ -91,7 +107,7 @@ to
 
 # Supported Browsers
 
-cc_dashboard has been tested successfully against Chrome 5.0, Firefox 3.5, Internet Explorer 7 and Internet Explorer 8.
+cc_dashboard has been tested successfully against Chrome 17.0, Firefox 11, Internet Explorer 7 and Internet Explorer 8.
 
 cc_dashboard does not render correctly using Internet Explorer 6 and I have no intention of supporting IE6 :)
 
@@ -122,6 +138,12 @@ The 'cheezburger' images are copyright Pet Holdings, Inc. The technique to get a
 
 The 'chucknorris' bling was inspired by the [Hudson Chuck Norris Plugin](http://wiki.hudson-ci.org/display/HUDSON/ChuckNorris+Plugin),
 which in turn was inspired by [The Ultimate Top 25 Chuck Norris 'The Programmer' Jokes](http://www.codesqueeze.com/the-ultimate-top-25-chuck-norris-the-programmer-jokes/). (Which I think was in turn inspired by [ChuckNorrisFacts.com](http://chucknorrisfacts.com/).)
+
+## (Sound) Tracks
+
+The 'aliens' sound bites are copyright 20th Century Fox (1986).
+
+The 'simpsons' sound bites are copyright Fox.
 
 # Other CruiseControl Aggregators
 

@@ -2,10 +2,17 @@
 module ApplicationHelper
 
   def skin_random_image_path(prefix, extension)
-    all_images = Dir.glob("app/assets/images/skins/#{@skin}/#{prefix}*.#{extension}")
+    all_images   = Dir.glob("app/assets/images/skins/#{@skin}/#{prefix}*.#{extension}")
     random_image = all_images[rand(all_images.size)]
 
     image_path("skins/#{@skin}/#{File.basename(random_image)}")
+  end
+
+  def track_random_sound_path(prefix, extension = 'wav')
+    all_sounds   = Dir.glob("public/audios/tracks/#{@track}/#{prefix}*.#{extension}")
+    random_sound = all_sounds[rand(all_sounds.size)]
+
+    audio_path("tracks/#{@track}/#{File.basename(random_sound)}")
   end
 
   # Output the difference between a give time and now in

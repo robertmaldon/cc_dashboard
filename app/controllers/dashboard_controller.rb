@@ -5,10 +5,13 @@ require 'ostruct'
 
 class DashboardController < ApplicationController
 
+  before_filter :load_config
+  
   def index
-    @skin = params[:skin] || DashboardConfig.skin
+    @skin    = params[:skin]    || DashboardConfig.skin
+    @track   = params[:track]   || DashboardConfig.track
     @refresh = params[:refresh] || DashboardConfig.refresh_interval
-    @bling = params[:bling] || DashboardConfig.bling
+    @bling   = params[:bling]   || DashboardConfig.bling
     
     @activity_building = 0
     @status_failure    = 0
@@ -84,6 +87,12 @@ class DashboardController < ApplicationController
   <Project name="#{message} [#{feed_url}]" activity="Error" lastBuildStatus="Error" lastBuildLabel="unknown" lastBuildTime="unknown" webUrl="#{feed_url}"/>
 </Projects>
 EOF
+  end
+
+  private
+
+  def load_config
+    load "#{Rails.root}/config/cc_dashboard_config.rb" if File.exists?("#{Rails.root}/config/cc_dashboard_config.rb")
   end
 
 end

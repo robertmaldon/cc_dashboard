@@ -18,4 +18,7 @@ class DashboardConfig
   cattr_accessor :skin, :instance_writer => false
   @@skin = 'doom'
 
+  cattr_accessor :track, :instance_writer => false
+  @@track = ''
+
 end

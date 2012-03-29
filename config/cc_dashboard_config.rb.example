@@ -24,3 +24,7 @@ DashboardConfig.cctray_feed_urls = {
 # The skin. Currently available skins are 'doom', 'hudson', 'iskin', 'kitten',
 # 'smiley', 'spaceinvaders' and 'worldcup'.
 #DashboardConfig.skin = 'doom'
+
+# The track. Comment out to disable sounds. Currently available tracks are
+# 'aliens' and 'simpsons'.
+#DashboardConfig.track = 'simpsons'
