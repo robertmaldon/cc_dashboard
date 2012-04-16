@@ -73,6 +73,14 @@ You choose the track by setting the **DashboardConfig.track** value in the **con
 
 NOTE: Tracks will only work on browsers that support the HTML5 audio and storage APIs. WAVs seem to be the most widely supported cross-browser audio format.
 
+# Alarms
+
+It can be helpful to get a reminder for upcoming important events of the day, such as the Daily Standup. cc_dashboard can be configured to display a clock + audible alarm in ['24' digital clock 'plink' style](http://www.urbandictionary.com/define.php?term=plink) to help remind you of these events.
+
+See the **DashboardConfig.alarm** value in the **config/cc\_dashboard\_config.rb** configuration file for examples. More than one alarm can be configured.
+
+NOTE: Alarms will only work on browsers that support HTML 5 audio and @font-family.
+
 # "cctray xml format"
 
 Originally developed for CruiseControl.NET, the "cctray xml format" is an RSS-like way of exposing the build status of projects. This format has caught on and is now supported by a number of continuous integration servers:
@@ -80,6 +88,7 @@ Originally developed for CruiseControl.NET, the "cctray xml format" is an RSS-li
 * [CruiseControl.rb](http://cruisecontrolrb.thoughtworks.com/) - http://cc.rb.servername:3333/XmlStatusReport.aspx
 * [CruiseControl](http://cruisecontrol.sourceforge.net/) - http://cc.java.servername:8080/cctray.xml
 * [CruiseControl.NET](http://ccnet.thoughtworks.com/) - http://cc.net.servername/XmlStatusReport.aspx
+* [Jenkins](http://jenkins-ci.org/) - http://jenkins.servername:8080/cc.xml
 * [Hudson](https://hudson.dev.java.net/) - http://hudson.servername:8080/cc.xml
 
 See [Multiple Project Summary Reporting Standard](http://confluence.public.thoughtworks.org/display/CI/Multiple+Project+Summary+Reporting+Standard) for details of the cctray XML feed format. This doco is mostly correct, the only difference i've seen "in the wild" are:
@@ -144,6 +153,12 @@ which in turn was inspired by [The Ultimate Top 25 Chuck Norris 'The Programmer'
 The 'aliens' sound bites are copyright 20th Century Fox (1986).
 
 The 'simpsons' sound bites are copyright Fox.
+
+## Alarms
+
+'24' is copyright 20th Century Fox Television.
+
+The '24' countdown-clock-like [LCD font](http://www.dafont.com/lcd-lcd-mono.font) was created by [Samuel Reynolds](http://www.spinwardstars.com/scrfonts/).
 
 # Other CruiseControl Aggregators
 

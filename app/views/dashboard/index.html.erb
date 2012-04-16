@@ -1,5 +1,6 @@
 <div id="main">
-  <%= render :partial => 'bling' %>
+  <%= render 'alarm_clock' %>
+  <%= render 'bling' %>
 
   <%- @projects.each do |project| -%>
     <%- title = "[#{project.group_name}] #{project.name} - Status: #{project.lastBuildStatus} - Activity: #{project.activity} - Last Build: #{project.lastBuildTime}" -%>

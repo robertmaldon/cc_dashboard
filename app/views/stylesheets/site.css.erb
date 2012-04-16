@@ -1,11 +1,16 @@
 /* cc_dashboard default styles */
 
+@font-face {
+    font-family: 'lcd';
+    src: url('<%= asset_paths.compute_public_path("LCD-BOLD.TTF", "fonts") %>');
+}
+
 body {
     margin: 0;
     padding: 0;
     background: #000e0e;
     color: #fff;
-    font: 30px "Trebuchet MS",trebuchet,helvetica,arial,sans-serif;
+    font: 30px helvetica,arial,sans-serif;
 }
 
 a {
@@ -88,11 +93,25 @@ div.cheezburger img {
 }
 
 #pageloaderror {
-	margin: 100px 0 0 0;
-	padding: 0;
-	text-align: center;
-	width: 100%;
-	float: none;
+    margin: 100px 0 0 0;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+    float: none;
+}
+
+#alarm-clock {
+    display: none;
+    position: absolute;
+    left: 20%;
+    top: 20%;
+    width: 60%;
+    height: auto;
+    padding: 20px;
+    z-index: 100;
+    color: #cccc00;
+    background-color: #000;
+    font: 200px 'lcd',sans-serif;
 }
 
 .Error {

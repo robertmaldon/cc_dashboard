@@ -1,0 +1,42 @@
+<%- if DashboardConfig.alarm.size > 0 -%>
+<div id="alarm-clock"></div>
+<script type="text/javascript">
+if (typeof(Audio) !== "undefined") {
+    function formatClockTime() {
+        var date = new Date();
+        var hours = date.getHours();
+        hours = ((hours < 10) ? "0" : "") + hours;
+        var minutes = date.getMinutes();
+        minutes = ((minutes < 10) ? "0" : "") + minutes;
+        var seconds = date.getSeconds();
+        seconds = ((seconds < 10) ? "0" : "") + seconds;
+
+        return hours + ':' + minutes + ':' + seconds;
+    }
+
+	function alarmClockTick(message) {
+        $("#alarm-clock").html('<p>' + message + '</p><p>' + formatClockTime() + '</p>');
+        $("#alarm-clock").show();
+    }
+
+    function alarmClockHide() {
+    	$("#alarm-clock").hide();
+    }
+
+    var now = formatClockTime();
+
+    <%- DashboardConfig.alarm.each do | alarm_config | -%>
+    if ((now >= '<%= alarm_config[:start] %>') && (now <= '<%= alarm_config[:stop] %>')) {
+        for (var i = 0; i < 9; i++) {
+    	    setTimeout("alarmClockTick('<%= alarm_config[:message] %>')", i * 1000);
+        }
+        setTimeout("alarmClockHide()", 9000);
+
+        var audioElement = document.createElement("audio");
+        audioElement.setAttribute("src", "<%= audio_path('alarms/24_clock_plink.wav') %>");
+        audioElement.play();
+    }
+    <%- end -%>
+}
+</script>
+<%- end -%>

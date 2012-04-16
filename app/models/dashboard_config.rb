@@ -21,4 +21,7 @@ class DashboardConfig
   cattr_accessor :track, :instance_writer => false
   @@track = ''
 
+  cattr_accessor :alarm, :instance_writer => false
+  @@alarm = []
+
 end

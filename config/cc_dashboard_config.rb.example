@@ -28,3 +28,23 @@ DashboardConfig.cctray_feed_urls = {
 # The track. Comment out to disable sounds. Currently available tracks are
 # 'aliens' and 'simpsons'.
 #DashboardConfig.track = 'simpsons'
+
+# Alarm. You can configure multiple alarms. The format of each alarm is a hash
+# with the following keys:
+# * message - An optional message to display above the alarm clock
+# * start   - Time to start displaying the alarm clock (format 'HH:MM:SS')
+# * stop    - Time to stop displaying the alarm clock (format 'HH:MM:SS')
+# e.g.
+#DashboardConfig.alarm = [
+#    {:message => 'Daily Standup',
+#	 :start   => '08:49:00',
+#	 :stop    => '09:01:00'},
+#
+#    {:message => 'Swap Pairs',
+#	 :start   => '11:29:00',
+#	 :stop    => '11:31:00'},
+#
+#	{:message => 'Afternoon Retro',
+#	 :start   => '16:14:00',
+#	 :stop    => '16:16:00'}
+#]
