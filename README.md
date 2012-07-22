@@ -90,6 +90,7 @@ Originally developed for CruiseControl.NET, the "cctray xml format" is an RSS-li
 * [CruiseControl.NET](http://ccnet.thoughtworks.com/) - http://cc.net.servername/XmlStatusReport.aspx
 * [Jenkins](http://jenkins-ci.org/) - http://jenkins.servername:8080/cc.xml
 * [Hudson](https://hudson.dev.java.net/) - http://hudson.servername:8080/cc.xml
+* [Travis CI](http://travis-ci.org/) - http://travis-ci.org/ownername/repositoryname/cc.xml
 
 See [Multiple Project Summary Reporting Standard](http://confluence.public.thoughtworks.org/display/CI/Multiple+Project+Summary+Reporting+Standard) for details of the cctray XML feed format. This doco is mostly correct, the only difference i've seen "in the wild" are:
 
