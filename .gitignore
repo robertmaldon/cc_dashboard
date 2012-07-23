@@ -16,3 +16,6 @@
 
 # Ignore non-example cc_dashboard configurations
 /config/cc_dashboard_config.rb
+
+# Ignore test of format changes to README.md
+README.html
