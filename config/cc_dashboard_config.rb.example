@@ -27,7 +27,7 @@ DashboardConfig.cctray_feed_urls = {
 
 # The track. Comment out to disable sounds. Currently available tracks are
 # 'aliens' and 'simpsons'.
-#DashboardConfig.track = 'simpsons'
+DashboardConfig.track = 'simpsons'
 
 # Alarm. You can configure multiple alarms. The format of each alarm is a hash
 # with the following keys:

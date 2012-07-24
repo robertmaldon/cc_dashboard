@@ -1,11 +1,18 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
-  def skin_random_image_path(prefix, extension)
-    all_images   = Dir.glob("app/assets/images/skins/#{@skin}/#{prefix}*.#{extension}")
+  def skin_random_image_path(prefix, suffix, extension)
+    all_images = Dir.glob("app/assets/images/skins/#{@skin}/#{prefix}_#{suffix}*.#{extension}")
+    all_images = Dir.glob("app/assets/images/skins/#{@skin}/#{prefix}*.#{extension}") if all_images.empty?
+    all_images = Dir.glob("app/assets/images/skins/#{@skin}/#{suffix}*.#{extension}") if all_images.empty?
+
     random_image = all_images[rand(all_images.size)]
 
-    image_path("skins/#{@skin}/#{File.basename(random_image)}")
+    if random_image.nil?
+      image_path("broken.jpg")
+    else
+      image_path("skins/#{@skin}/#{File.basename(random_image)}")
+    end
   end
 
   def track_random_sound_path(prefix, extension = 'wav')

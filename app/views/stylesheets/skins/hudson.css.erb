@@ -1,31 +1,31 @@
 /* 'hudson' skin styles */
 
 body { background: #fff; color: #000; }
-body.building { background: #ccc url(<%= skin_random_image_path('background_building', 'png') %>); }
-body.healthy { background: url(<%= skin_random_image_path('background_healthy', 'png') %>); }
-body.sick { background: #990000 url(<%= skin_random_image_path('background_sick', 'png') %>); }
+body.building { background: #ccc url(<%= skin_random_image_path('background', 'building', 'png') %>); }
+body.healthy { background: url(<%= skin_random_image_path('background', 'healthy', 'png') %>); }
+body.sick { background: #990000 url(<%= skin_random_image_path('background', 'sick', 'png') %>); }
 
 .Error { background: #882132; color: #fff; }
 
-.Exception.Building { background: #fff url(<%= skin_random_image_path('exception_building', 'gif') %>) no-repeat center left; color: #000; }
+.Exception.Building { background: #fff url(<%= skin_random_image_path('exception', 'building', 'gif') %>) no-repeat center left; color: #000; }
 .Exception.CheckingModifications { background: #440000; color: #fff; }
 .Exception.Pending { background: #440000; color: #fff; }
 .Exception.Sleeping { background: #440000; color: #fff; }
 .Exception.Unknown { background: #440000; color: #fff; }
 
-.Failure.Building { background: #fff url(<%= skin_random_image_path('failure_building', 'gif') %>) no-repeat center left; color: #000; }
+.Failure.Building { background: #fff url(<%= skin_random_image_path('failure', 'building', 'gif') %>) no-repeat center left; color: #000; }
 .Failure.CheckingModifications { background: #882132; color: #fff; }
 .Failure.Pending { background: #882132; color: #fff; }
 .Failure.Sleeping { background: #882132; color: #fff; }
 .Failure.Unknown { background: #882132; color: #fff; }
 
-.Success.Building { background: #fff url(<%= skin_random_image_path('success_building', 'gif') %>) no-repeat center left; color: #000; }
+.Success.Building { background: #fff url(<%= skin_random_image_path('success', 'building', 'gif') %>) no-repeat center left; color: #000; }
 .Success.CheckingModifications { background: #2bca5b; color: #040302; }
 .Success.Pending { background: #2bca5b; color: #040302; }
 .Success.Sleeping { background: #2bca5b; color: #040302; }
 .Success.Unknown { background: #2bca5b; color: #040302; }
 
-.Unknown.Building { background: #fff url(<%= skin_random_image_path('unknown_building', 'gif') %>) no-repeat center left; color: #000; }
+.Unknown.Building { background: #fff url(<%= skin_random_image_path('unknown', 'building', 'gif') %>) no-repeat center left; color: #000; }
 .Unknown.CheckingModifications { background: #707070; color: #040302; }
 .Unknown.Pending { background: #707070; color: #040302; }
 .Unknown.Sleeping { background: #707070; color: #040302; }
