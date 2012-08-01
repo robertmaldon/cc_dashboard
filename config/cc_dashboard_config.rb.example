@@ -34,17 +34,20 @@ DashboardConfig.track = 'simpsons'
 # * message - An optional message to display above the alarm clock
 # * start   - Time to start displaying the alarm clock (format 'HH:MM:SS')
 # * stop    - Time to stop displaying the alarm clock (format 'HH:MM:SS')
+# * speak   - An optional text-to-speech message. If not specified a 'plink'
+#             sound will be play instead. 
 # e.g.
 #DashboardConfig.alarm = [
 #    {:message => 'Daily Standup',
-#	 :start   => '08:49:00',
-#	 :stop    => '09:01:00'},
+#	 :start    => '08:49:00',
+#	 :stop     => '09:01:00',
+#    :speak    => 'Time for day lee standup. Make ship happen!'},
 #
 #    {:message => 'Swap Pairs',
-#	 :start   => '11:29:00',
-#	 :stop    => '11:31:00'},
+#	 :start    => '11:29:00',
+#	 :stop     => '11:31:00'},
 #
-#	{:message => 'Afternoon Retro',
-#	 :start   => '16:14:00',
-#	 :stop    => '16:16:00'}
+#	{:message  => 'Afternoon Retro',
+#	 :start    => '16:14:00',
+#	 :stop     => '16:16:00'}
 #]

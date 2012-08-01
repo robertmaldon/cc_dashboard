@@ -32,9 +32,13 @@ if (typeof(Audio) !== "undefined") {
         }
         setTimeout("alarmClockHide()", 9000);
 
+        <%- if alarm_config[:speak].blank? -%>
         var audioElement = document.createElement("audio");
         audioElement.setAttribute("src", "<%= audio_path('alarms/24_clock_plink.wav') %>");
         audioElement.play();
+        <%- else -%>
+        speak.play('<%= alarm_config[:speak] %>');
+        <%- end -%>
     }
     <%- end -%>
 }

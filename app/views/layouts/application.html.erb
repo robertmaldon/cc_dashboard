@@ -27,6 +27,7 @@
     <%- if File.exists?("#{Rails.root}/app/assets/javascripts/skins/#{@skin}.js") -%> 
       <%= javascript_include_tag "skins/#{@skin}.js" %>
     <%- end -%>
+    <%= javascript_include_tag "speakClient" %>
   </head>
   <body class="<%= @status %>">
 

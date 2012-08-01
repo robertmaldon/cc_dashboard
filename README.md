@@ -76,7 +76,7 @@ NOTE: Tracks will only work on browsers that support the HTML5 audio and storage
 
 # Alarms
 
-It can be helpful to get a reminder for upcoming important events of the day, such as the Daily Standup. cc_dashboard can be configured to display a clock + audible alarm in ['24' digital clock 'plink' style](http://www.urbandictionary.com/define.php?term=plink) to help remind you of these events.
+It can be helpful to get a reminder for upcoming important events of the day, such as the Daily Standup. cc_dashboard can be configured to display a clock and an audible alarm - either a text-to-speech mesage (see note on speak.js) or a ['24' digital clock 'plink' sound](http://www.urbandictionary.com/define.php?term=plink) - to help remind you of these events.
 
 See the **DashboardConfig.alarm** value in the **config/cc\_dashboard\_config.rb** configuration file for examples. More than one alarm can be configured.
 
@@ -157,6 +157,8 @@ The 'aliens' sound bites are copyright 20th Century Fox (1986).
 The 'simpsons' sound bites are copyright Fox.
 
 ## Alarms
+
+Text-to-speech is enabled by [speak.js](https://github.com/kripken/speak.js).
 
 '24' is copyright 20th Century Fox Television.
 
