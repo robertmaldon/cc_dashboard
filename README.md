@@ -65,9 +65,10 @@ cc_dashboard can play sounds to alert you when:
 2. a build is still broken
 3. a build was broken but is now fixed
 
-Available skins are:
+Available tracks are:
 
 * **aliens** - sound bites from the classic "Aliens" movie. Game over!
+* **nightmare** - sound bites from the schlock horror movies like Nightmare on Elm Street and Saw
 * **simpsons** - sound bites from the animated "satirical parody of a middle class American lifestyle" sitcom. Doh!
 
 You choose the track by setting the **DashboardConfig.track** value in the **config/cc\_dashboard\_config.rb** configuration file, or leave the configuration commented out to disable sounds. You can also choose the track per-HTTP-request by adding a "?track=TRACK" to the end of the URL (e.g. "?track=aliens").
