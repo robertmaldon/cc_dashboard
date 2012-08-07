@@ -6,7 +6,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <meta http-equiv="expires" content="0" />
-    <meta http-equiv="refresh" content="<%= @refresh %>" />
 
     <%= stylesheet_link_tag "stylesheets/site.css" %>
     <%= stylesheet_link_tag "stylesheets/skins/#{@skin}.css" %>
@@ -30,10 +29,33 @@
     <%= javascript_include_tag "speakClient" %>
   </head>
   <body class="<%= @status %>">
+    <div id="error-msg"></div>
 
     <%= yield %>
 
     <%= render 'tracks' %>
+
+    <script type="text/javascript">
+    // Make page reloading a bit more tolerant of intermittent network failures
+    function safeReloadPage() {
+      $.ajax({
+        type: "HEAD",
+        async: true,
+        url: window.location,
+        success: function(data, textStatus, jqXHR) {
+          window.location.reload();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          var now = new Date();
+          $("#error-msg").html("<span>Failed to load " + window.location + " at " + now.toLocaleDateString() + " " + now.toLocaleTimeString() + "</span>");
+          $("#error-msg").show();
+          setTimeout("safeReloadPage()", <%= @refresh %> * 1000);
+        }
+      });
+    }
+
+    setTimeout("safeReloadPage()", <%= @refresh %> * 1000);
+    </script>
   </body>
   
 </html>

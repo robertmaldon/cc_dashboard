@@ -1,6 +1,7 @@
 <div id="main">
   <%= render 'alarm_clock' %>
   <%= render 'bling' %>
+  <%= render 'jira_burndown' %>
 
   <%- @projects.each do |project| -%>
     <%- title = "[#{project.group_name}] #{project.name} - Status: #{project.lastBuildStatus} - Activity: #{project.activity} - Last Build: #{project.lastBuildTime}" -%>
