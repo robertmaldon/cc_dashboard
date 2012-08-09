@@ -7,54 +7,42 @@
 
     <meta http-equiv="expires" content="0" />
 
+    <link id="favicon1" rel="SHORTCUT_ICON" href="favicon.ico" />
+    <link id="favicon2" rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico" />
+
     <%= stylesheet_link_tag "stylesheets/site.css" %>
-    <%= stylesheet_link_tag "stylesheets/skins/#{@skin}.css" %>
 
-    <%= skinned_icon_tag(@icon) %>
-
-    <%-
-      title = ''
-      title += "F(#{@status_failure}) " if @status_failure > 0
-      title += "E(#{@status_exception}) " if @status_exception > 0
-      title += "B(#{@activity_building}) " if @activity_building > 0
-
-      title += 'cc_dashboard'
-    -%>
-    <title><%= title %></title>
+    <title>cc_dashboard</title>
 
     <%= javascript_include_tag "jquery" %>
-    <%- if File.exists?("#{Rails.root}/app/assets/javascripts/skins/#{@skin}.js") -%> 
-      <%= javascript_include_tag "skins/#{@skin}.js" %>
-    <%- end -%>
     <%= javascript_include_tag "speakClient" %>
   </head>
-  <body class="<%= @status %>">
+  <body>
     <div id="error-msg"></div>
 
-    <%= yield %>
-
-    <%= render 'tracks' %>
+    <div id="main">
+      <%= yield %>
+    </div>
 
     <script type="text/javascript">
     // Make page reloading a bit more tolerant of intermittent network failures
     function safeReloadPage() {
-      $.ajax({
-        type: "HEAD",
-        async: true,
-        url: window.location,
-        success: function(data, textStatus, jqXHR) {
-          window.location.reload();
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          var now = new Date();
+      var now = new Date();
+      $("#main").load("main?" + now.getTime(), function(response, status, jqXHR) {
+        if (status == "error") {
           $("#error-msg").html("<span>Failed to load " + window.location + " at " + now.toLocaleDateString() + " " + now.toLocaleTimeString() + "</span>");
           $("#error-msg").show();
-          setTimeout("safeReloadPage()", <%= @refresh %> * 1000);
+        } else {
+          $("#error-msg").hide();
         }
+
+        setTimeout("safeReloadPage()", <%= @refresh %> * 1000);
       });
     }
 
-    setTimeout("safeReloadPage()", <%= @refresh %> * 1000);
+    $(document).ready(function() {
+        safeReloadPage();
+    });
     </script>
   </body>
   

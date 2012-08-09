@@ -1,0 +1,54 @@
+<%= render 'alarm_clock' %>
+<%= render 'bling' %>
+
+<%- @projects.each do |project| -%>
+  <%- title = "[#{project.group_name}] #{project.name} - Status: #{project.lastBuildStatus} - Activity: #{project.activity} - Last Build: #{project.lastBuildTime}" -%>
+  <a href="<%= project.webUrl %>" target="_blank" title="<%= title %>" alt="<%= title %>">
+    <div class="project <%= project.lastBuildStatus %> <%= project.activity %>">
+        <h2><%= project.name %></h2>
+        <p>Last label: <%= project.lastBuildLabel %></p>
+        <p>Last build: <%= time_ago(project.lastBuildTime) rescue project.lastBuildTime %></p>
+    </div>
+  </a>
+
+<%- end -%>
+
+<div id="audio"></div>
+<%= render 'tracks' %>
+
+<script type="text/javascript">
+  // Dynamically set the title
+  <%-
+    title = ''
+    title += "F(#{@status_failure}) " if @status_failure > 0
+    title += "E(#{@status_exception}) " if @status_exception > 0
+    title += "B(#{@activity_building}) " if @activity_building > 0
+
+    title += 'cc_dashboard'
+  -%>
+  document.title = "<%= title %>";
+
+  // Dynamically set the theme stylesheet
+  $('link[title="theme-css"]').prop('disabled', true);
+  $('link[title="theme-css"]').remove();
+
+  var themeCssHref = '<%= stylesheet_path("stylesheets/skins/#{@skin}.css") %>'
+  $("head").append("<link>");
+  var themeCssLink = $("head").children(":last");
+  themeCssLink.attr({
+    title: "theme-css",
+    rel:  "stylesheet",
+    type: "text/css",
+    media: "screen",
+    href: themeCssHref
+  });
+
+  // Dynamically set the class attribute of "body", which applies css such
+  // as the backgound image
+  $("body").attr("class", "<%= @status %>")
+
+  // Dynamically set the favicon
+  var faviconHref = '<%= image_path("skins/#{@skin}/favicon_#{@icon}") %>';
+  $("#favicon1").attr("href", faviconHref);
+  $("#favicon2").attr("href", faviconHref);
+</script>

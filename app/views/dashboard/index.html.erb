@@ -1,18 +1,1 @@
-<div id="main">
-  <%= render 'alarm_clock' %>
-  <%= render 'bling' %>
-  <%= render 'jira_burndown' %>
-
-  <%- @projects.each do |project| -%>
-    <%- title = "[#{project.group_name}] #{project.name} - Status: #{project.lastBuildStatus} - Activity: #{project.activity} - Last Build: #{project.lastBuildTime}" -%>
-    <a href="<%= project.webUrl %>" target="_blank" title="<%= title %>" alt="<%= title %>">
-      <div class="project <%= project.lastBuildStatus %> <%= project.activity %>">
-          <h2><%= project.name %></h2>
-          <p>Last label: <%= project.lastBuildLabel %></p>
-          <p>Last build: <%= time_ago(project.lastBuildTime) rescue project.lastBuildTime %></p>
-      </div>
-    </a>
-
-  <%- end -%>
-</div>
-<div id="audio"></div>
+<!-- Default dashboard content -->

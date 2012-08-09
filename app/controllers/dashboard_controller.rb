@@ -8,6 +8,10 @@ class DashboardController < ApplicationController
   before_filter :load_config
   
   def index
+    @refresh = params[:refresh] || DashboardConfig.refresh_interval
+  end
+
+  def main
     @skin    = params[:skin]    || DashboardConfig.skin
     @track   = params[:track]   || DashboardConfig.track
     @refresh = params[:refresh] || DashboardConfig.refresh_interval
@@ -56,6 +60,8 @@ class DashboardController < ApplicationController
     @icon = "#{@status}.ico"
 
     @chuck_norris_fact = CHUCK_NORRIS_FACTS[rand(CHUCK_NORRIS_FACTS.length)]
+
+    render :layout => nil
   end
 
   private
