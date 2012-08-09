@@ -1,10 +1,21 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
 
-  def skin_random_image_path(prefix, suffix, extension)
-    all_images = Dir.glob("app/assets/images/skins/#{@skin}/#{prefix}_#{suffix}*.#{extension}")
-    all_images = Dir.glob("app/assets/images/skins/#{@skin}/#{prefix}*.#{extension}") if all_images.empty?
-    all_images = Dir.glob("app/assets/images/skins/#{@skin}/#{suffix}*.#{extension}") if all_images.empty?
+  def skin_random_image_path(prefix, suffix, extension = nil)
+
+    if extension
+      all_images = Dir.glob("app/assets/images/skins/#{@skin}/#{prefix}_#{suffix}*.#{extension}")
+      all_images = Dir.glob("app/assets/images/skins/#{@skin}/#{prefix}*.#{extension}") if all_images.empty?
+      all_images = Dir.glob("app/assets/images/skins/#{@skin}/#{suffix}*.#{extension}") if all_images.empty?
+    else
+      ['jpg', 'png', 'gif'].each do | ext |
+        all_images = Dir.glob("app/assets/images/skins/#{@skin}/#{prefix}_#{suffix}*.#{ext}")
+        all_images = Dir.glob("app/assets/images/skins/#{@skin}/#{prefix}*.#{ext}") if all_images.empty?
+        all_images = Dir.glob("app/assets/images/skins/#{@skin}/#{suffix}*.#{ext}") if all_images.empty?
+
+        break unless all_images.empty?
+      end
+    end
 
     random_image = all_images[rand(all_images.size)]
 
