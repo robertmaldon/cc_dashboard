@@ -16,6 +16,7 @@
 
     <%= javascript_include_tag "jquery" %>
     <%= javascript_include_tag "speakClient" %>
+    <%= javascript_include_tag "consolelog" %>
   </head>
   <body>
     <span id="background-image"></span>
@@ -23,6 +24,10 @@
 
     <div id="main">
       <%= yield %>
+    </div>
+
+    <div id="widgets">
+      <%= render 'widgets' %>
     </div>
 
     <script type="text/javascript">

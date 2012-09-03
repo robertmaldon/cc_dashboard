@@ -38,7 +38,225 @@ p {
 	font-size: 0.5em;
 }
 
-div {
+.chuck-norris-fact {
+    text-align: center;
+    width: 300px;
+    float: left;
+    height: 316px;
+    margin: 5px;
+    position: relative;
+    border: 2px solid #c0c0c0;
+    overflow: hidden;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    -o-box-shadow: 2px 2px 6px #000;
+    -moz-box-shadow: 2px 2px 6px #000;
+    -webkit-box-shadow: 2px 2px 6px #000;
+    box-shadow: 2px 2px 6px #000;
+}
+
+.chuck-norris-fact.healthy {
+	background: #2bca5b url(<%= image_path("bling/chuck-norris/healthy.png") %>) no-repeat bottom center;
+	color: #040302;
+}
+.chuck-norris-fact.building {
+    background: #ff9933 url(<%= image_path("bling/chuck-norris/building.png") %>) no-repeat bottom center;
+    color: #000;
+}
+.chuck-norris-fact.sick {
+    background: #882132 url(<%= image_path("bling/chuck-norris/sick.png") %>) no-repeat bottom center;
+    color: #fff;
+}
+
+.cheezburger {
+    position: relative;
+    width: 615px;
+    height: 430px;
+    border: none;
+    color: #fff;
+    text-align: center;
+    float: left;
+    margin: 5px;
+    border: 2px solid #c0c0c0;
+    overflow: hidden;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    -o-box-shadow: 2px 2px 6px #000;
+    -moz-box-shadow: 2px 2px 6px #000;
+    -webkit-box-shadow: 2px 2px 6px #000;
+    box-shadow: 2px 2px 6px #000;
+}
+
+div.cheezburger img {
+    position: absolute;
+    top: 190px;
+    left: 280px;
+    border: none;
+}
+
+#main {
+    border: 0px none;
+    width: 99%;
+}
+
+#background-image {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+#alarm-clock {
+    display: none;
+    position: absolute;
+    left: 20%;
+    top: 20%;
+    width: 60%;
+    height: auto;
+    padding: 20px;
+    z-index: 100;
+    color: #cccc00;
+    background-color: #000;
+    font: 200px 'lcd',sans-serif;
+    text-align: center;
+    border: 2px solid #c0c0c0;
+    overflow: hidden;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    -o-box-shadow: 2px 2px 6px #000;
+    -moz-box-shadow: 2px 2px 6px #000;
+    -webkit-box-shadow: 2px 2px 6px #000;
+    box-shadow: 2px 2px 6px #000;
+}
+
+#widgets {
+    clear: both;
+    float: right;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+}
+
+#weather-clock {
+    color: #cccc00;
+    background-color: #000;
+    text-align: center;
+    float: left;
+    margin: 5px;
+    position: relative;
+    border: 2px solid #c0c0c0;
+    xoverflow: hidden;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    -o-box-shadow: 2px 2px 6px #000;
+    -moz-box-shadow: 2px 2px 6px #000;
+    -webkit-box-shadow: 2px 2px 6px #000;
+    box-shadow: 2px 2px 6px #000;
+
+    font-size: 16px;
+}
+
+#weather-clock ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#weather-clock-date {
+    float: left;
+    margin: 10px;
+}
+
+#weather-clock-time {
+    color: #fff;
+    font: 56px 'lcd', sans-serif;
+    margin: 10px 0 10px 0;
+}
+
+#weather-clock-current {
+    float: left;
+    margin: 10px;
+}
+
+#weather-clock-current p {
+    color: #fff;
+    font-size: 18px;
+}
+
+#weather-clock-current th {
+    text-align: left;
+}
+
+#weather-clock-current td {
+    text-align: right;
+}
+
+#weather-clock-forecast {
+    float: left;
+    margin: 10px;
+}
+
+#weather-clock-forecast ul {
+    display: block;
+    width: 84px;
+    float: left;
+}
+
+#weather-clock-forecast ul li.day-name {
+    height: 20px;
+    line-height: 20px;
+    font-size: 16px;
+}
+
+#weather-clock-forecast ul li.temp-high {
+    font-size: 26px;
+    color: #ffe56e;
+}
+
+#weather-clock-forecast ul li.temp-low {
+    font-size: 26px;
+    color: #fff;
+}
+
+.weather-icon {
+    background: url('../widgets/weather-clock/weather-icon-sprite.png');
+    height: 50px;
+    width: 84px;
+    font-size: 0;
+}
+
+#audio {
+    display: none;
+}
+
+#error-msg {
+    display: none;
+    width: 99%;
+    color: #fff;
+    background: #ff0000;
+    text-align: center;
+    float: left;
+    height: 100px;
+    margin: 5px;
+    position: relative;
+    border: 2px solid #c0c0c0;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    -o-box-shadow: 2px 2px 6px #000;
+    -moz-box-shadow: 2px 2px 6px #000;
+    -webkit-box-shadow: 2px 2px 6px #000;
+    box-shadow: 2px 2px 6px #000;
+}
+
+.project {
     color: #fff;
     text-align: center;
     width: 300px;
@@ -55,91 +273,6 @@ div {
     -moz-box-shadow: 2px 2px 6px #000;
     -webkit-box-shadow: 2px 2px 6px #000;
     box-shadow: 2px 2px 6px #000;
-}
-
-div.chuck-norris-fact.healthy {
-	background: #2bca5b url(<%= image_path("bling/chuck-norris/healthy.png") %>) no-repeat bottom center;
-	height: 316px;
-	color: #040302;
-}
-div.chuck-norris-fact.building {
-    background: #ff9933 url(<%= image_path("bling/chuck-norris/building.png") %>) no-repeat bottom center;
-    height: 316px;
-    color: #000;
-}
-div.chuck-norris-fact.sick {
-    background: #882132 url(<%= image_path("bling/chuck-norris/sick.png") %>) no-repeat bottom center;
-    height: 316px;
-    color: #fff;
-}
-
-div.cheezburger {
-    position: relative;
-    width: 615px;
-    height: 430px;
-    border: none;
-}
-div.cheezburger img {
-    position: absolute;
-    top: 190px;
-    left: 280px;
-    border: none;
-}
-
-#main {
-    border: 0px none;
-    width: 99%;
-    overflow: visible;
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
-    border-radius: 0;
-    -o-box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-}
-
-#background-image {
-    position: absolute;
-    display: none;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
-
-#pageloaderror {
-    margin: 100px 0 0 0;
-    padding: 0;
-    text-align: center;
-    width: 100%;
-    float: none;
-}
-
-#alarm-clock {
-    display: none;
-    position: absolute;
-    left: 20%;
-    top: 20%;
-    width: 60%;
-    height: auto;
-    padding: 20px;
-    z-index: 100;
-    color: #cccc00;
-    background-color: #000;
-    font: 200px 'lcd',sans-serif;
-}
-
-#audio {
-    display: none;
-}
-
-#error-msg {
-    display: none;
-    width: 99%;
-    color: #fff;
-    background: #ff0000;
 }
 
 .Error {

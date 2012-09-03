@@ -51,3 +51,14 @@ DashboardConfig.track = 'simpsons'
 #	 :start    => '16:14:00',
 #	 :stop     => '16:16:00'}
 #]
+
+# Widgets. Display various widgets in the bottom-right corner of the dashboard.
+# The available widgets are:
+# * weather_clock - based on the browser location display the current time
+#                   and weather. Uses the Yahoo! PlaceFinder and weather
+#                   forecasting APIs.
+#DashboardConfig.widgets = {
+#	:weather_clock => {
+#	  :temp_units => 'c' # 'c' for celcius or 'f' for farenheit
+#  }
+#}

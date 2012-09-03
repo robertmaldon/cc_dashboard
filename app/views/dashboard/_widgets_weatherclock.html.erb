@@ -1,0 +1,149 @@
+<div id="weather-clock">
+  <div id="weather-clock-date"></div>
+  <div id="weather-clock-current"></div>
+  <div id="weather-clock-forecast"></div>
+</div>
+
+<script type="text/javascript">
+    function wcShowDateTime() {
+    	var  monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+        var now = new Date();
+
+        var hours = (now.getHours() < 13) ? now.getHours() : now.getHours() - 12;
+        if (hours < 10) {
+        	hours = '0' + hours;
+        }
+
+        var minutes = now.getMinutes();
+        if (minutes < 10) {
+        	minutes = '0' + minutes;
+        }
+
+        var meridiem = (now.getHours() < 12) ? 'AM' : 'PM';
+
+        var date = '';
+        date += '<p id="weather-clock-time">' + hours + ':' + minutes + ' ' + meridiem + '</p>';
+        date += '<ul>';
+        date += '<li>' + dayNames[now.getDay()] + '</li>';
+        date += '<li>' + monthNames[now.getMonth()] + ' ' + now.getDate() + '</li>';
+        date += '<li>' + now.getFullYear() + '</li>';
+        date += '<li>';
+
+        $('#weather-clock-date').html(date);
+
+        setTimeout('wcShowDateTime()', (60 - now.getSeconds()) * 1000);
+    }
+
+    function wcShowWeather() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(wcLocationSuccess, wcLocationError);
+        } else {
+        	log('geolocation api not supported by this browser');
+        }
+
+        setTimeout('wcShowWeather()', 60 * 60 * 1000); // Update every hour
+    }
+
+    function wcWeatherIconPosition(code, night) {
+        return "background-position: -" + ((code * 224) + (night * 112)) + "px -4px;";
+    }
+
+    function wcLocationError(error) {
+    	log(error);
+    }
+
+    function wcLocationSuccess(position) {
+	    var tempUnits = '<%= config[:temp_units] == 'f' ? 'f' : 'c' %>';
+	    log('<%= :config %>');
+
+	    var latitude  = position.coords.latitude;
+	    var longitude = position.coords.longitude;
+
+	    // Yahoo's PlaceFinder API http://developer.yahoo.com/geo/placefinder/
+	    // We are passing the R gflag for reverse geocoding (coordinates to place name)
+	    var geoAPI = 'http://where.yahooapis.com/geocode?location=' + latitude + ',' + longitude + '&flags=J&gflags=R';
+
+	    // Forming the query for Yahoo's weather forecasting API with YQL
+	    // http://developer.yahoo.com/weather/
+	    var wsql = 'select * from weather.forecast where woeid=WID and u="' + tempUnits + '"';
+	    var	weatherYQL = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(wsql) + '&format=json&callback=?';
+	    var code, city, results, woeid;
+
+	    // Issue a cross-domain AJAX request (CORS) to the GEO service.
+	    // Not supported in Opera and IE.
+	    $.getJSON(geoAPI, function(r) {
+		    if (r.ResultSet.Found == 1) {
+			    results = r.ResultSet.Results;
+			    city    = results[0].city;
+			    code    = results[0].statecode || results[0].countrycode;
+
+			    // This is the city identifier for the weather API
+			    woeid = results[0].woeid;
+
+			    // Make a weather API request (it is JSONP, so CORS is not an issue):
+			    $.getJSON(weatherYQL.replace('WID', woeid), function(r) {
+				    if (r.query.count == 1) {
+                        var astronomy  = r.query.results.channel.astronomy;
+                        var atmosphere = r.query.results.channel.atmosphere;
+					    var condition  = r.query.results.channel.item.condition;
+					    var location   = r.query.results.channel.location;
+					    var units      = r.query.results.channel.units;
+
+                        var now   = new Date();
+                        var night = (now.getHours() > 6 && now.getHours() < 18) ? 0 : 1;
+
+					    var current = '';
+					    current += '<div class="weather-icon" style="' + wcWeatherIconPosition(condition.code, night) + '">' + condition.temp + '</div>';
+					    current += '<p>' + location.city + '</p>';
+					    current += '<p>' + condition.temp + '°' + units.temperature + ' | ' + condition.text + '</p>';
+					    current += '<table>';
+					    current += '<tr>';
+					    current += '<th>Humidity:</th><td>' + atmosphere.humidity + '%</td>';
+					    current += '</tr>';
+					    current += '<tr>';
+					    current += '<th>Pressure:</th><td>' + atmosphere.pressure + units.pressure + '</td>';
+					    current += '</tr>';
+					    current += '<tr>';
+					    current += '<th>Sunrise:</th><td>' + astronomy.sunrise + '</td>';
+					    current += '</tr>';
+					    current += '<tr>';
+					    current += '<th>Sunset:</th><td>' + astronomy.sunset + '</td>';
+					    current += '</tr>';
+					    current += '</table>';
+
+					    $('#weather-clock-current').html(current);
+
+                        var forecast = r.query.results.channel.item.forecast;
+
+					    var prediction = '';
+					    for (var i = 0 ; i < forecast.length; i++) {
+						    var f = forecast[i];
+
+                            prediction += '<ul>';
+						    prediction += '<li class="day-name">' + f.day + '</li>';
+						    prediction += '<li class="weather-icon" style="' + wcWeatherIconPosition(f.code, 0) + '">' + f.text + '</li>';
+						    prediction += '<li class="temp-high">' + f.high + '°' + units.temperature + '</li>';
+						    prediction += '<li class="temp-low">' + f.low + '°' + units.temperature + '</li>';
+						    prediction += '</ul>';
+                        }
+
+					    $('#weather-clock-forecast').html(prediction);
+				    }
+				    else {
+				    	log('Error retrieving weather data!');
+				    }
+			    });
+
+		    }
+	    }).error(function() {
+	    	log('Your browser does not support CORS requests!');
+	    });
+    }
+
+    $(document).ready(function() {
+    	wcShowDateTime();
+        wcShowWeather();
+    });
+</script>

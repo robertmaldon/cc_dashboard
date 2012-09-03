@@ -79,9 +79,19 @@ NOTE: Tracks will only work on browsers that support the HTML5 audio and storage
 
 It can be helpful to get a reminder for upcoming important events of the day, such as the Daily Standup. cc_dashboard can be configured to display a clock and an audible alarm - either a text-to-speech mesage (see note on speak.js) or a ['24' digital clock 'plink' sound](http://www.urbandictionary.com/define.php?term=plink) - to help remind you of these events.
 
-See the **DashboardConfig.alarm** value in the **config/cc\_dashboard\_config.rb** configuration file for examples. More than one alarm can be configured.
+See the **DashboardConfig.alarm** section in the **config/cc\_dashboard\_config.rb** configuration file for examples. More than one alarm can be configured.
 
 NOTE: Alarms will only work on browsers that support HTML 5 audio and @font-family.
+
+# Widgets
+
+You can display a number of widgets - which can show all sorts of useful information such as the weather forecast - at the bottom right of the dashboard.
+
+Widgets include:
+
+* weather_clock - Displays the current time and weather forecast. The browser's geo location is determined using the [Yahoo! PlaceFinder API](http://developer.yahoo.com/geo/placefinder/) and the forecast is fetched every hour from the [Yahoo! Weather RSS Feed](http://developer.yahoo.com/weather/).
+
+See the **DashboardConfig.widgets** section in the **config/cc\_dashboard\_config.rb** configuration file for examples.
 
 # "cctray xml format"
 

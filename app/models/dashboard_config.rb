@@ -24,4 +24,7 @@ class DashboardConfig
   cattr_accessor :alarm, :instance_writer => false
   @@alarm = []
 
+  cattr_accessor :widgets, :instance_writer => false
+  @@widgets = {}
+
 end
