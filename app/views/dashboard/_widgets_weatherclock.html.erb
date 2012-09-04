@@ -95,7 +95,7 @@
                         var night = (now.getHours() > 6 && now.getHours() < 18) ? 0 : 1;
 
 					    var current = '';
-					    current += '<div class="weather-icon" style="' + wcWeatherIconPosition(condition.code, night) + '">' + condition.temp + '</div>';
+					    current += '<div class="weather-icon" style="' + wcWeatherIconPosition(condition.code, night) + '; float: left;">' + condition.temp + '</div>';
 					    current += '<p>' + location.city + '</p>';
 					    current += '<p>' + condition.temp + '°' + units.temperature + ' | ' + condition.text + '</p>';
 					    current += '<table>';

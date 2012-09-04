@@ -160,7 +160,7 @@ div.cheezburger img {
     -webkit-box-shadow: 2px 2px 6px #000;
     box-shadow: 2px 2px 6px #000;
 
-    font-size: 16px;
+    font-size: 18px;
 }
 
 #weather-clock ul {
@@ -176,18 +176,24 @@ div.cheezburger img {
 
 #weather-clock-time {
     color: #fff;
-    font: 56px 'lcd', sans-serif;
-    margin: 10px 0 10px 0;
+    font: 40px 'lcd', sans-serif;
+    margin: 5px 0 5px 0;
+    padding: 0;
 }
 
 #weather-clock-current {
     float: left;
-    margin: 10px;
+    margin: 5px;
+    padding: 0;
 }
 
 #weather-clock-current p {
     color: #fff;
     font-size: 18px;
+}
+
+#weather-clock-current table {
+    font-size: 14px;
 }
 
 #weather-clock-current th {
@@ -200,12 +206,12 @@ div.cheezburger img {
 
 #weather-clock-forecast {
     float: left;
-    margin: 10px;
+    margin: 5px;
+    padding: 0;
 }
 
 #weather-clock-forecast ul {
     display: block;
-    width: 84px;
     float: left;
 }
 
@@ -216,19 +222,19 @@ div.cheezburger img {
 }
 
 #weather-clock-forecast ul li.temp-high {
-    font-size: 26px;
+    font-size: 18px;
     color: #ffe56e;
 }
 
 #weather-clock-forecast ul li.temp-low {
-    font-size: 26px;
+    font-size: 18px;
     color: #fff;
 }
 
 .weather-icon {
     background: url('../widgets/weather-clock/weather-icon-sprite.png');
     height: 50px;
-    width: 84px;
+    width: 60px;
     font-size: 0;
 }
 
@@ -263,6 +269,7 @@ div.cheezburger img {
     float: left;
     height: 100px;
     margin: 5px;
+    padding: 5px;
     position: relative;
     border: 2px solid #c0c0c0;
     overflow: hidden;
