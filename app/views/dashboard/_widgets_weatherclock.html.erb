@@ -95,15 +95,12 @@
                         var night = (now.getHours() > 6 && now.getHours() < 18) ? 0 : 1;
 
 					    var current = '';
-					    current += '<div class="weather-icon" style="' + wcWeatherIconPosition(condition.code, night) + '; float: left;">' + condition.temp + '</div>';
+					    current += '<div class="weather-icon" style="' + wcWeatherIconPosition(condition.code, night) + '; float: left;">' + condition.text + '</div>';
 					    current += '<p>' + location.city + '</p>';
-					    current += '<p>' + condition.temp + '°' + units.temperature + ' | ' + condition.text + '</p>';
+					    current += '<p>' + condition.temp + '°' + units.temperature + ' ' + condition.text + '</p>';
 					    current += '<table>';
 					    current += '<tr>';
 					    current += '<th>Humidity:</th><td>' + atmosphere.humidity + '%</td>';
-					    current += '</tr>';
-					    current += '<tr>';
-					    current += '<th>Pressure:</th><td>' + atmosphere.pressure + units.pressure + '</td>';
 					    current += '</tr>';
 					    current += '<tr>';
 					    current += '<th>Sunrise:</th><td>' + astronomy.sunrise + '</td>';
