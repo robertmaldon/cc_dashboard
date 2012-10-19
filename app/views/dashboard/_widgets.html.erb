@@ -1,4 +1,5 @@
 <%- DashboardConfig.widgets.keys.each do |widget_name| -%>
 <%-   widget_config = DashboardConfig.widgets[widget_name] -%>
+<%= render :partial => 'widgets_cobertura', :locals => {:config => widget_config} if widget_name == :cobertura %>
 <%= render :partial => 'widgets_weatherclock', :locals => {:config => widget_config} if widget_name == :weather_clock %>
 <%- end -%>

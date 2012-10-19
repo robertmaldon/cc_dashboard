@@ -1,0 +1,34 @@
+<div id="cobertura-stats">
+</div>
+
+<script type="text/javascript">
+
+    function crShowCoberturaStats() {
+    	jQuery.support.cors = true;
+    	$.ajax({
+		    type: 'GET',
+		    url: 'proxy_xml?xml_url=<%= config[:xml_report_url] %>',
+		    dataType: 'xml',
+		    success: function(xml) {
+		    	        $(xml).find('coverage').each(function() {
+		    	        	var lineRate   = Math.round($(this).attr('line-rate') * 100);
+		    	        	var branchRate = Math.round($(this).attr('branch-rate') * 100);
+
+		    	        	var html = '<h2><%= config[:title] %></h2>';
+		    	        	html += '<table>';
+		    	        	html += '<tr><th>Line Coverage</th><td>' + lineRate + ' %</td></tr>';
+		    	        	html += '<tr><th>Branch Coverage</th><td>' + branchRate + ' %</td></tr>';
+		    	        	html += '</table>';
+
+		    	        	$('#cobertura-stats').html(html);
+		    	        });
+		    	    }
+        });
+
+    	setTimeout('crShowCoberturaStats()', 15 * 60 * 1000); // Update every 15 minutes
+    }
+
+    $(document).ready(function() {
+    	crShowCoberturaStats();
+    });
+</script>

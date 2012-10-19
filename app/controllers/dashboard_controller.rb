@@ -2,6 +2,7 @@ require 'rexml/document'
 require 'net/http'
 require 'uri'
 require 'ostruct'
+require 'json'
 
 class DashboardController < ApplicationController
 
@@ -49,6 +50,9 @@ class DashboardController < ApplicationController
       end
     end
 
+    DashboardConfig.jenkins_json_feed_urls.each do |group_name, feed_url|
+    end
+
     if @activity_building > 0
       @status = 'building'
     elsif @status_failure > 0 || @status_exception > 0
@@ -62,6 +66,13 @@ class DashboardController < ApplicationController
     @chuck_norris_fact = CHUCK_NORRIS_FACTS[rand(CHUCK_NORRIS_FACTS.length)]
 
     render :layout => nil
+  end
+
+  # A work-around for cross-domain permission issues when we can't use jasonp
+  # TODO: Reject URLs that do not go to servers that we fetch cctray feeds from
+  def proxy_xml
+    xml = get_cctray_feed_xml(params[:xml_url])
+    render :text => xml
   end
 
   private
@@ -95,7 +106,24 @@ class DashboardController < ApplicationController
 EOF
   end
 
-  private
+  def get_all_jenkins_jobs(json_feed_url)
+    url = URI.parse(json_feed_url)
+    begin
+      http = Net::HTTP.new(url.host, url.port)
+      http.open_timeout = DashboardConfig.cctray_feed_open_timeout
+      http.read_timeout = DashboardConfig.cctray_feed_read_timeout
+      http.start do
+        response = http.request_get(url.path)
+        case response
+          when Net::HTTPSuccess     then JSON.parse(response.body)
+          when Net::HTTPRedirection then get_all_jenkins_jobs(response['location'])
+          else {}
+        end
+      end
+    rescue Exception => e
+      {}
+    end
+  end
 
   def load_config
     load "#{Rails.root}/config/cc_dashboard_config.rb" if File.exists?("#{Rails.root}/config/cc_dashboard_config.rb")

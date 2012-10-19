@@ -3,6 +3,9 @@ class DashboardConfig
   cattr_accessor :cctray_feed_urls, :instance_writer => false
   @@cctray_feed_urls = {}
 
+  cattr_accessor :jenkins_json_feed_urls, :instance_writer => false
+  @@jenkins_json_feed_urls = {}
+
   cattr_accessor :cctray_feed_open_timeout, :instance_writer => false
   @@cctray_feed_open_timeout = 10
 

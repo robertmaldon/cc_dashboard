@@ -50,6 +50,7 @@ CcDashboard::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'dashboard#index'
   match 'main' => 'dashboard#main'
+  match 'proxy_xml' => 'dashboard#proxy_xml'
 
   # Serve up dynamic stylesheets
   match 'assets/stylesheets/:id.:format' => 'stylesheets#show'
