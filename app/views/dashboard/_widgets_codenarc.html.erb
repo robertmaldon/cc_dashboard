@@ -1,0 +1,35 @@
+<div id="codenarc-stats">
+</div>
+
+<script type="text/javascript">
+
+    function crShowCodenarcStats() {
+    	$.ajax({
+		    type: 'GET',
+		    url: 'proxy_xml?xml_url=<%= config[:xml_report_url] %>',
+		    dataType: 'xml',
+		    success: function(xml) {
+		    	        $(xml).find('PackageSummary').each(function() {
+		    	        	var prio1 = $(this).attr('priority1');
+		    	        	var prio2 = $(this).attr('priority2');
+		    	        	var prio3 = $(this).attr('priority3');
+
+		    	        	var html = '<h2><%= config[:title] %></h2>';
+		    	        	html += '<table>';
+		    	        	html += '<tr><th>Priority 1</th><td>' + prio1 + '</td></tr>';
+		    	        	html += '<tr><th>Priority 2</th><td>' + prio2 + '</td></tr>';
+		    	        	html += '<tr><th>Priority 3</th><td>' + prio3 + '</td></tr>';
+		    	        	html += '</table>';
+
+		    	        	$('#codenarc-stats').html(html);
+		    	        });
+		    	    }
+        });
+
+    	setTimeout('crShowCodenarcStats()', 15 * 60 * 1000); // Update every 15 minutes
+    }
+
+    $(document).ready(function() {
+    	crShowCodenarcStats();
+    });
+</script>
