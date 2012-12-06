@@ -1,7 +1,73 @@
 <div id="cobertura-stats">
+    <span><%= config[:title] %></span>
+    <div>
+        <div id="cobertura-stats-line-rate"></div>
+        <div id="cobertura-stats-branch-rate"></div>
+    </div>
 </div>
 
 <script type="text/javascript">
+
+    function crShowCoverageChart(renderToId, coveredLabel, percentageCovered) {
+        return new Highcharts.Chart({
+            chart: {
+                renderTo: renderToId,
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                backgroundColor: '#000000',
+                spacingLeft: 0,
+                spacingRight: 0,
+                spacingTop: 0
+            },
+            title : {
+                text: null
+            },
+            credits: {
+                enabled: false
+            },
+            tooltip: {
+        	    pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+            	percentageDecimals: 1
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: false,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        connectorWidth: 0,
+                        distance: -1,
+                        color: '#FFFFFF',
+                        crop: false,
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return this.point.name +': '+ this.percentage + '%';
+                        }
+                    }
+                },
+                series: {
+                    animation: false
+                }
+            },
+            series: [{
+                type: 'pie',
+                data: [
+                    {
+                      name: coveredLabel,
+                      color: '#2BCA5B',
+                      y: percentageCovered,
+                      sliced: true
+                    },
+                    {
+                      name: 'Bummer',
+                      color: '#FF0000',
+                      y: (100 - percentageCovered)
+                    }
+                ]
+            }]
+        });
+    }
 
     function crShowCoberturaStats() {
     	jQuery.support.cors = true;
@@ -12,16 +78,10 @@
 		    success: function(xml) {
 		    	        $(xml).find('coverage').each(function() {
 		    	        	var lineRate   = Math.round($(this).attr('line-rate') * 100);
-		    	        	var branchRate = Math.round($(this).attr('branch-rate') * 100);
-
-		    	        	var html = '<h2><%= config[:title] %></h2>';
-		    	        	html += '<table>';
-		    	        	html += '<tr><th>Line Coverage</th><td>' + lineRate + ' %</td></tr>';
-		    	        	html += '<tr><th>Branch Coverage</th><td>' + branchRate + ' %</td></tr>';
-		    	        	html += '</table>';
-
-		    	        	$('#cobertura-stats').html(html);
-		    	        });
+                            var branchRate = Math.round($(this).attr('branch-rate') * 100);
+		    	        	crShowCoverageChart('cobertura-stats-line-rate', 'Line Rate', lineRate);
+                            crShowCoverageChart('cobertura-stats-branch-rate', 'Branch Rate', branchRate);
+            		    });
 		    	    }
         });
 
@@ -29,6 +89,17 @@
     }
 
     $(document).ready(function() {
+        // Radialize the colors
+        Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function(color) {
+            return {
+                radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+                stops: [
+                    [0, color],
+                    [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+                ]
+            };
+        });
+
     	crShowCoberturaStats();
     });
 </script>

@@ -81,6 +81,7 @@ class DashboardController < ApplicationController
     url = URI.parse(feed_url)
     begin
       http = Net::HTTP.new(url.host, url.port)
+      http.use_ssl = true if url.is_a?(URI::HTTPS)
       http.open_timeout = DashboardConfig.cctray_feed_open_timeout
       http.read_timeout = DashboardConfig.cctray_feed_read_timeout
       http.start do
