@@ -63,7 +63,8 @@ class DashboardController < ApplicationController
 
     @icon = "#{@status}.ico"
 
-    @chuck_norris_fact = CHUCK_NORRIS_FACTS[rand(CHUCK_NORRIS_FACTS.length)]
+    @chuck_norris_fact = 'Chuck Norris ' + CHUCK_NORRIS_FACTS[rand(CHUCK_NORRIS_FACTS.length)]
+    @chuck_norris_fact = @chuck_norris_fact.gsub(/Chuck Norris/, 'Chucky') if @skin == 'nightmare'
 
     render :layout => nil
   end
