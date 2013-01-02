@@ -26,7 +26,7 @@ DashboardConfig.cctray_feed_urls = {
 #DashboardConfig.skin = 'doom'
 
 # The track. Comment out to disable sounds. Currently available tracks are
-# 'aliens', 'nightmare' and 'simpsons'.
+# 'aliens', 'itrack', 'nightmare' and 'simpsons'.
 DashboardConfig.track = 'simpsons'
 
 # Alarm. You can configure multiple alarms. The format of each alarm is a hash
@@ -41,7 +41,7 @@ DashboardConfig.track = 'simpsons'
 #    {:message => 'Daily Standup',
 #	 :start    => '08:49:00',
 #	 :stop     => '09:01:00',
-#    :speak    => 'Time for day lee standup. Make ship happen!'},
+#        :speak    => 'Time for day lee standup. Make ship happen!'},
 #
 #    {:message => 'Swap Pairs',
 #	 :start    => '11:29:00',

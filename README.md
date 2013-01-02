@@ -68,6 +68,7 @@ cc_dashboard can play sounds to alert you when:
 Available tracks are:
 
 * **aliens** - sound bites from the classic "Aliens" movie. Game over!
+* **itrack** - some wisdom from Steve Jobs
 * **nightmare** - sound bites from the schlock horror movies like Nightmare on Elm Street and Saw
 * **simpsons** - sound bites from the animated "satirical parody of a middle class American lifestyle" sitcom. Doh!
 
