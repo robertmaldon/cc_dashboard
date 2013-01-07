@@ -40,7 +40,7 @@
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(wcLocationSuccess, wcLocationError);
         } else {
-        	log('geolocation api not supported by this browser');
+        	console.log('geolocation api not supported by this browser');
         }
 
         setTimeout('wcShowWeather()', 30 * 60 * 1000); // Update every 30 mins
@@ -51,7 +51,7 @@
     }
 
     function wcLocationError(error) {
-    	log(error);
+    	console.log(error);
     }
 
     function wcLocationSuccess(position) {
@@ -129,13 +129,13 @@
 					    $('#weather-clock-forecast').html(prediction);
 				    }
 				    else {
-				    	log('Error retrieving weather data!');
+				    	console.log('Error retrieving weather data!');
 				    }
 			    });
 
 		    }
 	    }).error(function() {
-	    	log('Your browser does not support CORS requests!');
+	    	console.log('Your browser does not support CORS requests!');
 	    });
     }
 
