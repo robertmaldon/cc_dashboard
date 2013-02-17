@@ -33,6 +33,17 @@ module ApplicationHelper
     audio_path("tracks/#{@track}/#{File.basename(random_sound)}")
   end
 
+  def alarm_path(alarm, extension = 'wav')
+    if File.exists?("public/audios/alarms/#{alarm}.#{extension}")
+      audio_path("alarms/#{alarm}.#{extension}")
+    else
+      all_alarms    = Dir.glob("public/audios/alarms/*.#{extension}")
+      random_alarms = all_alarms[rand(all_alarms.size)]
+
+      audio_path("alarms/#{File.basename(random_alarms)}")
+    end
+  end
+
   # Output the difference between a give time and now in
   # approximate seconds/minutes/hours/days
   def time_ago(time)
