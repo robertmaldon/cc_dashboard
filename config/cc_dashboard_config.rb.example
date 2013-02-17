@@ -31,17 +31,20 @@ DashboardConfig.track = 'simpsons'
 
 # Alarm. You can configure multiple alarms. The format of each alarm is a hash
 # with the following keys:
+# * sound   - The sound to play when the alarm first starts. See public/audios/alarms
+#             for choices, or use 'random' to choose a random alarm sound.
 # * message - An optional message to display above the alarm clock
 # * start   - Time to start displaying the alarm clock (format 'HH:MM:SS')
 # * stop    - Time to stop displaying the alarm clock (format 'HH:MM:SS')
-# * speak   - An optional text-to-speech message. If not specified a 'plink'
-#             sound will be play instead. 
+# * speak   - An optional text-to-speech message that will be played after the sound.
+#
 # e.g.
 #DashboardConfig.alarm = [
-#    {:message => 'Daily Standup',
-#	 :start    => '08:49:00',
-#	 :stop     => '09:01:00',
-#        :speak    => 'Time for day lee standup. Make ship happen!'},
+#    {:sound   => 'mission_impossible_theme',
+#     :message => 'Daily Standup',
+#	  :start    => '08:49:00',
+#	  :stop     => '09:01:00',
+#     :speak    => 'Time for day lee standup. Make ship happen!'},
 #
 #    {:message => 'Swap Pairs',
 #	 :start    => '11:29:00',
