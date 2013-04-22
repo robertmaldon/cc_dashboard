@@ -23,10 +23,10 @@ if (typeof(Audio) !== "undefined") {
     	$("#alarm-clock").hide();
     }
 
-    var now = formatClockTime();
+    var now = Date.now();
 
     <%- DashboardConfig.alarm.each do | alarm_config | -%>
-    if ((now >= '<%= alarm_config[:start] %>') && (now <= '<%= alarm_config[:stop] %>')) {
+    if ((now >= chrono.parseDate('<%= alarm_config[:start] %>')) && (now <= chrono.parseDate('<%= alarm_config[:stop] %>'))) {
         for (var i = 0; i < 9; i++) {
     	    setTimeout("alarmClockTick('<%= alarm_config[:message] %>')", i * 1000);
         }

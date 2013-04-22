@@ -14,11 +14,8 @@
     <%= stylesheet_link_tag "stylesheets/widgets.css" %>
 
     <title>cc_dashboard</title>
-
-    <%= javascript_include_tag "consolelog" %>
+    
     <%= javascript_include_tag "jquery" %>
-    <%= javascript_include_tag "speakClient" %>
-    <%= javascript_include_tag "highcharts" %>
   </head>
   <body>
     <span id="background-image"></span>
@@ -32,6 +29,10 @@
       <%= render 'widgets' %>
     </div>
 
+    <%= javascript_include_tag "consolelog" %>
+    <%= javascript_include_tag "speakClient" %>
+    <%= javascript_include_tag "highcharts" %>
+    <%= javascript_include_tag "chrono.min" %>
     <script type="text/javascript">
     // Make page reloading a bit more tolerant of intermittent network failures
     function safeReloadPage() {

@@ -34,8 +34,8 @@ DashboardConfig.track = 'simpsons'
 # * sound   - The sound to play when the alarm first starts. See public/audios/alarms
 #             for choices, or use 'random' to choose a random alarm sound.
 # * message - An optional message to display above the alarm clock
-# * start   - Time to start displaying the alarm clock (format 'HH:MM:SS')
-# * stop    - Time to stop displaying the alarm clock (format 'HH:MM:SS')
+# * start   - Time to start displaying the alarm clock, format is any format supported by chrono. e.g. '09:00:00', 'friday 13:00'
+# * stop    - Time to stop displaying the alarm clock, format is any format supported by chrono
 # * speak   - An optional text-to-speech message that will be played after the sound.
 #
 # e.g.
@@ -50,9 +50,9 @@ DashboardConfig.track = 'simpsons'
 #	 :start    => '11:29:00',
 #	 :stop     => '11:31:00'},
 #
-#	{:message  => 'Afternoon Retro',
-#	 :start    => '16:14:00',
-#	 :stop     => '16:16:00'}
+#	{:message  => 'Retro Retro',
+#	 :start    => 'friday 16:14:00',
+#	 :stop     => 'friday 16:16:00'}
 #]
 
 # Widgets. Display various widgets in the bottom-right corner of the dashboard.

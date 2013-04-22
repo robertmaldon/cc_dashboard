@@ -329,6 +329,14 @@ cc_dashboard has been tested successfully against Chrome 17.0, Firefox 11, Inter
 
 cc_dashboard does not render correctly using Internet Explorer 6 and I have no intention of supporting IE6 :)
 
+# Libraries
+
+A lot of the functionality of this build monitor would not be possible if not for the awesome efforts of others. Here are some of the javascript libraries used by this application:
+
+* Alarm times natural language date parsing is done by [chrono](https://github.com/berryboy/chrono)
+* Alarm text-to-speech is made possible by [speak.js](https://github.com/kripken/speak.js)
+* Code coverage graphs enabled by [Highcharts](http://www.highcharts.com/)
+
 # License and Acknowledgements
 
 cc_dashboard is licensed under the terms of the the Apache 2.0 license. See [http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0) for details.
@@ -364,8 +372,6 @@ The 'aliens' sound bites are copyright 20th Century Fox (1986).
 The 'simpsons' sound bites are copyright Fox.
 
 ## Alarms
-
-Text-to-speech is enabled by [speak.js](https://github.com/kripken/speak.js).
 
 '24' is copyright 20th Century Fox Television.
 
