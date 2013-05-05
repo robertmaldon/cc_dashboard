@@ -1,72 +1,107 @@
-<div id="cobertura-stats">
+<div class="coverage-parent-container">
     <span><%= config[:title] %></span>
     <div>
-        <div id="cobertura-stats-line-rate"></div>
-        <div id="cobertura-stats-branch-rate"></div>
+        <div id="cobertura-stats-line-rate" class="coverage-container"></div>
+        <div id="cobertura-stats-branch-rate" class="coverage-container"></div>
     </div>
 </div>
 
 <script type="text/javascript">
 
-    function crShowCoverageChart(renderToId, coveredLabel, percentageCovered) {
-        return new Highcharts.Chart({
-            chart: {
-                renderTo: renderToId,
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                backgroundColor: '#000000',
-                spacingLeft: 0,
-                spacingRight: 0,
-                spacingTop: 0
-            },
-            title : {
-                text: null
-            },
-            credits: {
-                enabled: false
-            },
-            tooltip: {
-        	    pointFormat: '{series.name}: <b>{point.percentage}%</b>',
-            	percentageDecimals: 1
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: false,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        connectorWidth: 0,
-                        distance: -1,
-                        color: '#FFFFFF',
-                        crop: false,
-                        connectorColor: '#000000',
-                        formatter: function() {
-                            return this.point.name +': '+ this.percentage + '%';
-                        }
-                    }
-                },
-                series: {
-                    animation: false
-                }
-            },
-            series: [{
-                type: 'pie',
-                data: [
-                    {
-                      name: coveredLabel,
-                      color: '#2BCA5B',
-                      y: percentageCovered,
-                      sliced: true
-                    },
-                    {
-                      name: 'Bummer',
-                      color: '#FF0000',
-                      y: (100 - percentageCovered)
-                    }
-                ]
-            }]
-        });
+    function crShowCoverageChart(renderToId, label, percentage) {
+        var color;
+        if (percentage < 0.5) {
+            color = 'red';
+        } else if (percentage < 0.9) {
+            color = 'orange';
+        } else {
+            color = 'green';
+        }
+
+        var coverage = $('<div>').attr('class', 'coverage ' + color).html(
+            '<div class="display"></div>'+
+                
+            '<div class="front left"></div>'+
+                
+            '<div class="rotate left">'+
+                '<div class="bg left"></div>'+
+            '</div>'+
+                
+            '<div class="rotate right">'+
+                '<div class="bg right"></div>'+
+            '</div>'
+        );
+            
+        // Appending to the container:
+        $(renderToId).append(coverage);
+            
+        // Assigning some of the elements as variables for speed
+        coverage.rotateLeft = coverage.find('.rotate.left');
+        coverage.rotateRight = coverage.find('.rotate.right');
+        coverage.display = coverage.find('.display');
+
+        var angle = 360 * percentage;
+    
+        var element;
+
+        if (percentage == 0) {
+            // Hiding the right half of the background
+            coverage.rotateRight.hide();
+            
+            // Resetting the rotation of the left part
+            rotateElement(coverage.rotateLeft, 0);
+        }
+        
+        if (angle <= 180) {
+            // The left part is rotated, and the right is currently hidden
+            element = coverage.rotateLeft;
+        } else {
+            // The first part of the rotation has completed, so we start
+            // rotating the right part
+            coverage.rotateRight.show();
+            coverage.rotateLeft.show();
+            
+            crRotateElement(coverage.rotateLeft, 180);
+            
+            element = coverage.rotateRight;
+            angle = angle - 180;
+        }
+
+        crRotateElement(element, angle);
+
+        coverage.display.html(label + '<br>' + crFormatPercentage(percentage) + '%');
+    }
+
+    function crRotateElement(element, angle)
+    {
+        // Rotating the element, depending on the browser:
+        var rotate = 'rotate(' + angle + 'deg)';
+        
+        if (element.css('MozTransform') != undefined) {
+            element.css('MozTransform', rotate);
+        } else if(element.css('WebkitTransform') != undefined) {
+            element.css('WebkitTransform', rotate);
+        } else if (element.css("filter") != undefined) {
+            // A version for internet explorer using filters, works but is a bit buggy
+            var cos = Math.cos(Math.PI * 2 / 360 * angle);
+            var sin = Math.sin(Math.PI * 2 / 360 * angle);
+            
+            element.css("filter","progid:DXImageTransform.Microsoft.Matrix(M11=" + cos + ",M12=-" + sin + ",M21=" + sin + ",M22=" + cos + ",SizingMethod='auto expand',FilterType='nearest neighbor')");
+    
+            element.css("left", -Math.floor((element.width() - 120) / 2));
+            element.css("top", -Math.floor((element.height() - 120) / 2));
+        }
+    }
+
+    function crFormatPercentage(percentage) {
+        var pct = (percentage * 100) + "";
+
+        var dotIndex = pct.indexOf('.');
+        if (dotIndex > -1) {
+            pct = pct.substring(0, dotIndex + 2);
+        }
+
+        return pct;
     }
 
     function crShowCoberturaStats() {
@@ -77,10 +112,10 @@
 		    dataType: 'xml',
 		    success: function(xml) {
 		    	        $(xml).find('coverage').each(function() {
-		    	        	var lineRate   = Math.round($(this).attr('line-rate') * 100);
-                            var branchRate = Math.round($(this).attr('branch-rate') * 100);
-		    	        	crShowCoverageChart('cobertura-stats-line-rate', 'Line Rate', lineRate);
-                            crShowCoverageChart('cobertura-stats-branch-rate', 'Branch Rate', branchRate);
+		    	        	var lineRate   = $(this).attr('line-rate');
+                            var branchRate = $(this).attr('branch-rate');
+		    	        	crShowCoverageChart('#cobertura-stats-line-rate', 'Line', lineRate);
+                            crShowCoverageChart('#cobertura-stats-branch-rate', 'Branch', branchRate);
             		    });
 		    	    }
         });
@@ -88,18 +123,7 @@
     	setTimeout('crShowCoberturaStats()', 15 * 60 * 1000); // Update every 15 minutes
     }
 
-    $(document).ready(function() {
-        // Radialize the colors
-        Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function(color) {
-            return {
-                radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
-                stops: [
-                    [0, color],
-                    [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
-                ]
-            };
-        });
-
+    $(document).ready(function() { 
     	crShowCoberturaStats();
     });
 </script>

@@ -93,27 +93,6 @@
     font-size: 0;
 }
 
-#cobertura-stats {
-    font-size: 18px;
-    text-align: center;
-    float: left;
-    margin: 5px;
-    padding: 0;
-    position: relative;
-}
-
-#cobertura-stats-line-rate {
-    width: 170px;
-    height: 120px;
-    float: left;   
-}
-
-#cobertura-stats-branch-rate {
-    width: 170px;
-    height: 120px;
-    float: left; 
-}
-
 #codenarc-stats {
     font-size: 18px;
     text-align: center;
@@ -129,4 +108,92 @@
 
 #codenarc-stats td {
     text-align: right;
+}
+
+.coverage-parent-container {
+    font-size: 18px;
+    text-align: center;
+    float: left;
+    margin: 5px;
+    padding: 0;
+    position: relative;
+}
+
+.coverage-container {
+    width: 120px;
+    height: 120px;
+    float: left;   
+}
+
+.coverage {
+    height: 120px;
+    width: 120px;
+    position: relative;
+    overflow: hidden;
+    float: left;
+}
+
+.coverage .rotate {
+    /* There are two .rotate divs - one for each half of the background */
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    top: 0;
+    left: 0;
+}
+
+.coverage .rotate.right {
+    display: none;
+    z-index: 11;
+}
+
+.coverage .bg, .coverage .front {
+    width: 60px;
+    height: 120px;
+    position: absolute;
+    top: 0;
+}
+
+.coverage .display {
+    position: absolute;
+    width: 120px;
+    z-index: 20;
+    text-align: center;
+    top: 35px;
+    left: 0;
+
+    text-shadow: 4px 4px 5px #333333;
+}
+
+.coverage .bg.left {
+    left: 0;
+}
+
+.coverage.red .bg.left {
+    background: url(../widgets/code_coverage/bg_red.png) no-repeat left top;
+}
+.coverage.orange .bg.left {
+    background: url(../widgets/code_coverage/bg_orange.png) no-repeat left top;
+}
+.coverage.green .bg.left {
+    background: url(../widgets/code_coverage/bg_green.png) no-repeat left top;
+}
+
+.coverage .bg.right {
+    left: 60px;
+}
+
+.coverage.red .bg.right {
+    background: url(../widgets/code_coverage/bg_red.png) no-repeat right top;
+}
+.coverage.orange .bg.right {
+    background: url(../widgets/code_coverage/bg_orange.png) no-repeat right top;
+}
+.coverage.green .bg.right {
+    background: url(../widgets/code_coverage/bg_green.png) no-repeat right top;
+}
+
+.coverage .front.left {
+    left: 0;
+    z-index: 10;
 }
