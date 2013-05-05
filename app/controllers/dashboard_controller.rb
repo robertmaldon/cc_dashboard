@@ -76,6 +76,28 @@ class DashboardController < ApplicationController
     render :text => xml
   end
 
+  def play_alarm
+    sound = params[:sound]
+    extension = 'wav'
+
+    if File.exists?("public/audios/alarms/#{sound}.#{extension}")
+      alarm_path = "#{sound}.#{extension}"
+    elsif Dir.exists?("public/audios/alarms/#{sound}")
+      all_alarms = Dir.glob("public/audios/alarms/#{sound}/*.#{extension}")
+      rand_alarm = randomish_alarm(all_alarms, sound)
+      if sound.blank?
+        alarm_path = "#{rand_alarm}"
+      else
+        alarm_path = "#{sound}/#{rand_alarm}"
+      end
+    else
+      all_alarms = Dir.glob("public/audios/alarms/*.#{extension}")
+      alarm_path = randomish_alarm(all_alarms)
+    end
+
+    send_file "#{Rails.root}/public/audios/alarms/#{alarm_path}"
+  end
+
   private
 
   def get_cctray_feed_xml(feed_url)
@@ -125,6 +147,23 @@ EOF
     rescue Exception => e
       {}
     end
+  end
+
+  def randomish_alarm(all_alarms, folder)
+    folder = 'default' if folder.blank?
+
+    alarm_seq_hash = session[:alarm_seqs]||{}
+    alarm_seq = alarm_seq_hash[folder]||rand(100)
+
+    alarm_index = alarm_seq % all_alarms.size
+
+    alarm_seq = alarm_seq + 1
+    alarm_seq = 0 if alarm_seq > 999999
+
+    alarm_seq_hash[folder] = alarm_seq
+    session[:alarm_seqs] = alarm_seq_hash
+
+    File.basename(all_alarms[alarm_index])
   end
 
   def load_config

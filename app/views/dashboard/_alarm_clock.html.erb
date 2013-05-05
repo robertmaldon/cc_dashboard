@@ -33,7 +33,7 @@ if (typeof(Audio) !== "undefined") {
         setTimeout("alarmClockHide()", 9000);
 
         var audioElement = document.createElement("audio");
-        audioElement.setAttribute("src", "<%= alarm_path(alarm_config[:sound]) %>");
+        audioElement.setAttribute("src", "play_alarm?cache_bust=" + now + "&sound=<%= alarm_config[:sound] %>");
         <%- if !alarm_config[:speak].blank? -%>
         $(audioElement).bind('ended', function() {
             speak.play('<%= alarm_config[:speak] %>');
