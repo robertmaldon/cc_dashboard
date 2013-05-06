@@ -62,26 +62,24 @@
 	    var latitude  = position.coords.latitude;
 	    var longitude = position.coords.longitude;
 
-	    // Yahoo's PlaceFinder API http://developer.yahoo.com/geo/placefinder/
-	    // We are passing the R gflag for reverse geocoding (coordinates to place name)
-	    var geoAPI = 'http://where.yahooapis.com/geocode?location=' + latitude + ',' + longitude + '&flags=J&gflags=R';
+        // BOSS Geo Services
+        // http://developer.yahoo.com/boss/geo/docs/free_YQL.html
+	    var geosql = 'select * from geo.placefinder where text="LATLONG" and gflags="R"';
+        var geoYQL = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(geosql) + '&' + now.getTime() + '&format=json&callback=?';
 
 	    // Forming the query for Yahoo's weather forecasting API with YQL
 	    // http://developer.yahoo.com/weather/
 	    var wsql = 'select * from weather.forecast where woeid=WID and u="' + tempUnits + '"';
 	    var	weatherYQL = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(wsql) + '&' + now.getTime() + '&format=json&callback=?';
-	    var code, city, results, woeid;
+	    var city, woeid;
 
-	    // Issue a cross-domain AJAX request (CORS) to the GEO service.
-	    // Not supported in Opera and IE.
-	    $.getJSON(geoAPI, function(r) {
-		    if (r.ResultSet.Found == 1) {
-			    results = r.ResultSet.Results;
-			    city    = results[0].city;
-			    code    = results[0].statecode || results[0].countrycode;
+	    $.getJSON(geoYQL.replace('LATLONG', latitude + ',' + longitude), function(r) {
+	    	console.log(r);
+		    if (r.query.count == 1) {
+			    city = r.query.results.Result.city;
 
 			    // This is the city identifier for the weather API
-			    woeid = results[0].woeid;
+			    woeid = r.query.results.Result.woeid;
 
 			    // Make a weather API request (it is JSONP, so CORS is not an issue):
 			    $.getJSON(weatherYQL.replace('WID', woeid), function(r) {
