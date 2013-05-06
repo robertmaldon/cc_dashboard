@@ -16,7 +16,7 @@ class DashboardConfig
   @@refresh_interval = 60.seconds
 
   cattr_accessor :bling, :instance_writer => false
-  @@bling = 'chucknorris'
+  @@bling = ''
 
   cattr_accessor :skin, :instance_writer => false
   @@skin = 'doom'
