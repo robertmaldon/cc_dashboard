@@ -1,6 +1,3 @@
-<%- DashboardConfig.widgets.keys.each do |widget_name| -%>
-<%-   widget_config = DashboardConfig.widgets[widget_name] -%>
-<%= render :partial => 'widgets_codenarc', :locals => {:config => widget_config} if widget_name == :codenarc %>
-<%= render :partial => 'widgets_cobertura', :locals => {:config => widget_config} if widget_name == :cobertura %>
-<%= render :partial => 'widgets_weatherclock', :locals => {:config => widget_config} if widget_name == :weather_clock %>
+<%- DashboardConfig.widgets.each_with_index do |widget_config, index| -%>
+<%= render :partial => "widgets_#{widget_config[:type]}", :locals => {:config => widget_config, :index => index} %>
 <%- end -%>

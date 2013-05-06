@@ -1,14 +1,14 @@
 <div class="coverage-parent-container">
     <span><%= config[:title] %></span>
     <div>
-        <div id="cobertura-stats-line-rate" class="coverage-container"></div>
-        <div id="cobertura-stats-branch-rate" class="coverage-container"></div>
+        <div id="cobertura-stats-line-rate-<%= index %>" class="coverage-container"></div>
+        <div id="cobertura-stats-branch-rate-<%= index %>" class="coverage-container"></div>
     </div>
 </div>
 
 <script type="text/javascript">
 
-    function crShowCoverageChart(renderToId, label, percentage) {
+    function crShowCoverageChart<%= index %>(renderToId, label, percentage) {
         var color;
         if (percentage < 0.5) {
             color = 'red';
@@ -49,7 +49,7 @@
             coverage.rotateRight.hide();
             
             // Resetting the rotation of the left part
-            rotateElement(coverage.rotateLeft, 0);
+            crRotateElement<%= index %>(coverage.rotateLeft, 0);
         }
         
         if (angle <= 180) {
@@ -61,18 +61,18 @@
             coverage.rotateRight.show();
             coverage.rotateLeft.show();
             
-            crRotateElement(coverage.rotateLeft, 180);
+            crRotateElement<%= index %>(coverage.rotateLeft, 180);
             
             element = coverage.rotateRight;
             angle = angle - 180;
         }
 
-        crRotateElement(element, angle);
+        crRotateElement<%= index %>(element, angle);
 
-        coverage.display.html(label + '<br>' + crFormatPercentage(percentage) + '%');
+        coverage.display.html(label + '<br>' + crFormatPercentage<%= index %>(percentage) + '%');
     }
 
-    function crRotateElement(element, angle)
+    function crRotateElement<%= index %>(element, angle)
     {
         // Rotating the element, depending on the browser:
         var rotate = 'rotate(' + angle + 'deg)';
@@ -93,7 +93,7 @@
         }
     }
 
-    function crFormatPercentage(percentage) {
+    function crFormatPercentage<%= index %>(percentage) {
         var pct = (percentage * 100) + "";
 
         var dotIndex = pct.indexOf('.');
@@ -104,7 +104,7 @@
         return pct;
     }
 
-    function crShowCoberturaStats() {
+    function crShowCoberturaStats<%= index %>() {
     	jQuery.support.cors = true;
     	$.ajax({
 		    type: 'GET',
@@ -114,16 +114,16 @@
 		    	        $(xml).find('coverage').each(function() {
 		    	        	var lineRate   = $(this).attr('line-rate');
                             var branchRate = $(this).attr('branch-rate');
-		    	        	crShowCoverageChart('#cobertura-stats-line-rate', 'Line', lineRate);
-                            crShowCoverageChart('#cobertura-stats-branch-rate', 'Branch', branchRate);
+		    	        	crShowCoverageChart<%= index %>('#cobertura-stats-line-rate-<%= index %>', 'Line', lineRate);
+                            crShowCoverageChart<%= index %>('#cobertura-stats-branch-rate-<%= index %>', 'Branch', branchRate);
             		    });
 		    	    }
         });
 
-    	setTimeout('crShowCoberturaStats()', 15 * 60 * 1000); // Update every 15 minutes
+    	setTimeout('crShowCoberturaStats<%= index %>()', 15 * 60 * 1000); // Update every 15 minutes
     }
 
     $(document).ready(function() { 
-    	crShowCoberturaStats();
+    	crShowCoberturaStats<%= index %>();
     });
 </script>

@@ -40,28 +40,39 @@ DashboardConfig.track = 'simpsons'
 #
 # e.g.
 #DashboardConfig.alarm = [
-#    {:sound   => 'mission_impossible_theme',
-#     :message => 'Daily Standup',
-#	  :start    => '08:49:00',
-#	  :stop     => '09:01:00',
-#     :speak    => 'Time for day lee standup. Make ship happen!'},
-#
-#    {:message => 'Swap Pairs',
+#  {
+#    :sound   => 'mission_impossible_theme',
+#    :message => 'Daily Standup',
+#    :start    => '08:49:00',
+#    :stop     => '09:01:00',
+#    :speak    => 'Time for day lee standup. Make ship happen!'
+#  },
+#  {
+#    :message => 'Swap Pairs',
 #	 :start    => '11:29:00',
-#	 :stop     => '11:31:00'},
-#
-#	{:message  => 'Retro Retro',
+#	 :stop     => '11:31:00'
+#  },
+#  {
+#    :message  => 'Retro Retro',
 #	 :start    => 'friday 16:14:00',
-#	 :stop     => 'friday 16:16:00'}
+#	 :stop     => 'friday 16:16:00'
+#  }
 #]
 
 # Widgets. Display various widgets in the bottom-right corner of the dashboard.
 # The available widgets are:
+# * cobertura     - display line and brach coverage from a cobertura xml report
 # * weather_clock - based on the browser location display the current time
 #                   and weather. Uses the Yahoo! PlaceFinder and weather
 #                   forecasting APIs.
-#DashboardConfig.widgets = {
-#	:weather_clock => {
+#DashboardConfig.widgets = [
+#  {
+#    :type           => :cobertura,
+#    :title          => 'MyAwesomeApp Code Coverage',
+#    :xml_report_url => 'https://raw.github.com/jenkinsci/cobertura-plugin/master/src/test/resources/hudson/plugins/cobertura/coverage-with-data.xml'
+#  },
+#  {
+#     :type => :weather_clock,
 #	  :temp_units => 'c' # 'c' for celcius or 'f' for farenheit
 #  }
-#}
+#]

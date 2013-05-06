@@ -1,9 +1,9 @@
-<div id="codenarc-stats">
+<div id="codenarc-stats-<%= index %>" class="codenarc">
 </div>
 
 <script type="text/javascript">
 
-    function crShowCodenarcStats() {
+    function crShowCodenarcStats<%= index %>() {
     	$.ajax({
 		    type: 'GET',
 		    url: 'proxy_xml?xml_url=<%= config[:xml_report_url] %>',
@@ -16,20 +16,20 @@
 
 		    	        	var html = '<h2><%= config[:title] %></h2>';
 		    	        	html += '<table>';
-		    	        	html += '<tr><th>Priority 1</th><td>' + prio1 + '</td></tr>';
-		    	        	html += '<tr><th>Priority 2</th><td>' + prio2 + '</td></tr>';
-		    	        	html += '<tr><th>Priority 3</th><td>' + prio3 + '</td></tr>';
+		    	        	html += '<tr><th>P1</th><td>' + prio1 + '</td></tr>';
+		    	        	html += '<tr><th>P2</th><td>' + prio2 + '</td></tr>';
+		    	        	html += '<tr><th>P3</th><td>' + prio3 + '</td></tr>';
 		    	        	html += '</table>';
 
-		    	        	$('#codenarc-stats').html(html);
+		    	        	$('#codenarc-stats-<%= index %>').html(html);
 		    	        });
 		    	    }
         });
 
-    	setTimeout('crShowCodenarcStats()', 15 * 60 * 1000); // Update every 15 minutes
+    	setTimeout('crShowCodenarcStats<%= index %>()', 15 * 60 * 1000); // Update every 15 minutes
     }
 
     $(document).ready(function() {
-    	crShowCodenarcStats();
+    	crShowCodenarcStats<%= index %>();
     });
 </script>
