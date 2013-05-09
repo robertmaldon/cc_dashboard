@@ -1,0 +1,29 @@
+<div class="beer-container">
+  <div class="beer-glass"></div>
+  <div class="beer-fill">
+    <div class="beer-head"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    function blingShowBeerOClock() {
+        var start = chrono.parseDate('friday 09:00:00');
+        var end   = chrono.parseDate('friday 16:30:00');
+
+        var now = Date.now();
+
+        if ((now >= start) && (now < end)) {
+
+            var fillPercentage = 100 - ((end - now)/(end - start) * 100);
+            $('.beer-fill').css('height', fillPercentage + '%');
+
+            $('.beer-container').show();
+        } else {
+            $('.beer-container').hide();
+        }
+    }
+
+    $(document).ready(function() {
+        blingShowBeerOClock();
+    });
+</script>
