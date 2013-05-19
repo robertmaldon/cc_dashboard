@@ -16,7 +16,6 @@ class DashboardController < ApplicationController
     @skin    = params[:skin]    || DashboardConfig.skin
     @track   = params[:track]   || DashboardConfig.track
     @refresh = params[:refresh] || DashboardConfig.refresh_interval
-    @bling   = params[:bling]   || DashboardConfig.bling
     
     @activity_building = 0
     @status_failure    = 0

@@ -17,9 +17,20 @@ DashboardConfig.cctray_feed_urls = {
 # The number of seconds between browser page reloads
 #DashboardConfig.refresh_interval = 60.seconds
 
-# The bling. Currently available blings are 'cheezburger' and 'chucknorris'.
+# The bling. Currently available blings are 'beer_o_clock' and 'chucknorris'.
+# You can configure multiple blings.
 # Nobody stops Chuck Norris from kicking ass!
-#DashboardConfig.bling = 'chucknorris'
+#DashboardConfig.bling = [
+#  {
+#    :type           => :beer_o_clock,
+#    :fill_start     => 'friday 9 am',
+#    :bubbles_start  => 'friday 4:30 pm',
+#    :fill_end       => 'friday 5 pm'
+#  },
+#  {
+#    :type => :chuck_norris
+#  }
+#]
 
 # The skin. Currently available skins are 'doom', 'hudson', 'iskin', 'kitten',
 # 'nightmare', 'smiley', 'spaceinvaders' and 'worldcup'.

@@ -1,3 +1,3 @@
-<%- unless @bling.blank? -%>
-<%= render :partial => "bling_#{@bling}" %>
+<%- DashboardConfig.bling.each_with_index do |bling_config, index| -%>
+<%= render :partial => "bling_#{bling_config[:type]}", :locals => {:config => bling_config, :index => index} %>
 <%- end -%>

@@ -2,22 +2,96 @@
   <div class="beer-glass"></div>
   <div class="beer-fill">
     <div class="beer-head"></div>
+    <div class="beer-bubbles"></div>
   </div>
 </div>
 
 <script type="text/javascript">
+    function releaseTheBeerBubblez() {
+        
+        // Get variables
+        var $bubbles = $('.beer-bubbles');
+
+        var min_bubble_count = 20, // Minimum number of bubbles
+            max_bubble_count = 40, // Maximum number of bubbles
+            min_bubble_size = 2, // Smallest possible bubble diameter (px)
+            max_bubble_size = 6; // Largest possible bubble diameter (px)
+                
+
+        var bubbleCount = min_bubble_count + Math.floor(Math.random() * (max_bubble_count + 1));
+            
+        for (var i = 0; i < bubbleCount; i++) {
+            $bubbles.append('<div class="beer-bubble-container"><div class="beer-bubble"></div></div>');
+        }
+
+        // Make each bubble random
+        $bubbles.find('> .beer-bubble-container').each(function() {
+
+            // Randomise their size
+            var size_rand = min_bubble_size + Math.floor(Math.random() * (max_bubble_size + 1));
+            
+            // Randomly position the bubbles
+            var pos_rand = Math.floor(Math.random() * 101);
+            
+            // Randomise the time they start rising
+            var delay_rand = Math.floor(Math.random() * 16);
+            
+            // Randomise their speed
+            var speed_rand = 6 + Math.floor(Math.random() * 9);
+            
+            // Cache the this selector
+            var $this = $(this);
+
+            // Stick the above to the bubble container
+            $this.css({
+                'left' : pos_rand + '%',
+                
+                '-webkit-animation-duration' : speed_rand + 's',
+                '-moz-animation-duration' : speed_rand + 's',
+                '-ms-animation-duration' : speed_rand + 's',
+                'animation-duration' : speed_rand + 's',
+                
+                '-webkit-animation-delay' : delay_rand + 's',
+                '-moz-animation-delay' : delay_rand + 's',
+                '-ms-animation-delay' : delay_rand + 's',
+                'animation-delay' : delay_rand + 's'
+            });
+            
+            // And set the bubble size
+            $this.children('.beer-bubble').css({
+                'width' : size_rand + 'px',
+                'height' : size_rand + 'px'
+            });
+        });
+
+        // Show the bubbles
+        $('.beer-bubbles').fadeIn('100', function(){
+            
+            // Start the animation
+            $('.beer-bubble-container').css({
+                'animation-play-state' : 'running',
+                '-webkit-animation-play-state' : 'running'
+            });
+        });
+    };
+
     function blingShowBeerOClock() {
-        var start = chrono.parseDate('friday 09:00:00');
-        var end   = chrono.parseDate('friday 16:30:00');
+        var fill_start    = chrono.parseDate('<%= config[:fill_start] %>');
+        var bubbles_start = chrono.parseDate('<%= config[:bubbles_start] %>');
+        var fill_end      = chrono.parseDate('<%= config[:fill_end] %>');
 
         var now = Date.now();
 
-        if ((now >= start) && (now < end)) {
+        if ((now >= fill_start) && (now < fill_end)) {
 
-            var fillPercentage = 100 - ((end - now)/(end - start) * 100);
+            var fillPercentage = 100 - ((fill_end - now)/(fill_end - fill_start) * 100);
             $('.beer-fill').css('height', fillPercentage + '%');
 
             $('.beer-container').show();
+
+            if (now >= bubbles_start) {
+                releaseTheBeerBubblez();
+            }
         } else {
             $('.beer-container').hide();
         }
