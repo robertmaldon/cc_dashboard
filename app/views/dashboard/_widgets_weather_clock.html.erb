@@ -24,7 +24,7 @@
         var meridiem = (now.getHours() < 12) ? 'AM' : 'PM';
 
         var date = '';
-        date += '<p id="weather-clock-time">' + hours + ':' + minutes + ' ' + meridiem + '</p>';
+        date += '<span id="weather-clock-time">' + hours + ':' + minutes + ' ' + meridiem + '</span>';
         date += '<ul>';
         date += '<li>' + dayNames[now.getDay()] + '</li>';
         date += '<li>' + monthNames[now.getMonth()] + ' ' + now.getDate() + '</li>';
