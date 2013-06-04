@@ -74,7 +74,6 @@
 	    var city, woeid;
 
 	    $.getJSON(geoYQL.replace('LATLONG', latitude + ',' + longitude), function(r) {
-	    	console.log(r);
 		    if (r.query.count == 1) {
 			    city = r.query.results.Result.city;
 
