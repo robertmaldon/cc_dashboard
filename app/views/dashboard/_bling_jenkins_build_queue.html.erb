@@ -4,21 +4,24 @@
     	var jenkinsQueueURL = '<%= config[:base_url] %>/queue/api/json?jsonp=?';
     	$.getJSON(jenkinsQueueURL, function(json) {
     	    if (json.items.length > 0) {
-    		    var html = '<div id="jenkins-queue-container"><ul>'
+                if ($('#jenkins-queue-container-<%= index %>').length > 0) {
+                    $('#jenkins-queue-container-<%= index %> ul li').remove();
+                } else {
+                    var html = '<div id="jenkins-queue-container-<%= index %>" class="jenkins-queue-container"><ul></ul></div>';
+                    $('#main').before(html);
+                }
     	        for (var i = 0; i < json.items.length; ++i) {
     		        var item = json.items[i];
     		        var task = item.task;
 
-    		        html += '<li><a href="' + task.url + '">' + task.name + '</a></li>';
+    		        var html = '<li><a href="' + task.url + '">' + task.name + '</a></li>';
+                    $('#jenkins-queue-container-<%= index %> ul').append(html);
     	        }
 
-                html += '</ul></div>'
-    	        $('#main').before(html);
-
-    	        $('#jenkins-queue-container').show();
+    	        $('#jenkins-queue-container-<%= index %>').show(2000);
             } else {
-                $('#jenkins-queue-container').hide();
-            }                   
+                $('#jenkins-queue-container-<%= index %>').hide(2000).remove();
+            }                 
 		});
 	}
 
