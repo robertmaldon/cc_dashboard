@@ -2,16 +2,56 @@
 <%= render 'alarm_clock' %>
 <%= render 'bling' %>
 
-<%- @projects.each do |project| -%>
-  <%- title = "[#{project.group_name}] #{project.name} - Status: #{project.lastBuildStatus} - Activity: #{project.activity} - Last Build: #{project.lastBuildTime}" -%>
+<%- @projects.each_with_index do |project, index| -%>
+  <%-
+      title = "[#{project.group_name}] #{project.name} - Status: #{project.lastBuildStatus} - Activity: #{project.activity} - Last Build: #{project.lastBuildTime}"
+      id = "project-#{index}"
+  -%>
   <a href="<%= project.webUrl %>" target="_blank" title="<%= title %>" alt="<%= title %>">
-    <div class="project <%= project.lastBuildStatus %> <%= project.activity %>">
+    <div id="<%= id %>" class="project <%= project.lastBuildStatus %> <%= project.activity %>">
         <h2><%= project.name %></h2>
         <p>Last label: <%= project.lastBuildLabel %></p>
         <p>Last build: <%= time_ago(project.lastBuildTime) rescue project.lastBuildTime %></p>
+        <div class="culprits"></div>
     </div>
   </a>
 
+<script type="text/javascript">
+    var failedProjects = []
+  <%-
+  if project.lastBuildStatus == 'Failure'
+    failedProjectUrl = "#{project.webUrl}/#{project.lastBuildLabel}"
+  -%>
+  failedProjects.push({'url': '<%= failedProjectUrl %>', 'id': '<%= id %>'});
+  <%-
+  end
+  -%>
+
+    $(document).ready(function() {
+        for (var i = 0; i < failedProjects.length; ++i) {
+            var failedUrl = failedProjects[i]['url'] + '/api/json?jsonp=?';
+            var failedId = failedProjects[i]['id'];
+
+            $.getJSON(failedUrl, function(json) {
+                if (json.culprits.length > 0) {
+                    var culprits = json.culprits;
+                    var culpritNames = [];
+                    for (var j = 0; j < culprits.length; ++j) {
+                        if (culprits[j].fullName) {
+                            culpritNames.push(culprits[j].fullName);
+                        }
+                    }
+
+                    if (culpritNames.length > 0) {
+                      console.log(culpritNames.join());
+                        var culpritsElem = $('#' + failedId + ' .culprits');
+                        culpritsElem.html(culpritNames.join());
+                    }
+                }
+            });
+        }
+    });
+</script>
 <%- end -%>
 
 <div id="audio"></div>
