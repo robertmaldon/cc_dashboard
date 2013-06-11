@@ -112,7 +112,7 @@
                         var forecast = r.query.results.channel.item.forecast;
 
 					    var prediction = '';
-					    for (var i = 0 ; i < forecast.length; i++) {
+					    for (var i = 0 ; i < forecast.length && i < 3; i++) {
 						    var f = forecast[i];
 
                             prediction += '<ul>';
