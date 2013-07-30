@@ -162,6 +162,7 @@ EOF
     alarm_seq_hash[folder] = alarm_seq
     session[:alarm_seqs] = alarm_seq_hash
 
+    all_alarms = all_alarms.sort
     File.basename(all_alarms[alarm_index])
   end
 

@@ -50,6 +50,10 @@
         return "background-position: -" + ((code * 224) + (night * 112)) + "px -4px;";
     }
 
+    function wcWeatherIconSmallPosition(code, night) {
+        return "background-position: -" + ((code * 112) + (night * 56)) + "px -2px;";
+    }
+
     function wcLocationError(error) {
     	console.log(error);
     }
@@ -111,6 +115,7 @@
 
                         var forecast = r.query.results.channel.item.forecast;
 
+/*
 					    var prediction = '';
 					    for (var i = 0 ; i < forecast.length && i < 3; i++) {
 						    var f = forecast[i];
@@ -122,6 +127,19 @@
 						    prediction += '<li class="temp-low">' + f.low + '°' + units.temperature + '</li>';
 						    prediction += '</ul>';
                         }
+*/
+                        var prediction = '<table>';
+                        for (var i = 0 ; i < forecast.length && i < 4; i++) {
+                            var f = forecast[i];
+
+                            prediction += '<tr>';
+                            prediction += '<td class="day-name">' + f.day + '</td>';
+                            prediction += '<td class="weather-icon-small" style="' + wcWeatherIconSmallPosition(f.code, 0) + '">' + f.text + '</td>';
+                            prediction += '<td class="temp-high">' + f.high + '°' + units.temperature + '</td>';
+                            prediction += '<td class="temp-low">' + f.low + '°' + units.temperature + '</td>';
+                            prediction += '</tr>';
+                        }
+                        prediction += '</table>';
 
 					    $('#weather-clock-forecast').html(prediction);
 				    }

@@ -1,12 +1,23 @@
 <div class="coverage-parent-container">
     <span><%= config[:title] %></span>
     <div>
-        <div id="cobertura-stats-line-rate-<%= index %>" class="coverage-container"></div>
-        <div id="cobertura-stats-branch-rate-<%= index %>" class="coverage-container"></div>
+        <canvas id="cobertura-stats-line-rate-<%= index %>" class="coverage-canvas"></canvas>
+        <canvas id="cobertura-stats-branch-rate-<%= index %>" class="coverage-canvas"></canvas>
     </div>
 </div>
 
 <script type="text/javascript">
+
+    function crFormatPercentage<%= index %>(percentage) {
+        var pct = (percentage * 100) + "";
+
+        var dotIndex = pct.indexOf('.');
+        if (dotIndex > -1) {
+            pct = pct.substring(0, dotIndex + 2);
+        }
+
+        return pct;
+    }
 
     function crShowCoverageChart<%= index %>(renderToId, label, percentage) {
         var color;
@@ -18,90 +29,33 @@
             color = 'green';
         }
 
-        var coverage = $('<div>').attr('class', 'coverage ' + color).html(
-            '<div class="display"></div>'+
-                
-            '<div class="front left"></div>'+
-                
-            '<div class="rotate left">'+
-                '<div class="bg left"></div>'+
-            '</div>'+
-                
-            '<div class="rotate right">'+
-                '<div class="bg right"></div>'+
-            '</div>'
-        );
-            
-        // Appending to the container:
-        $(renderToId).append(coverage);
-            
-        // Assigning some of the elements as variables for speed
-        coverage.rotateLeft = coverage.find('.rotate.left');
-        coverage.rotateRight = coverage.find('.rotate.right');
-        coverage.display = coverage.find('.display');
+        // Set the canvas corrds to be the same as the css dimensions
+        $(renderToId).attr('width', $(renderToId).css('width'));
+        $(renderToId).attr('height', $(renderToId).css('height'));
 
-        var angle = 360 * percentage;
-    
-        var element;
+        var canvas = $(renderToId).get(0);
+        var context = canvas.getContext('2d');
+        var centerX = canvas.width / 2;
+        var centerY = canvas.height / 2;
+        var lineWidth = 15;
+        var radius = (canvas.width - lineWidth)/ 2;
+        var startAngle = 0;
+        var endAngle = percentage * 2 * Math.PI;
+        var counterClockwise = false;
 
-        if (percentage == 0) {
-            // Hiding the right half of the background
-            coverage.rotateRight.hide();
-            
-            // Resetting the rotation of the left part
-            crRotateElement<%= index %>(coverage.rotateLeft, 0);
-        }
-        
-        if (angle <= 180) {
-            // The left part is rotated, and the right is currently hidden
-            element = coverage.rotateLeft;
-        } else {
-            // The first part of the rotation has completed, so we start
-            // rotating the right part
-            coverage.rotateRight.show();
-            coverage.rotateLeft.show();
-            
-            crRotateElement<%= index %>(coverage.rotateLeft, 180);
-            
-            element = coverage.rotateRight;
-            angle = angle - 180;
-        }
+        context.beginPath();
+        context.arc(centerX, centerY, radius, startAngle, endAngle, counterClockwise);
+        context.lineWidth = lineWidth;
+        context.strokeStyle = color;
+        context.stroke();
 
-        crRotateElement<%= index %>(element, angle);
+        context.font = $(renderToId).css('font');
+        context.textAlign = 'center';
+        context.fillStyle = $(renderToId).css('color');
+        context.fillText(label, centerX, centerY);
+        context.fillText(crFormatPercentage<%= index %>(percentage) + '%', centerX, centerY + 16);
 
-        coverage.display.html(label + '<br>' + crFormatPercentage<%= index %>(percentage) + '%');
-    }
-
-    function crRotateElement<%= index %>(element, angle)
-    {
-        // Rotating the element, depending on the browser:
-        var rotate = 'rotate(' + angle + 'deg)';
-        
-        if (element.css('MozTransform') != undefined) {
-            element.css('MozTransform', rotate);
-        } else if(element.css('WebkitTransform') != undefined) {
-            element.css('WebkitTransform', rotate);
-        } else if (element.css("filter") != undefined) {
-            // A version for internet explorer using filters, works but is a bit buggy
-            var cos = Math.cos(Math.PI * 2 / 360 * angle);
-            var sin = Math.sin(Math.PI * 2 / 360 * angle);
-            
-            element.css("filter","progid:DXImageTransform.Microsoft.Matrix(M11=" + cos + ",M12=-" + sin + ",M21=" + sin + ",M22=" + cos + ",SizingMethod='auto expand',FilterType='nearest neighbor')");
-    
-            element.css("left", -Math.floor((element.width() - 120) / 2));
-            element.css("top", -Math.floor((element.height() - 120) / 2));
-        }
-    }
-
-    function crFormatPercentage<%= index %>(percentage) {
-        var pct = (percentage * 100) + "";
-
-        var dotIndex = pct.indexOf('.');
-        if (dotIndex > -1) {
-            pct = pct.substring(0, dotIndex + 2);
-        }
-
-        return pct;
+        console.log("size [" + $(renderToId).css('font-size') + "]");
     }
 
     function crShowCoberturaStats<%= index %>() {

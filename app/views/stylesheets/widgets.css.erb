@@ -67,20 +67,17 @@
     float: left;
 }
 
-#weather-clock-forecast ul {
-    display: block;
-    float: left;
-}
-
-#weather-clock-forecast ul li.day-name {
-    height: 20px;
-    line-height: 20px;
-}
-
 .weather-icon {
     background: url('../widgets/weather-clock/weather-icon-sprite.png');
     height: 50px;
     width: 60px;
+    font-size: 0;
+}
+
+.weather-icon-small {
+    background: url('../widgets/weather-clock/weather-icon-sprite-small.png');
+    height: 25px;
+    width: 30px;
     font-size: 0;
 }
 
@@ -107,81 +104,9 @@
     position: relative;
 }
 
-.coverage-container {
-    width: 120px;
-    height: 120px;
-    float: left;   
-}
-
-.coverage {
-    height: 120px;
-    width: 120px;
-    position: relative;
-    overflow: hidden;
+.coverage-canvas {
+    height: 100px;
+    width: 100px;
+    padding: 0 5px 0 5px;
     float: left;
-}
-
-.coverage .rotate {
-    /* There are two .rotate divs - one for each half of the background */
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    top: 0;
-    left: 0;
-}
-
-.coverage .rotate.right {
-    display: none;
-    z-index: 11;
-}
-
-.coverage .bg, .coverage .front {
-    width: 60px;
-    height: 120px;
-    position: absolute;
-    top: 0;
-}
-
-.coverage .display {
-    position: absolute;
-    width: 120px;
-    z-index: 20;
-    text-align: center;
-    top: 35px;
-    left: 0;
-
-    text-shadow: 4px 4px 5px #333333;
-}
-
-.coverage .bg.left {
-    left: 0;
-}
-
-.coverage.red .bg.left {
-    background: url(../widgets/code_coverage/bg_red.png) no-repeat left top;
-}
-.coverage.orange .bg.left {
-    background: url(../widgets/code_coverage/bg_orange.png) no-repeat left top;
-}
-.coverage.green .bg.left {
-    background: url(../widgets/code_coverage/bg_green.png) no-repeat left top;
-}
-
-.coverage .bg.right {
-    left: 60px;
-}
-
-.coverage.red .bg.right {
-    background: url(../widgets/code_coverage/bg_red.png) no-repeat right top;
-}
-.coverage.orange .bg.right {
-    background: url(../widgets/code_coverage/bg_orange.png) no-repeat right top;
-}
-.coverage.green .bg.right {
-    background: url(../widgets/code_coverage/bg_green.png) no-repeat right top;
-}
-
-.coverage .front.left {
-    left: 0;
-    z-index: 10;
 }
