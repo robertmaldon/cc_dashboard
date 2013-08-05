@@ -1,15 +1,18 @@
 class DashboardConfig
 
-  cattr_accessor :cctray_feed_urls, :instance_writer => false
-  @@cctray_feed_urls = {}
+  #cattr_accessor :cctray_feed_urls, :instance_writer => false
+  #@@cctray_feed_urls = {}
 
-  cattr_accessor :jenkins_json_feed_urls, :instance_writer => false
-  @@jenkins_json_feed_urls = {}
+  cattr_accessor :servers, :instance_writer => false
+  @@servers = []
 
-  cattr_accessor :cctray_feed_open_timeout, :instance_writer => false
+  cattr_accessor :servers_hash, :instance_writer => false
+  @@servers_hash = {}
+
+  cattr_accessor :http_open_timeout, :instance_writer => false
   @@cctray_feed_open_timeout = 10
 
-  cattr_accessor :cctray_feed_read_timeout, :instance_writer => false
+  cattr_accessor :http_read_timeout, :instance_writer => false
   @@cctray_feed_read_timeout = 10
 
   cattr_accessor :refresh_interval, :instance_writer => false

@@ -54,15 +54,13 @@
         context.fillStyle = $(renderToId).css('color');
         context.fillText(label, centerX, centerY);
         context.fillText(crFormatPercentage<%= index %>(percentage) + '%', centerX, centerY + 16);
-
-        console.log("size [" + $(renderToId).css('font-size') + "]");
     }
 
     function crShowCoberturaStats<%= index %>() {
     	jQuery.support.cors = true;
     	$.ajax({
 		    type: 'GET',
-		    url: 'proxy_xml?xml_url=<%= config[:xml_report_url] %>',
+		    url: 'proxy_xml?server_id=' + encodeURI('<%= config[:server_id] %>') + '&xml_path=' + encodeURI('<%= config[:xml_path] %>'),
 		    dataType: 'xml',
 		    success: function(xml) {
 		    	        $(xml).find('coverage').each(function() {

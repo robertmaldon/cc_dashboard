@@ -96,8 +96,7 @@
                         var night = (now.getHours() > 6 && now.getHours() < 18) ? 0 : 1;
 
 					    var current = '';
-					    current += '<div class="weather-icon" style="' + wcWeatherIconPosition(condition.code, night) + '; float: left;">' + condition.text + '</div>';
-					    current += '<p>' + location.city + '</p>';
+					    current += '<div class="weather-icon" style="' + wcWeatherIconPosition(condition.code, night) + '; float: left;">' + location.city + '</div>';
 					    current += '<p>' + condition.temp + '°' + units.temperature + ' ' + condition.text + '</p>';
 					    current += '<table>';
 					    current += '<tr>';
@@ -115,19 +114,6 @@
 
                         var forecast = r.query.results.channel.item.forecast;
 
-/*
-					    var prediction = '';
-					    for (var i = 0 ; i < forecast.length && i < 3; i++) {
-						    var f = forecast[i];
-
-                            prediction += '<ul>';
-						    prediction += '<li class="day-name">' + f.day + '</li>';
-						    prediction += '<li class="weather-icon" style="' + wcWeatherIconPosition(f.code, 0) + '">' + f.text + '</li>';
-						    prediction += '<li class="temp-high">' + f.high + '°' + units.temperature + '</li>';
-						    prediction += '<li class="temp-low">' + f.low + '°' + units.temperature + '</li>';
-						    prediction += '</ul>';
-                        }
-*/
                         var prediction = '<table>';
                         for (var i = 0 ; i < forecast.length && i < 4; i++) {
                             var f = forecast[i];

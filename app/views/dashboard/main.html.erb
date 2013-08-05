@@ -2,6 +2,10 @@
 <%= render 'alarm_clock' %>
 <%= render 'bling' %>
 
+<script type="text/javascript">
+    var failedProjects = []
+</script>
+
 <%- @projects.each_with_index do |project, index| -%>
   <%-
       title = "[#{project.group_name}] #{project.name} - Status: #{project.lastBuildStatus} - Activity: #{project.activity} - Last Build: #{project.lastBuildTime}"
@@ -17,42 +21,51 @@
   </a>
 
 <script type="text/javascript">
-    var failedProjects = []
   <%-
   if project.lastBuildStatus == 'Failure'
-    failedProjectUrl = "#{project.webUrl}/#{project.lastBuildLabel}"
+    failedProjectFullUrl = "#{project.webUrl}/#{project.lastBuildLabel}"
+    failedProjectParsedUrl = URI.parse(failedProjectFullUrl)
   -%>
-  failedProjects.push({'url': '<%= failedProjectUrl %>', 'id': '<%= id %>'});
+  failedProjects.push({'url': '<%= failedProjectParsedUrl.path %>', 'server_id': '<%= project.server[:id] %>', 'server_type': '<%= project.server[:type] %>', 'id': '<%= id %>'});
   <%-
   end
   -%>
+</script>
+<%- end -%>
+
+<script type="text/javascript">
+    function failedProjectCallback(projectId) {
+        return function(json) {
+            if (json.culprits.length > 0) {
+                var culprits = json.culprits;
+                var culpritNames = [];
+                for (var j = 0; j < culprits.length; ++j) {
+                    if (culprits[j].fullName) {
+                        culpritNames.push(culprits[j].fullName);
+                    }
+                }
+
+                if (culpritNames.length > 0) {
+                    var culpritsElem = $('#' + projectId + ' .culprits');
+                    culpritsElem.html(culpritNames.join());
+                }
+            }
+        };
+    }
 
     $(document).ready(function() {
         for (var i = 0; i < failedProjects.length; ++i) {
-            var failedUrl = failedProjects[i]['url'] + '/api/json?jsonp=?';
-            var failedId = failedProjects[i]['id'];
+            if (failedProjects[i]['server_type'] == 'jenkins') {
+                var failedUrl = failedProjects[i]['url'] + '/api/json';
+                var failedId = failedProjects[i]['id'];
 
-            $.getJSON(failedUrl, function(json) {
-                if (json.culprits.length > 0) {
-                    var culprits = json.culprits;
-                    var culpritNames = [];
-                    for (var j = 0; j < culprits.length; ++j) {
-                        if (culprits[j].fullName) {
-                            culpritNames.push(culprits[j].fullName);
-                        }
-                    }
+                var proxyUrl = 'proxy_json?server_id=' + failedProjects[i]['server_id'] + '&json_path=' + encodeURI(failedUrl);
 
-                    if (culpritNames.length > 0) {
-                      console.log(culpritNames.join());
-                        var culpritsElem = $('#' + failedId + ' .culprits');
-                        culpritsElem.html(culpritNames.join());
-                    }
-                }
-            });
+                $.getJSON(proxyUrl, failedProjectCallback(failedId));
+            }
         }
     });
 </script>
-<%- end -%>
 
 <div id="audio"></div>
 <%= render 'tracks' %>

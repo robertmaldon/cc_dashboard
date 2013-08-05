@@ -1,6 +1,6 @@
 class Project
 
-  attr_accessor :group_name
+  attr_accessor :group_name, :server
   attr_reader :name, :nextBuildTime, :webUrl, :activity, :lastBuildStatus, :category, :lastBuildLabel, :lastBuildTime
   
   def populate_from_xml(element)

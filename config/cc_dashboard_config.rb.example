@@ -1,26 +1,66 @@
 # This is a sample cc_dashboard configuration file
 
-# List of cctray-formatted feed URLs. This is a Ruby hash where the key is
-# a "group name" (an identifier for) and the value is a URL
-DashboardConfig.cctray_feed_urls = {
-  'CC.rb' => 'http://cruisecontrolrb.thoughtworks.com/XmlStatusReport.aspx',
-  'CC.java' => 'http://cclive.thoughtworks.com/dashboard/cctray.xml',
-  'CC.net' => 'http://ccnetlive.thoughtworks.com/ccnet/XmlStatusReport.aspx',
-  'Huson' => 'http://deadlock.netbeans.org/hudson/cc.xml'
-}
+# List of servers from which to fetch cctray (and other server-specific) feeds
+# from. A server configuration can have the following options:
+# * :id          - A unique id/name for a server
+# * :base_url    - URL to the root of a server 
+# * :type        - The type of the server. e.g. :jenkins, :travis, :ccnet, :ccjava, :ccrb
+# * :cctray_path - Location of the cctray feed, relative to :base_url.
+#                  Typical locations are:
+#                  ** :jenkins => 'cc.xml'
+#                  ** :ccjava  => 'cctray.xml'
+#                  ** :ccnet   => 'XmlStatusReport.aspx'
+#                  ** :ccrb    => 'XmlStatusReport.aspx'
+# * :user        - Optional. If :user and :password are supplied then they
+#                  will be used as the username and password, respectively,
+#                  for accessing the server using Basic Authentication
+# * :password    - Optional. See :user for details.
+#                  NOTE: For Jenkins you should not use a real password but
+#                  instead use an "API token". See https://wiki.jenkins-ci.org/display/JENKINS/Authenticating+scripted+clients
+#                  for details.
+DashboardConfig.servers = [
+  {
+    :id          => 'Apache',
+    :base_url    => 'https://builds.apache.org',
+    :type        => :jenkins,
+    :cctray_path => 'cc.xml'
+  },
+  {
+    :id          => 'Netbeans',
+    :base_url    => 'http://deadlock.netbeans.org/hudson',
+    :type        => :hudson,
+    :cctray_path => 'cc.xml'
+  },
+  {
+    :id          => 'My Local Secured Jenkins',
+    :base_url    => 'http://localhost:8080',
+    :type        => :jenkins,
+    :cctray_path => 'cc.xml',
+    :user        => 'cctray_user',
+    :password    => '7fa6eda45f2c3089751922868eaa3e3f'
+  },
+]
 
 # If the cctray feeds regularly timeout then you may need to increase the
 # default feed timeouts
-#DashboardConfig.cctray_feed_open_timeout = 10
-#DashboardConfig.cctray_feed_read_timeout = 10
+#DashboardConfig.http_open_timeout = 10
+#DashboardConfig.http_read_timeout = 10
 
 # The number of seconds between browser page reloads
 #DashboardConfig.refresh_interval = 60.seconds
 
-# The bling. Currently available blings are 'beer_o_clock' and 'chucknorris'.
+# The bling. Currently available blings are
+# * :jenkins_build_queue - Display a list of jobs waiting in the
+#                          build queue across the top of the monitor
+# * :beer_o_clock        - Display a beer glass that gradually fills up
+#                          as it gets closer to Beer O'Clock!
+# * :chucknorris         - Marvel at the programming prowess of Chick Norris
 # You can configure multiple blings.
-# Nobody stops Chuck Norris from kicking ass!
 #DashboardConfig.bling = [
+#  {
+#    :type      => :jenkins_build_queue,
+#    :server_id => 'Apache'
+#  },
 #  {
 #    :type           => :beer_o_clock,
 #    :fill_start     => 'friday 9 am',
@@ -45,7 +85,8 @@ DashboardConfig.track = 'simpsons'
 # * sound   - The sound to play when the alarm first starts. See public/audios/alarms
 #             for choices, or use 'random' to choose a random alarm sound.
 # * message - An optional message to display above the alarm clock
-# * start   - Time to start displaying the alarm clock, format is any format supported by chrono. e.g. '09:00:00', 'friday 13:00'
+# * start   - Time to start displaying the alarm clock, format is any format supported
+#             by chrono. e.g. '09:00:00', 'friday 13:00'
 # * stop    - Time to stop displaying the alarm clock, format is any format supported by chrono
 # * speak   - An optional text-to-speech message that will be played after the sound.
 #
@@ -54,9 +95,9 @@ DashboardConfig.track = 'simpsons'
 #  {
 #    :sound   => 'mission_impossible_theme',
 #    :message => 'Daily Standup',
-#    :start    => '08:49:00',
-#    :stop     => '09:01:00',
-#    :speak    => 'Time for day lee standup. Make ship happen!'
+#    :start   => '08:49:00',
+#    :stop    => '09:01:00',
+#    :speak   => 'Time for day lee standup. Make ship happen!'
 #  },
 #  {
 #    :message => 'Swap Pairs',
@@ -72,18 +113,26 @@ DashboardConfig.track = 'simpsons'
 
 # Widgets. Display various widgets in the bottom-right corner of the dashboard.
 # The available widgets are:
-# * cobertura     - display line and brach coverage from a cobertura xml report
-# * weather_clock - based on the browser location display the current time
-#                   and weather. Uses the Yahoo! PlaceFinder and weather
-#                   forecasting APIs.
+# * :cobertura     - Display line and brach coverage from a cobertura xml report
+# * :codenarc      - Display code violations stats from a codenarc xml report
+# * :weather_clock - Based on the browser location display the current time
+#                    and weather. Uses the Yahoo! PlaceFinder and weather
+#                    forecasting APIs.
 #DashboardConfig.widgets = [
 #  {
-#    :type           => :cobertura,
-#    :title          => 'MyAwesomeApp Code Coverage',
-#    :xml_report_url => 'https://raw.github.com/jenkinsci/cobertura-plugin/master/src/test/resources/hudson/plugins/cobertura/coverage-with-data.xml'
+#    :type      => :cobertura,
+#    :server_id => 'Apache',
+#    :title     => 'uimaFIT code coverage',
+#    :xml_path  => 'job/UIMA-uimaFIT/ws/trunk/uimafit/target/site/cobertura/coverage.xml'
 #  },
 #  {
-#     :type => :weather_clock,
+#    :type      => :codenarc,
+#    :server_id => 'My Local Secured Jenkins',
+#    :title     => 'Balloon Crush code violations',
+#    :xml_path  => 'job/Balloon Crush/lastSuccessfulBuild/artifact/target/CodeNarcXmlReport.xml'
+#  },
+#  {
+#     :type       => :weather_clock,
 #	  :temp_units => 'c' # 'c' for celcius or 'f' for farenheit
 #  }
 #]

@@ -1,7 +1,7 @@
 
 <script type="text/javascript">
     function blingJenkinsBuildQueue<%= index %>() {
-    	var jenkinsQueueURL = '<%= config[:base_url] %>/queue/api/json?jsonp=?';
+    	var jenkinsQueueURL = 'proxy_json?server_id=' + encodeURI('<%= config[:server_id] %>') + '&json_path=queue/api/json';
     	$.getJSON(jenkinsQueueURL, function(json) {
     	    if (json.items.length > 0) {
                 if ($('#jenkins-queue-container-<%= index %>').length > 0) {

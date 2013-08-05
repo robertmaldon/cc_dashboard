@@ -20,7 +20,7 @@ Assuming you have the base Rails gems installed (no database needed):
 
 - Install ruby 1.9.2 or later and bundler
 - Unpack the cc_dashboard zip/tar
-- Create a **config/cc\_dashboard\_config.rb** file with a list of "cctray xml format" (see below) feed URLs. You can use **config/cc\_dashboard\_config.rb.example** as a template
+- Create a **config/cc\_dashboard\_config.rb** file with a list servers from which to fetch "cctray xml format" (see below) feeds. You can use **config/cc\_dashboard\_config.rb.example** as a template
 - Install the dependent gems by doing a **bundle install**
 - Start the cc_dashboard Rails server by running the **start.sh** script
 - Point your web browser at the application root. e.g.
@@ -71,6 +71,7 @@ Available tracks are:
 * **itrack** - some wisdom from Steve Jobs
 * **nightmare** - sound bites from the schlock horror movies like Nightmare on Elm Street and Saw
 * **simpsons** - sound bites from the animated "satirical parody of a middle class American lifestyle" sitcom. Doh!
+* **south_park** - safe for work sound bites from the cartoon that kicks ass!
 
 You choose the track by setting the **DashboardConfig.track** value in the **config/cc\_dashboard\_config.rb** configuration file, or leave the configuration commented out to disable sounds. You can also choose the track per-HTTP-request by adding a "?track=TRACK" to the end of the URL (e.g. "?track=aliens").
 

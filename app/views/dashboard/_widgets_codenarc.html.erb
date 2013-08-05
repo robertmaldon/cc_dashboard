@@ -6,7 +6,7 @@
     function crShowCodenarcStats<%= index %>() {
     	$.ajax({
 		    type: 'GET',
-		    url: 'proxy_xml?xml_url=<%= config[:xml_report_url] %>',
+		    url: 'proxy_xml?server_id=' + encodeURI('<%= config[:server_id] %>') + '&xml_path=' + encodeURI('<%= config[:xml_path] %>'),
 		    dataType: 'xml',
 		    success: function(xml) {
 		    	        $(xml).find('PackageSummary').each(function() {

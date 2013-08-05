@@ -51,6 +51,7 @@ CcDashboard::Application.routes.draw do
   root :to => 'dashboard#index'
   match 'main' => 'dashboard#main'
   match 'proxy_xml' => 'dashboard#proxy_xml'
+  match 'proxy_json' => 'dashboard#proxy_json'
   match 'play_alarm' => 'dashboard#play_alarm'
 
   # Serve up dynamic stylesheets
