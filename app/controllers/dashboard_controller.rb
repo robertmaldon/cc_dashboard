@@ -30,28 +30,46 @@ class DashboardController < ApplicationController
       feed_url = feed_url + server[:cctray_path]
 
       doc = REXML::Document.new get_cctray_feed_xml(feed_url, server[:user], server[:password])
-      doc.elements.each('Projects/Project') do |element|
-        project = Project.new
-        project.group_name = server[:id]
-        project.server = server
-        project.populate_from_xml(element)
-        @projects.push(project)
+      if server[:type] != :bamboo
+        doc.elements.each('Projects/Project') do |element|
+          project = Project.new
+          project.group_name = server[:id]
+          project.server = server
+          project.populate_from_xml(element)
+          @projects.push(project)
+        end
+      else
+        projects_hash = Hash.new
+        doc.elements.each('rss/channel/item') do |element|
+          project = Project.new
+          project.group_name = server[:id]
+          project.server = server
 
-        case project.lastBuildStatus
-        when 'Error' # 'Error' is our own status, not part of the cctray spec
-          @status_exception += 1
-        when 'Failure'
-          @status_failure += 1
-        when 'Exception'
-          @status_exception += 1
-        when 'Success'
-          @status_success += 1
-        when 'Unknown'
-          @status_unknown += 1
+          project.populate_from_bamboo_xml(element)
+          projects_hash[project.name] = project unless projects_hash[project.name]
         end
 
-        @activity_building += 1 if project.activity == 'Building'
+        projects_hash.keys.sort.each do |project_name|
+          @projects.push(projects_hash[project_name])
+        end
       end
+    end
+
+    @projects.each do |project|
+      case project.lastBuildStatus
+      when 'Error' # 'Error' is our own status, not part of the cctray spec
+        @status_exception += 1
+      when 'Failure'
+        @status_failure += 1
+      when 'Exception'
+        @status_exception += 1
+      when 'Success'
+        @status_success += 1
+      when 'Unknown'
+        @status_unknown += 1
+      end
+
+      @activity_building += 1 if project.activity == 'Building'
     end
 
     if @activity_building > 0

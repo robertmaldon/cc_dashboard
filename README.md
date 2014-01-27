@@ -105,6 +105,7 @@ Originally developed for CruiseControl.NET, the "cctray xml format" is an RSS-li
 * [Jenkins](http://jenkins-ci.org/) - http://jenkins.servername:8080/cc.xml
 * [Hudson](https://hudson.dev.java.net/) - http://hudson.servername:8080/cc.xml
 * [Travis CI](http://travis-ci.org/) - http://travis-ci.org/ownername/repositoryname/cc.xml
+* [Bamboo](https://www.atlassian.com/software/bamboo) - https://build.springsource.org/rss/createAllBuildsRssFeed.action?feedType=rssAll&os_authType=basic (NOTE: Bamboo does not output build status in cctray format, but instead has its own RSS format - see below) 
 
 See [Multiple Project Summary Reporting Standard](http://confluence.public.thoughtworks.org/display/CI/Multiple+Project+Summary+Reporting+Standard) for details of the cctray XML feed format (or see a copy of this doco in the next section below). This doco is mostly correct, the only difference i've seen "in the wild" are:
 
@@ -114,6 +115,12 @@ See [Multiple Project Summary Reporting Standard](http://confluence.public.thoug
 btw, [cctray](http://confluence.public.thoughtworks.org/display/CCNET/CCTray) is a .NET application that sits in your Windows system tray and can alert you via popups or sounds when a project build is successful or fails. It is available as part of a [CruiseControl.NET release](http://sourceforge.net/projects/ccnet/files/CruiseControl.NET%20Releases/).
 
 [ccmenu](http://ccmenu.sourceforge.net/) is a cctray equivalent for the Mac.
+
+## Bamboo RSS feed
+
+[Bamboo](https://www.atlassian.com/software/bamboo) does not output build status in cctray format, but it is a common enough CI server that it was a no brainer to add support for.
+
+Bamboo has its own proprietary RSS format, an example of which can be viewed [here](https://build.springsource.org/rss/createAllBuildsRssFeed.action?feedType=rssAll). An important difference to note between the Bamboo RSS feed and a cctray feed is that the Bamboo RSS feed outputs the status of the last, say, 20 builds (it's configurable) and not the current status of all configured projects. This means that if a particular project does not build for a long time that project may "drop out" of the RSS feed until it builds again. Bummer, but that's the way it is.  
 
 # Multiple Project Summary Reporting Standard
 

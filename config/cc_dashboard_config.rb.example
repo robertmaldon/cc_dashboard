@@ -4,10 +4,12 @@
 # from. A server configuration can have the following options:
 # * :id          - A unique id/name for a server
 # * :base_url    - URL to the root of a server 
-# * :type        - The type of the server. e.g. :jenkins, :travis, :ccnet, :ccjava, :ccrb
+# * :type        - The type of the server. e.g. :jenkins, :travis, :bamboo, :ccnet, :ccjava, :ccrb
 # * :cctray_path - Location of the cctray feed, relative to :base_url.
 #                  Typical locations are:
 #                  ** :jenkins => 'cc.xml'
+#                  ** :travis  => 'ownername/repositoryname/cc.xml'
+#                  ** :bamboo  => 'rss/createAllBuildsRssFeed.action?feedType=rssAll&os_authType=basic'
 #                  ** :ccjava  => 'cctray.xml'
 #                  ** :ccnet   => 'XmlStatusReport.aspx'
 #                  ** :ccrb    => 'XmlStatusReport.aspx'
@@ -30,6 +32,12 @@ DashboardConfig.servers = [
     :base_url    => 'http://deadlock.netbeans.org/hudson',
     :type        => :hudson,
     :cctray_path => 'cc.xml'
+  },
+  {
+    :id          => 'SpringSource',
+    :base_url    => 'https://build.springsource.org/',
+    :type        => :bamboo,
+    :cctray_path => 'rss/createAllBuildsRssFeed.action?feedType=rssAll'    
   },
   {
     :id          => 'My Local Secured Jenkins',

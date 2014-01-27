@@ -13,10 +13,10 @@
   -%>
   <a href="<%= project.webUrl %>" target="_blank" title="<%= title %>" alt="<%= title %>">
     <div id="<%= id %>" class="project <%= project.lastBuildStatus %> <%= project.activity %>">
-        <h2><%= project.name %></h2>
+        <p class="project-name"><%= project.name %></p>
         <p>Last label: <%= project.lastBuildLabel %></p>
         <p>Last build: <%= time_ago(project.lastBuildTime) rescue project.lastBuildTime %></p>
-        <div class="culprits"></div>
+        <div class="culprits"><%= project.culprits if project.culprits %></div>
     </div>
   </a>
 
@@ -110,4 +110,7 @@
   var faviconHref = '<%= image_path("skins/#{@skin}/favicon_#{@icon}") %>';
   $("#favicon1").attr("href", faviconHref);
   $("#favicon2").attr("href", faviconHref);
+
+  //$(".project-name").quickfit({ min: 8, max: 20, truncate: true});
+  $(".project-name").textfill({ minFontPixels: 10, maxFontPixels: 20, widthOnly: true});
 </script>
