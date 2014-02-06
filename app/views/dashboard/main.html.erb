@@ -111,6 +111,5 @@
   $("#favicon1").attr("href", faviconHref);
   $("#favicon2").attr("href", faviconHref);
 
-  //$(".project-name").quickfit({ min: 8, max: 20, truncate: true});
-  $(".project-name").textfill({ minFontPixels: 10, maxFontPixels: 20, widthOnly: true});
+  $(".project-name").squishy({maxWidth: $(".project").attr("width"), maxSize: 18});
 </script>
