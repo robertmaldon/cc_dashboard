@@ -100,16 +100,19 @@
   // Dynamically set the class attribute of "body"
   $("body").attr("class", "<%= @status %>");
 
+  <%- if @skin != 'minimal' -%>
   // Slowly change the background image
   var backgroundImagePath = '<%= skin_random_image_path('background', @status) %>';
   $("#background-image").fadeOut(2000, function() {
     $(this).css('background-image', 'url(' + backgroundImagePath + ')');
   }).fadeIn(2000);
+  <%- end -%>
 
   // Dynamically set the favicon
   var faviconHref = '<%= image_path("skins/#{@skin}/favicon_#{@icon}") %>';
   $("#favicon1").attr("href", faviconHref);
   $("#favicon2").attr("href", faviconHref);
 
+  // Resize the project name if it exceeds the width of its parent container
   $(".project-name").squishy({maxWidth: $(".project").attr("width"), maxSize: 18});
 </script>

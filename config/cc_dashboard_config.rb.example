@@ -81,7 +81,7 @@ DashboardConfig.servers = [
 #]
 
 # The skin. Currently available skins are 'doom', 'hudson', 'iskin', 'kitten',
-# 'nightmare', 'smiley', 'spaceinvaders' and 'worldcup'.
+# 'minimal', nightmare', 'smiley', 'spaceinvaders' and 'worldcup'.
 #DashboardConfig.skin = 'doom'
 
 # The track. Comment out to disable sounds. Currently available tracks are

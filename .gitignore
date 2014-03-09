@@ -19,3 +19,6 @@
 
 # Ignore test of format changes to README.md
 README.html
+
+# Mac stuff
+.DS_Store

@@ -41,6 +41,7 @@ Available skins are:
 * **hudson** - some images borrowed from the [Hudson continuous integration server](https://hudson.dev.java.net/)
 * **iskin** - all things Apple and the cult of Steve Jobs
 * **kitten** - aaawww, how cute :)
+* **minimal** - a very, very basic skin if you don't appreciate art
 * **nightmare** - primarily Nightmare on Elm Street, but throw in some other horror schlock from Jason vs Freddy, Chucky, etc
 * **smiley**
 * **spaceinvaders** - yep, the arcade classic

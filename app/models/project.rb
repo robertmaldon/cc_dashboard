@@ -31,7 +31,9 @@ class Project
       @lastBuildStatus = 'Unknown'
     end
 
-    @webUrl = element.elements['link'].text
+    url = element.elements['link'].text
+    @webUrl = $1 if url =~ /(.*)-/
+
     @activity = 'Sleeping' #element.attributes['activity']
     @lastBuildTime = Time.parse(element.elements['pubDate'].text)
   end
