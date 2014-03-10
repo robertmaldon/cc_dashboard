@@ -16,8 +16,8 @@ if ((typeof(Audio) !== "undefined") && (typeof(Storage) !== "undefined")) {
 
 	lastBuildStatus    = item.split(";")[0];
 	currentBuildStatus = '<%= project.lastBuildStatus %>';
-	lastActivity       = item.split(";")[1];
-	currentActivity    = '<%= project.activity %>';
+	lastBuildLabel     = item.split(";")[1];
+	currentBuildLabel  = '<%= project.lastBuildLabel %>';
 	if (('Success' == lastBuildStatus) && ('Success' != currentBuildStatus)) {
 		// The simplest case. The last status was 'Success' and the current status is not 'Success'
 		play_failure = true;
@@ -25,7 +25,7 @@ if ((typeof(Audio) !== "undefined") && (typeof(Storage) !== "undefined")) {
 		if ('Success' == currentBuildStatus) {
 			// The last status was 'Failure' and the current status is 'Success'
 			play_success = true;
-		} else if (('Sleeping' != lastActivity) && ('Sleeping' == currentActivity)) {
+		} else if (currentBuildLabel != lastBuildLabel) {
 			// The last status was 'Failure' and a new build - just finished - failed again
 			play_failure = true;
 		}
@@ -37,7 +37,7 @@ if ((typeof(Audio) !== "undefined") && (typeof(Storage) !== "undefined")) {
 
 	// Store the status of each build for comparison on the next update
 	<%- @projects.each do | project | -%>
-		sessionStorage.setItem('<%= project.webUrl %>', '<%= project.lastBuildStatus %>;<%= project.activity %>');
+		sessionStorage.setItem('<%= project.webUrl %>', '<%= project.lastBuildStatus %>;<%= project.lastBuildLabel %>');
 	<%- end -%>
 
 	// Play sounds
